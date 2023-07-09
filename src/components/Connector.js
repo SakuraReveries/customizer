@@ -5,7 +5,7 @@ import { STLLoader } from 'three/examples/jsm/loaders/STLLoader';
 import { connectorRotations } from 'utils';
 
 export default function Connector({ model, ...props }) {
-  const obj = useLoader(STLLoader, `./${model}.stl`);
+  const obj = useLoader(STLLoader, `./connectors/${model}.stl`);
 
   return (
     <mesh

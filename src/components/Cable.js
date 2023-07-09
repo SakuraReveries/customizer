@@ -3,7 +3,7 @@ import { useLoader } from '@react-three/fiber';
 import { STLLoader } from 'three/examples/jsm/loaders/STLLoader';
 
 export default function Cable({ model, color, ...props }) {
-  const obj = useLoader(STLLoader, `./${model}.stl`);
+  const obj = useLoader(STLLoader, `./cables/${model}.stl`);
 
   return (
     <mesh {...props} castShadow receiveShadow>
