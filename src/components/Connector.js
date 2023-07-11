@@ -2,26 +2,30 @@ import PropTypes from 'prop-types';
 import { useLoader } from '@react-three/fiber';
 import { STLLoader } from 'three/examples/jsm/loaders/STLLoader';
 
-import { connectorRotations } from 'utils';
+import { connectorOffsets, connectorRotations } from 'utils';
+import { useMemo } from 'react';
 
 export default function Connector({ model, ...props }) {
-  const obj = useLoader(STLLoader, `./connectors/${model}.stl`);
+  const cachedObj = useLoader(STLLoader, `./connectors/${model}.stl`);
+  const obj = useMemo(() => cachedObj.clone(), [cachedObj]);
 
   return (
-    <mesh
-      {...props}
-      castShadow
-      receiveShadow
-      rotation={connectorRotations[model] ?? [0, 0, 0]}
-    >
-      <primitive object={obj} attach="geometry" />
-      <meshPhysicalMaterial
-        color="#848789"
-        metalness={0.8}
-        roughness={0.3}
-        reflectivity={0.2}
-      />
-    </mesh>
+    <group {...props}>
+      <mesh
+        position={connectorOffsets[model] ?? [0, 0, 0]}
+        rotation={connectorRotations[model] ?? [0, 0, 0]}
+        castShadow
+        receiveShadow
+      >
+        <primitive object={obj.clone()} attach="geometry" />
+        <meshPhysicalMaterial
+          color="#848789"
+          metalness={0.8}
+          roughness={0.3}
+          reflectivity={0.2}
+        />
+      </mesh>
+    </group>
   );
 }
 

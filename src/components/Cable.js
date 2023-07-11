@@ -1,9 +1,11 @@
 import PropTypes from 'prop-types';
 import { useLoader } from '@react-three/fiber';
 import { STLLoader } from 'three/examples/jsm/loaders/STLLoader';
+import { useMemo } from 'react';
 
 export default function Cable({ model, color, ...props }) {
-  const obj = useLoader(STLLoader, `./cables/${model}.stl`);
+  const cachedObj = useLoader(STLLoader, `./cables/${model}.stl`);
+  const obj = useMemo(() => cachedObj.clone(), [cachedObj]);
 
   return (
     <mesh {...props} castShadow receiveShadow>
