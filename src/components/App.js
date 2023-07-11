@@ -32,10 +32,10 @@ export default function App() {
     <Suspense fallback={<Loader />}>
       <Container fluid className="g-0 h-100 d-inline-block">
         <Row className="g-0 h-100">
-          <Col xs={10}>
+          <Col xs={8} sm={9}>
             <Scene settings={values} />
           </Col>
-          <Col xs={2}>
+          <Col xs={4} sm={3}>
             <Sidebar values={values} setFieldValue={setFieldValue} />
           </Col>
         </Row>
