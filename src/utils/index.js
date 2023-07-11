@@ -26,6 +26,18 @@ export const connectors = {
   USB_C_Alt: 'USB_C (Alt)'
 };
 
+export const finishes = {
+  Standard: 'Standard',
+  Gold: 'Gold-plated',
+  Nickel: 'Nickel-plated'
+};
+
+export const finishColors = {
+  Standard: '#848789',
+  Gold: '#b0834f',
+  Nickel: '#727472'
+};
+
 export const cableAttachments = {
   Charger: {
     hostConnector: [95.7, -50, 8],

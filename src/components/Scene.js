@@ -4,7 +4,8 @@ import {
   Stage,
   Center,
   OrbitControls,
-  PerspectiveCamera
+  PerspectiveCamera,
+  Stats
 } from '@react-three/drei';
 // eslint-disable-next-line import/no-unresolved
 import { EffectComposer, Bloom } from '@react-three/postprocessing';
@@ -18,7 +19,7 @@ export default function Scene({ settings }) {
 
   return (
     <Canvas shadows>
-      <color attach="background" args={['#e3be9b']} />
+      <color attach="background" args={['#f3969a']} />
       <Stage
         intensity={0.1}
         adjustCamera={1.2}
@@ -26,19 +27,20 @@ export default function Scene({ settings }) {
         environment="apartment"
       >
         <Center rotation={[Math.PI / 2, 0, Math.PI]}>
-          <Cable model={settings.cable.model} color={settings.cable.color} />
+          <Cable {...settings.cable} />
           <Connector
-            model={settings.deviceConnector.model}
+            {...settings.deviceConnector}
             position={attachments?.deviceConnector ?? [0, 0, 0]}
           />
           <Connector
-            model={settings.hostConnector.model}
+            {...settings.hostConnector}
             position={attachments?.hostConnector ?? [0, 0, 0]}
           />
         </Center>
       </Stage>
       <PerspectiveCamera makeDefault fov={20} position={[-12, 8, 10]} />
       <OrbitControls makeDefault maxPolarAngle={Math.PI / 2} panSpeed={0} />
+      <Stats />
       <EffectComposer>
         <Bloom luminanceThreshold={0} luminanceSmoothing={0.9} height={320} />
       </EffectComposer>

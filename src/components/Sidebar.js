@@ -3,9 +3,15 @@ import { Accordion, Col, Container, Form, Row } from 'react-bootstrap';
 
 import ColorPicker from 'components/ColorPicker';
 import SidebarPane from 'components/SidebarPane';
-import { cables, colors, connectors } from 'utils';
+import { cables, colors, connectors, finishes } from 'utils';
+import { useCallback } from 'react';
 
 export default function Sidebar({ values, setFieldValue }) {
+  const updateField = useCallback(
+    (name) => (event) => setFieldValue(name, event.target.value),
+    [setFieldValue]
+  );
+
   return (
     <Container fluid className="bg-secondary h-100">
       <Row>
@@ -57,6 +63,31 @@ export default function Sidebar({ values, setFieldValue }) {
                     ))}
                   </Form.Select>
                 </Form.Group>
+                <Form.Group>
+                  <Form.Label className="text-light">Finish</Form.Label>
+                  <Form.Select
+                    onChange={updateField('hostConnector.finish')}
+                    value={values.hostConnector.finish}
+                  >
+                    {Object.entries(finishes).map(([key, val]) => (
+                      <option key={key} value={key}>
+                        {val}
+                      </option>
+                    ))}
+                  </Form.Select>
+                </Form.Group>
+                <Form.Group>
+                  <Form.Label className="text-light">
+                    Heatshrink Color
+                  </Form.Label>
+                  <ColorPicker
+                    colors={colors}
+                    onChange={(color) =>
+                      setFieldValue('hostConnector.heatshrinkColor', color)
+                    }
+                    value={values.hostConnector.heatshrinkColor}
+                  />
+                </Form.Group>
               </Form>
             </SidebarPane>
             <SidebarPane title="Device Connector">
@@ -75,6 +106,31 @@ export default function Sidebar({ values, setFieldValue }) {
                       </option>
                     ))}
                   </Form.Select>
+                </Form.Group>
+                <Form.Group>
+                  <Form.Label className="text-light">Finish</Form.Label>
+                  <Form.Select
+                    onChange={updateField('deviceConnector.finish')}
+                    value={values.deviceConnector.finish}
+                  >
+                    {Object.entries(finishes).map(([key, val]) => (
+                      <option key={key} value={key}>
+                        {val}
+                      </option>
+                    ))}
+                  </Form.Select>
+                </Form.Group>
+                <Form.Group>
+                  <Form.Label className="text-light">
+                    Heatshrink Color
+                  </Form.Label>
+                  <ColorPicker
+                    colors={colors}
+                    onChange={(color) =>
+                      setFieldValue('deviceConnector.heatshrinkColor', color)
+                    }
+                    value={values.deviceConnector.heatshrinkColor}
+                  />
                 </Form.Group>
               </Form>
             </SidebarPane>

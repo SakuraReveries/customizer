@@ -12,10 +12,14 @@ const initialValues = {
     color: '#ff0000'
   },
   hostConnector: {
-    model: 'USB_A'
+    model: 'USB_A',
+    heatshrinkColor: 'green',
+    finish: 'Standard'
   },
   deviceConnector: {
-    model: 'USB_C'
+    model: 'USB_C',
+    heatshrinkColor: 'blue',
+    finish: 'Standard'
   }
 };
 

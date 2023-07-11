@@ -21,13 +21,13 @@ export default function ColorPicker({ colors, onChange, value }) {
                   backgroundColor: hex,
                   cursor: 'pointer',
                   border:
-                    value === hex
+                    value === id
                       ? `2px dashed ${contrastColor({ bgColor: hex })}`
                       : null
                 }}
                 onClick={(event) => {
                   event.preventDefault();
-                  onChange(hex);
+                  onChange(id);
                 }}
               />
             </OverlayTrigger>
@@ -39,7 +39,13 @@ export default function ColorPicker({ colors, onChange, value }) {
 }
 
 ColorPicker.propTypes = {
-  colors: PropTypes.arrayOf(PropTypes.string).isRequired,
+  colors: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+      hex: PropTypes.string.isRequired
+    })
+  ).isRequired,
   onChange: PropTypes.func.isRequired,
   value: PropTypes.string.isRequired
 };

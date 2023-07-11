@@ -1,13 +1,15 @@
 import PropTypes from 'prop-types';
-import { useLoader } from '@react-three/fiber';
-import { STLLoader } from 'three/examples/jsm/loaders/STLLoader';
 
 import { connectorOffsets, connectorRotations } from 'utils';
-import { useMemo } from 'react';
+import useConnectorMesh from 'hooks/useConnectorMesh';
 
-export default function Connector({ model, ...props }) {
-  const cachedObj = useLoader(STLLoader, `./connectors/${model}.stl`);
-  const obj = useMemo(() => cachedObj.clone(), [cachedObj]);
+export default function Connector({
+  finish,
+  heatshrinkColor,
+  model,
+  ...props
+}) {
+  const { meshRef, obj } = useConnectorMesh(model, finish, heatshrinkColor);
 
   return (
     <group {...props}>
@@ -16,19 +18,16 @@ export default function Connector({ model, ...props }) {
         rotation={connectorRotations[model] ?? [0, 0, 0]}
         castShadow
         receiveShadow
+        ref={meshRef}
       >
-        <primitive object={obj.clone()} attach="geometry" />
-        <meshPhysicalMaterial
-          color="#848789"
-          metalness={0.8}
-          roughness={0.3}
-          reflectivity={0.2}
-        />
+        <primitive object={obj} />
       </mesh>
     </group>
   );
 }
 
 Connector.propTypes = {
-  model: PropTypes.string.isRequired
+  model: PropTypes.string.isRequired,
+  heatshrinkColor: PropTypes.string.isRequired,
+  finish: PropTypes.string.isRequired
 };
