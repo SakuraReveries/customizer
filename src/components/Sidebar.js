@@ -1,10 +1,11 @@
 import PropTypes from 'prop-types';
+import { useCallback } from 'react';
 import { Accordion, Col, Container, Form, Row } from 'react-bootstrap';
 
+import logo from 'images/logo.png';
 import ColorPicker from 'components/ColorPicker';
 import SidebarPane from 'components/SidebarPane';
 import { cables, colors, connectors, finishes } from 'utils';
-import { useCallback } from 'react';
 
 export default function Sidebar({ values, setFieldValue }) {
   const updateField = useCallback(
@@ -15,8 +16,16 @@ export default function Sidebar({ values, setFieldValue }) {
   return (
     <Container fluid className="bg-secondary h-100">
       <Row>
-        <Col xs={12} className="d-flex flex-column justify-content-end">
-          <h1 className="text-light text-end">Cable Builder</h1>
+        <Col xs={12} className="d-flex flex-column">
+          <h1 className="mt-2 mb-3 d-flex align-items-center h2 text-light">
+            <img
+              src={logo}
+              alt="Sakura Reveries"
+              style={{ height: 48 }}
+              className="ms-auto me-auto"
+            />
+            <span className="ms-auto">Cable Builder</span>
+          </h1>
           <hr className="border-white mt-0" />
           <Accordion alwaysOpen>
             <SidebarPane title="Cable">

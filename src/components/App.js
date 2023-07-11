@@ -5,6 +5,7 @@ import { Col, Container, Row } from 'react-bootstrap';
 import Loader from 'components/Loader';
 import Sidebar from 'components/Sidebar';
 import Scene from 'components/Scene';
+import { Helmet } from 'react-helmet';
 
 const initialValues = {
   cable: {
@@ -30,6 +31,7 @@ export default function App() {
 
   return (
     <Suspense fallback={<Loader />}>
+      <Helmet title="Sakura Reveries Cable Builder" />
       <Container fluid className="g-0 h-100 d-inline-block">
         <Row className="g-0 h-100">
           <Col xs={8} sm={9}>
