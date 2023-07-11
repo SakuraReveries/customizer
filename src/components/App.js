@@ -9,7 +9,7 @@ import Scene from 'components/Scene';
 const initialValues = {
   cable: {
     model: 'Charger',
-    color: '#ff0000'
+    color: 'red'
   },
   hostConnector: {
     model: 'USB_A',

@@ -5,7 +5,7 @@ import { STLLoader } from 'three/examples/jsm/loaders/STLLoader';
 // eslint-disable-next-line import/no-unresolved
 import { RepeatWrapping, TextureLoader } from 'three';
 
-export default function Cable({ model, ...props }) {
+export default function Cable({ color, model, ...props }) {
   const cachedObj = useLoader(STLLoader, `./cables/${model}.stl`);
   const obj = useMemo(() => cachedObj.clone(), [cachedObj]);
   const [colorMap, normalMap, roughnessMap] = useLoader(TextureLoader, [
@@ -26,6 +26,7 @@ export default function Cable({ model, ...props }) {
     <mesh {...props} castShadow receiveShadow>
       <primitive object={obj} attach="geometry" />
       <meshPhysicalMaterial
+        color={color}
         map={colorMap}
         normalMap={normalMap}
         roughnessMap={roughnessMap}

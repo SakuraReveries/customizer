@@ -4,10 +4,10 @@ import { Col, Container, OverlayTrigger, Row, Tooltip } from 'react-bootstrap';
 
 export default function ColorPicker({ colors, onChange, value }) {
   return (
-    <Container fluid className="g-0 d-flex justify-content-center">
+    <Container fluid className="g-0 d-flex">
       <Row className="g-0 w-100">
         {colors.map(({ id, name, hex }) => (
-          <Col xs={3} key={id} className="g-2">
+          <Col xs={2} key={id} className="g-2 d-flex justify-content-center">
             <OverlayTrigger
               placement="bottom"
               overlay={<Tooltip>{name}</Tooltip>}

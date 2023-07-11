@@ -16,12 +16,12 @@ export default function Sidebar({ values, setFieldValue }) {
     <Container fluid className="bg-secondary h-100">
       <Row>
         <Col xs={12} className="d-flex flex-column justify-content-end">
-          <h1 className="text-light">Options</h1>
+          <h1 className="text-light text-end">Options</h1>
           <hr className="border-white mt-0" />
           <Accordion alwaysOpen>
             <SidebarPane title="Cable">
-              <Form className="mb-2">
-                <Form.Group>
+              <Form>
+                <Form.Group className="mb-2">
                   <Form.Label className="text-light">Type</Form.Label>
                   <Form.Select
                     onChange={(event) =>
@@ -47,8 +47,8 @@ export default function Sidebar({ values, setFieldValue }) {
               </Form>
             </SidebarPane>
             <SidebarPane title="Host Connector">
-              <Form className="mb-2">
-                <Form.Group>
+              <Form>
+                <Form.Group className="mb-2">
                   <Form.Label className="text-light">Type</Form.Label>
                   <Form.Select
                     onChange={(event) =>
@@ -63,19 +63,21 @@ export default function Sidebar({ values, setFieldValue }) {
                     ))}
                   </Form.Select>
                 </Form.Group>
-                <Form.Group>
-                  <Form.Label className="text-light">Finish</Form.Label>
-                  <Form.Select
-                    onChange={updateField('hostConnector.finish')}
-                    value={values.hostConnector.finish}
-                  >
-                    {Object.entries(finishes).map(([key, val]) => (
-                      <option key={key} value={key}>
-                        {val}
-                      </option>
-                    ))}
-                  </Form.Select>
-                </Form.Group>
+                {values.hostConnector.model.includes('_Alt') && (
+                  <Form.Group className="mb-2">
+                    <Form.Label className="text-light">Finish</Form.Label>
+                    <Form.Select
+                      onChange={updateField('hostConnector.finish')}
+                      value={values.hostConnector.finish}
+                    >
+                      {Object.entries(finishes).map(([key, val]) => (
+                        <option key={key} value={key}>
+                          {val}
+                        </option>
+                      ))}
+                    </Form.Select>
+                  </Form.Group>
+                )}
                 <Form.Group>
                   <Form.Label className="text-light">
                     Heatshrink Color
@@ -91,8 +93,8 @@ export default function Sidebar({ values, setFieldValue }) {
               </Form>
             </SidebarPane>
             <SidebarPane title="Device Connector">
-              <Form className="mb-2">
-                <Form.Group>
+              <Form>
+                <Form.Group className="mb-2">
                   <Form.Label className="text-light">Type</Form.Label>
                   <Form.Select
                     onChange={(event) =>
@@ -107,19 +109,21 @@ export default function Sidebar({ values, setFieldValue }) {
                     ))}
                   </Form.Select>
                 </Form.Group>
-                <Form.Group>
-                  <Form.Label className="text-light">Finish</Form.Label>
-                  <Form.Select
-                    onChange={updateField('deviceConnector.finish')}
-                    value={values.deviceConnector.finish}
-                  >
-                    {Object.entries(finishes).map(([key, val]) => (
-                      <option key={key} value={key}>
-                        {val}
-                      </option>
-                    ))}
-                  </Form.Select>
-                </Form.Group>
+                {values.deviceConnector.model.includes('_Alt') && (
+                  <Form.Group className="mb-2">
+                    <Form.Label className="text-light">Finish</Form.Label>
+                    <Form.Select
+                      onChange={updateField('deviceConnector.finish')}
+                      value={values.deviceConnector.finish}
+                    >
+                      {Object.entries(finishes).map(([key, val]) => (
+                        <option key={key} value={key}>
+                          {val}
+                        </option>
+                      ))}
+                    </Form.Select>
+                  </Form.Group>
+                )}
                 <Form.Group>
                   <Form.Label className="text-light">
                     Heatshrink Color
@@ -133,6 +137,14 @@ export default function Sidebar({ values, setFieldValue }) {
                   />
                 </Form.Group>
               </Form>
+            </SidebarPane>
+            <SidebarPane title="Summary">
+              <Container fluid className="text-light">
+                <Row>
+                  <Col xs={6}>Cable Type</Col>
+                  <Col xs={6}>{values.cable.model}</Col>
+                </Row>
+              </Container>
             </SidebarPane>
           </Accordion>
         </Col>

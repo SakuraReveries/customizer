@@ -22,8 +22,9 @@ export const cables = {
 export const connectors = {
   USB_A: 'USB-A',
   USB_C: 'USB-C',
-  USB_A_Alt: 'USB_A (Alt)',
-  USB_C_Alt: 'USB_C (Alt)'
+  USB_A_Alt: 'USB-A (Alt)',
+  USB_C_Alt: 'USB-C (Alt)',
+  USB_C_GlowRing: 'USB-C (Glow Ring)'
 };
 
 export const finishes = {
@@ -34,7 +35,7 @@ export const finishes = {
 
 export const finishColors = {
   Standard: '#848789',
-  Gold: '#b0834f',
+  Gold: '#d4af37',
   Nickel: '#727472'
 };
 
