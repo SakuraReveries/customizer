@@ -4,8 +4,12 @@
 @import "~bootswatch/dist/minty/bootswatch";
 
 html,
-body,
-body > div {
-  height: 100%;
+body {
+  height: 100vh;
   overflow: hidden;
+}
+
+body > div {
+  height: 100vh;
+  overflow-y: auto;
 }

@@ -28,21 +28,18 @@ export default function Scene({ settings }) {
       >
         <Center rotation={[Math.PI / 2, 0, Math.PI]}>
           <Cable {...settings.cable} />
-          <Connector
-            {...settings.deviceConnector}
-            position={attachments?.deviceConnector ?? [0, 0, 0]}
-          />
-          <Connector
-            {...settings.hostConnector}
-            position={attachments?.hostConnector ?? [0, 0, 0]}
-          />
+          <group position={attachments?.deviceConnector ?? [0, 0, 0]}>
+            <Connector {...settings.deviceConnector} />
+          </group>
+          <group position={attachments?.hostConnector ?? [0, 0, 0]}>
+            <Connector {...settings.hostConnector} />
+          </group>
         </Center>
       </Stage>
       <PerspectiveCamera makeDefault fov={20} position={[-12, 8, 10]} />
       <OrbitControls makeDefault maxPolarAngle={Math.PI / 2} panSpeed={0} />
       <Stats />
       <EffectComposer disableNormalPass>
-        {/* <Bloom luminanceThreshold={0} luminanceSmoothing={0.9} height={320} /> */}
         <N8AO aoRadius={4} intensity={2} distanceFalloff={1} />
       </EffectComposer>
     </Canvas>

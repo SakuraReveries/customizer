@@ -28,7 +28,7 @@ export const connectors = {
 };
 
 export const finishes = {
-  Standard: 'Standard',
+  Standard: 'Silver',
   Gold: 'Gold-plated',
   Nickel: 'Nickel-plated'
 };

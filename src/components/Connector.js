@@ -31,38 +31,38 @@ export default function Connector({
   }, [nodes]);
 
   return (
-    <group {...props} dispose={null}>
-      <group
-        position={connectorOffsets[model] ?? [0, 0, 0]}
-        rotation={connectorRotations[model] ?? [0, 0, 0]}
-      >
-        <mesh castShadow receiveShadow geometry={nodes.Connector.geometry}>
-          <meshPhysicalMaterial color={'#EFF4F7'} metalness={1} roughness={0} />
+    <group
+      {...props}
+      dispose={null}
+      position={connectorOffsets[model] ?? [0, 0, 0]}
+      rotation={connectorRotations[model] ?? [0, 0, 0]}
+    >
+      <mesh castShadow receiveShadow geometry={nodes.Connector.geometry}>
+        <meshPhysicalMaterial color={'#EFF4F7'} metalness={1} roughness={0} />
+      </mesh>
+      {Boolean(nodes.Heatshrink) && (
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.Heatshrink.geometry}
+          material={nodes.Heatshrink.material}
+        >
+          <meshPhysicalMaterial
+            color={colors.find((color) => color.id === heatshrinkColor).hex}
+            roughness={0.5}
+            clearcoat={0.4}
+          />
         </mesh>
-        {Boolean(nodes.Heatshrink) && (
-          <mesh
-            castShadow
-            receiveShadow
-            geometry={nodes.Heatshrink.geometry}
-            material={nodes.Heatshrink.material}
-          >
-            <meshPhysicalMaterial
-              color={colors.find((color) => color.id === heatshrinkColor).hex}
-              roughness={0.5}
-              clearcoat={0.4}
-            />
-          </mesh>
-        )}
-        {Boolean(nodes.Housing) && (
-          <mesh castShadow receiveShadow geometry={nodes.Housing.geometry}>
-            <meshPhysicalMaterial
-              color={finishColors[finish]}
-              metalness={1}
-              roughness={0.5}
-            />
-          </mesh>
-        )}
-      </group>
+      )}
+      {Boolean(nodes.Housing) && (
+        <mesh castShadow receiveShadow geometry={nodes.Housing.geometry}>
+          <meshPhysicalMaterial
+            color={finishColors[finish]}
+            metalness={1}
+            roughness={0.5}
+          />
+        </mesh>
+      )}
     </group>
   );
 }

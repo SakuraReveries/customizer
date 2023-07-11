@@ -32,7 +32,7 @@ export default function App() {
   return (
     <Suspense fallback={<Loader />}>
       <Helmet title="Sakura Reveries Cable Builder" />
-      <Container fluid className="g-0 h-100 d-inline-block">
+      <Container fluid className="g-0 h-100">
         <Row className="g-0 h-100">
           <Col xs={8} sm={9}>
             <Scene settings={values} />
