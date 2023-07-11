@@ -8,7 +8,7 @@ import {
   Stats
 } from '@react-three/drei';
 // eslint-disable-next-line import/no-unresolved
-import { EffectComposer, Bloom } from '@react-three/postprocessing';
+import { EffectComposer, N8AO } from '@react-three/postprocessing';
 
 import Cable from 'components/Cable';
 import Connector from 'components/Connector';
@@ -41,8 +41,9 @@ export default function Scene({ settings }) {
       <PerspectiveCamera makeDefault fov={20} position={[-12, 8, 10]} />
       <OrbitControls makeDefault maxPolarAngle={Math.PI / 2} panSpeed={0} />
       <Stats />
-      <EffectComposer>
-        <Bloom luminanceThreshold={0} luminanceSmoothing={0.9} height={320} />
+      <EffectComposer disableNormalPass>
+        {/* <Bloom luminanceThreshold={0} luminanceSmoothing={0.9} height={320} /> */}
+        <N8AO aoRadius={1} intensity={5} distanceFalloff={3} />
       </EffectComposer>
     </Canvas>
   );

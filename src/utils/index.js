@@ -47,9 +47,13 @@ export const cableAttachments = {
 
 export const connectorOffsets = {
   USB_A: [0, -20, 3.25],
-  USB_C: [0, -20, -3.25]
+  USB_A_Alt: [0, -20, 3.25],
+  USB_C: [0, -20, -3.25],
+  USB_C_Alt: [0, -10, 6]
 };
 export const connectorRotations = {
   USB_A: [0, Math.PI, 0],
-  USB_C: [0, 0, 0]
+  USB_A_Alt: [0, Math.PI, 0],
+  USB_C: [0, 0, 0],
+  USB_C_Alt: [0, Math.PI, 0]
 };
