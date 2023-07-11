@@ -11,9 +11,7 @@ import {
 } from 'utils';
 
 export default function Connector({
-  // eslint-disable-next-line
   finish,
-  // eslint-disable-next-line
   heatshrinkColor,
   model,
   ...props
@@ -39,11 +37,7 @@ export default function Connector({
         rotation={connectorRotations[model] ?? [0, 0, 0]}
       >
         <mesh castShadow receiveShadow geometry={nodes.Connector.geometry}>
-          <meshPhysicalMaterial
-            color={finishColors['Standard']}
-            metalness={1}
-            roughness={0}
-          />
+          <meshPhysicalMaterial color={'#EFF4F7'} metalness={1} roughness={0} />
         </mesh>
         {Boolean(nodes.Heatshrink) && (
           <mesh
@@ -63,8 +57,8 @@ export default function Connector({
           <mesh castShadow receiveShadow geometry={nodes.Housing.geometry}>
             <meshPhysicalMaterial
               color={finishColors[finish]}
-              metalness={0.75}
-              roughness={1}
+              metalness={1}
+              roughness={0.5}
             />
           </mesh>
         )}

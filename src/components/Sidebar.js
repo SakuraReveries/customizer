@@ -16,7 +16,7 @@ export default function Sidebar({ values, setFieldValue }) {
     <Container fluid className="bg-secondary h-100">
       <Row>
         <Col xs={12} className="d-flex flex-column justify-content-end">
-          <h1 className="text-light text-end">Options</h1>
+          <h1 className="text-light text-end">Cable Builder</h1>
           <hr className="border-white mt-0" />
           <Accordion alwaysOpen>
             <SidebarPane title="Cable">

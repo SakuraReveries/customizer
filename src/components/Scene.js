@@ -18,12 +18,12 @@ export default function Scene({ settings }) {
   const attachments = cableAttachments[settings.cable.model];
 
   return (
-    <Canvas shadows>
+    <Canvas shadows gl={{ antialias: false }}>
       <color attach="background" args={['#f3969a']} />
       <Stage
         intensity={0.1}
         adjustCamera={1.2}
-        shadows="accumulative"
+        shadows={{ type: 'accumulative', frames: 20 }}
         environment="apartment"
       >
         <Center rotation={[Math.PI / 2, 0, Math.PI]}>
@@ -43,7 +43,7 @@ export default function Scene({ settings }) {
       <Stats />
       <EffectComposer disableNormalPass>
         {/* <Bloom luminanceThreshold={0} luminanceSmoothing={0.9} height={320} /> */}
-        <N8AO aoRadius={1} intensity={5} distanceFalloff={3} />
+        <N8AO aoRadius={4} intensity={2} distanceFalloff={1} />
       </EffectComposer>
     </Canvas>
   );
