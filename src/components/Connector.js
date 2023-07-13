@@ -5,18 +5,29 @@ import { ThreeMFLoader } from 'three/examples/jsm/loaders/3MFLoader';
 
 import {
   colors,
-  finishColors,
   connectorOffsets,
-  connectorRotations
+  connectorRotations,
+  cncHousingFinishColors,
+  connectorFinishColors,
+  cerakoteColors
 } from 'utils';
 
 export default function Connector({
-  finish,
+  connectorFinish,
   heatshrinkColor,
+  subHousingType,
+  cerakoteColor,
+  housingFinish,
+  housingType,
   model,
   ...props
 }) {
-  const cachedObj = useLoader(ThreeMFLoader, `./connectors/${model}.3mf`);
+  const cachedObj = useLoader(
+    ThreeMFLoader,
+    `./connectors/${model}_${housingType}${
+      subHousingType ? `_${subHousingType}` : ''
+    }.3mf`
+  );
   const obj = useMemo(() => cachedObj.clone(), [cachedObj]);
   const { nodes } = useGraph(obj);
 
@@ -34,11 +45,19 @@ export default function Connector({
     <group
       {...props}
       dispose={null}
-      position={connectorOffsets[model] ?? [0, 0, 0]}
-      rotation={connectorRotations[model] ?? [0, 0, 0]}
+      position={
+        connectorOffsets[model][subHousingType || housingType] ?? [0, 0, 0]
+      }
+      rotation={
+        connectorRotations[model][subHousingType || housingType] ?? [0, 0, 0]
+      }
     >
       <mesh castShadow receiveShadow geometry={nodes.Connector.geometry}>
-        <meshPhysicalMaterial color={'#EFF4F7'} metalness={1} roughness={0} />
+        <meshPhysicalMaterial
+          color={connectorFinishColors[connectorFinish]}
+          metalness={1}
+          roughness={0}
+        />
       </mesh>
       {Boolean(nodes.Heatshrink) && (
         <mesh
@@ -57,9 +76,13 @@ export default function Connector({
       {Boolean(nodes.Housing) && (
         <mesh castShadow receiveShadow geometry={nodes.Housing.geometry}>
           <meshPhysicalMaterial
-            color={finishColors[finish]}
-            metalness={1}
-            roughness={0.5}
+            color={
+              housingFinish === 'Cerakote'
+                ? cerakoteColors.find((color) => color.id === cerakoteColor).hex
+                : cncHousingFinishColors[housingFinish]
+            }
+            metalness={housingFinish === 'Cerakote' ? 0.4 : 1}
+            roughness={housingFinish === 'Cerakote' ? 0.7 : 0.5}
           />
         </mesh>
       )}
@@ -68,7 +91,11 @@ export default function Connector({
 }
 
 Connector.propTypes = {
+  connectorFinish: PropTypes.string.isRequired,
+  housingType: PropTypes.string.isRequired,
   model: PropTypes.string.isRequired,
-  heatshrinkColor: PropTypes.string.isRequired,
-  finish: PropTypes.string.isRequired
+  heatshrinkColor: PropTypes.string,
+  subHousingType: PropTypes.string,
+  cerakoteColor: PropTypes.string,
+  housingFinish: PropTypes.string
 };

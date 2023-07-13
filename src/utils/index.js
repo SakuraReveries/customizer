@@ -9,7 +9,15 @@ export const colors = [
   { id: 'black', name: 'Black', hex: '#000000' }
 ];
 
-export const cables = {
+export const heatshrinkColors = colors.slice();
+
+export const techFlexColors = colors.slice();
+
+export const mdpcxColors = colors.slice();
+
+export const cerakoteColors = colors.slice();
+
+export const cableTypes = {
   Charger: 'Charger',
   Straight: 'Straight',
   StraightExit: 'Straight Exit',
@@ -19,42 +27,88 @@ export const cables = {
   RightRearExit: 'Right Rear Exit'
 };
 
-export const connectors = {
+export const connectorFinishes = {
+  Nickel: 'Nickel',
+  Gold: 'Gold-plated'
+};
+
+export const connectorFinishColors = {
+  Nickel: '#727472',
+  Gold: '#d4af37'
+};
+
+export const housingTypes = {
+  Heatshrink: 'Heatshrink',
+  CNC: 'CNC Housing'
+};
+
+export const sleeveTypes = {
+  MDPC_X: 'MDPC-X',
+  TechFlex: 'TechFlex'
+};
+
+export const connectorTypes = {
   USB_A: 'USB-A',
-  USB_C: 'USB-C',
-  USB_A_Alt: 'USB-A (Alt)',
-  USB_C_Alt: 'USB-C (Alt)',
-  USB_C_GlowRing: 'USB-C (Glow Ring)'
+  USB_C: 'USB-C'
 };
 
-export const finishes = {
-  Standard: 'Silver',
+export const cncHousingTypes = {
+  USB_A: {
+    Facet: 'Facet'
+  },
+  USB_C: {
+    GlowRing: 'Glow',
+    MonoRing: 'Mono Ring',
+    RightAngle: 'Right-angle'
+  }
+};
+
+export const cncHousingFinishes = {
   Gold: 'Gold-plated',
-  Nickel: 'Nickel-plated'
+  Silver: 'Silver-plated',
+  Cerakote: 'Cerakote'
 };
 
-export const finishColors = {
-  Standard: '#848789',
+export const cncHousingFinishColors = {
   Gold: '#d4af37',
-  Nickel: '#727472'
+  Silver: '#c0c0c0'
 };
 
 export const cableAttachments = {
   Charger: {
-    hostConnector: [95.7, -50, 8],
+    hostConnector: [87.5, -50, 8],
     deviceConnector: [0, -50, -8]
-  }
+  },
+  Straight: {},
+  StraightExit: {},
+  LeftParallel: {},
+  LeftRearExit: {},
+  RightParallel: {},
+  RightRearExit: {}
 };
 
 export const connectorOffsets = {
-  USB_A: [0, -20, 3.25],
-  USB_A_Alt: [0, -20, 3.25],
-  USB_C: [0, -20, -3.25],
-  USB_C_Alt: [0, -10, 6]
+  USB_A: {
+    Heatshrink: [0, -20, 3.25],
+    Facet: [0, -20, -3.25]
+  },
+  USB_C: {
+    Heatshrink: [0, -20, -3.25],
+    GlowRing: [0, 0, 0],
+    MonoRing: [0, -10, 6],
+    RightAngle: [0, 0, 0]
+  }
 };
+
 export const connectorRotations = {
-  USB_A: [0, Math.PI, 0],
-  USB_A_Alt: [0, Math.PI, 0],
-  USB_C: [0, 0, 0],
-  USB_C_Alt: [0, Math.PI, 0]
+  USB_A: {
+    Heatshrink: [0, Math.PI, 0],
+    Facet: [0, 0, 0]
+  },
+  USB_C: {
+    Heatshrink: [0, 0, 0],
+    GlowRing: [0, 0, 0],
+    MonoRing: [0, Math.PI, 0],
+    RightAngle: [0, 0, 0]
+  }
 };

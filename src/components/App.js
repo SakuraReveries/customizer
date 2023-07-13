@@ -10,22 +10,31 @@ import { Helmet } from 'react-helmet';
 const initialValues = {
   cable: {
     model: 'Charger',
-    color: 'red'
+    sleeveType: 'MDPC_X',
+    sleeveColor: 'black'
   },
   hostConnector: {
     model: 'USB_A',
-    heatshrinkColor: 'green',
-    finish: 'Standard'
+    connectorFinish: 'Nickel',
+    housingType: 'Heatshrink',
+    subHousingType: null,
+    housingFinish: null,
+    heatshrinkColor: 'black',
+    cerakoteColor: null
   },
   deviceConnector: {
     model: 'USB_C',
-    heatshrinkColor: 'blue',
-    finish: 'Standard'
+    connectorFinish: 'Nickel',
+    housingType: 'Heatshrink',
+    subHousingType: null,
+    housingFinish: null,
+    heatshrinkColor: 'black',
+    cerakoteColor: null
   }
 };
 
 export default function App() {
-  const { values, setFieldValue } = useFormik({
+  const { values, setFieldValue, setValues } = useFormik({
     initialValues
   });
 
@@ -38,7 +47,11 @@ export default function App() {
             <Scene settings={values} />
           </Col>
           <Col xs={4} sm={3}>
-            <Sidebar values={values} setFieldValue={setFieldValue} />
+            <Sidebar
+              values={values}
+              setFieldValue={setFieldValue}
+              setValues={setValues}
+            />
           </Col>
         </Row>
       </Container>
