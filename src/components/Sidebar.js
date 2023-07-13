@@ -75,14 +75,14 @@ export default function Sidebar({ values, setFieldValue, setValues }) {
     <Container fluid className="bg-secondary h-100">
       <Row>
         <Col xs={12} className="d-flex flex-column">
-          <h1 className="mt-2 mb-3 d-flex align-items-center h2 text-light">
+          <h1 className="mt-2 mb-3 d-flex align-items-center h4 text-light">
             <img
               src={logo}
               alt="Sakura Reveries"
-              style={{ height: 48 }}
-              className="ms-auto me-auto"
+              style={{ height: 96 }}
+              className="mx-4"
             />
-            <span className="ms-auto">Cable Builder</span>
+            <span className="text-end">Cable Builder</span>
           </h1>
           <hr className="border-white mt-0" />
           <Accordion alwaysOpen activeKey={activeKey} onSelect={setActiveKey}>
