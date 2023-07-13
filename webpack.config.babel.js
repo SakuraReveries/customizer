@@ -28,7 +28,7 @@ const plugins = [
     template: './src/index.html'
   }),
   new CnameWebpackPlugin({
-    domain: 'swaglord.net'
+    domain: 'customizer.sakurareveries.com'
   }),
   new CopyPlugin({
     patterns: [{ from: 'public/' }]
