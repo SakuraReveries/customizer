@@ -5,7 +5,8 @@ import {
   Center,
   OrbitControls,
   PerspectiveCamera,
-  Stats
+  Stats,
+  useKeyboardControls
 } from '@react-three/drei';
 // eslint-disable-next-line import/no-unresolved
 import { EffectComposer, N8AO } from '@react-three/postprocessing';
@@ -13,12 +14,21 @@ import { EffectComposer, N8AO } from '@react-three/postprocessing';
 import Cable from 'components/Cable';
 import Connector from 'components/Connector';
 import { cableAttachments } from 'utils';
+import { useEffect, useState } from 'react';
 
 export default function Scene({ settings }) {
+  const [showStats, setShowStats] = useState(false);
   const attachments = cableAttachments[settings.cable.model];
+  const toggleStats = useKeyboardControls((state) => state.toggleStats);
+
+  useEffect(() => {
+    if (toggleStats) {
+      setShowStats((prevStats) => !prevStats);
+    }
+  }, [toggleStats]);
 
   return (
-    <Canvas shadows gl={{ antialias: false }}>
+    <Canvas shadows gl={{ antialias: false }} style={{ height: '100vh' }}>
       <color attach="background" args={['#f3969a']} />
       <Stage
         intensity={0.1}
@@ -38,9 +48,9 @@ export default function Scene({ settings }) {
       </Stage>
       <PerspectiveCamera makeDefault fov={20} position={[-12, 8, 10]} />
       <OrbitControls makeDefault maxPolarAngle={Math.PI / 2} panSpeed={0} />
-      <Stats />
+      {showStats && <Stats />}
       <EffectComposer disableNormalPass>
-        <N8AO aoRadius={4} intensity={2} distanceFalloff={1} />
+        <N8AO aoRadius={4} intensity={10} distanceFalloff={1} />
       </EffectComposer>
     </Canvas>
   );

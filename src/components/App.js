@@ -1,11 +1,12 @@
 import { useFormik } from 'formik';
-import { Suspense } from 'react';
+import { Suspense, useMemo } from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
 
 import Loader from 'components/Loader';
 import Sidebar from 'components/Sidebar';
 import Scene from 'components/Scene';
 import { Helmet } from 'react-helmet';
+import { KeyboardControls } from '@react-three/drei';
 
 const initialValues = {
   cable: {
@@ -34,6 +35,7 @@ const initialValues = {
 };
 
 export default function App() {
+  const controlMap = useMemo(() => [{ name: 'toggleStats', keys: ['F4'] }], []);
   const { values, setFieldValue, setValues } = useFormik({
     initialValues
   });
@@ -44,7 +46,9 @@ export default function App() {
       <Container fluid className="g-0 h-100">
         <Row className="g-0 h-100">
           <Col xs={8} sm={9}>
-            <Scene settings={values} />
+            <KeyboardControls map={controlMap}>
+              <Scene settings={values} />
+            </KeyboardControls>
           </Col>
           <Col xs={4} sm={3}>
             <Sidebar

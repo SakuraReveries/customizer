@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { Fragment, useCallback, useState } from 'react';
+import { Fragment, useCallback } from 'react';
 import { Accordion, Col, Container, Form, Row } from 'react-bootstrap';
 
 import logo from 'images/logo.png';
@@ -19,9 +19,9 @@ import {
   sleeveTypes,
   techFlexColors
 } from 'utils';
+import ObjectOptions from './ObjectOptions';
 
 export default function Sidebar({ values, setFieldValue, setValues }) {
-  const [activeKey, setActiveKey] = useState('Cable');
   const updateField = useCallback(
     (name) => (event) => setFieldValue(name, event.target.value),
     [setFieldValue]
@@ -72,7 +72,10 @@ export default function Sidebar({ values, setFieldValue, setValues }) {
   }
 
   return (
-    <Container fluid className="bg-secondary h-100">
+    <Container
+      fluid
+      className="bg-secondary h-100 border-4 border-primary border-start"
+    >
       <Row>
         <Col xs={12} className="d-flex flex-column">
           <h1 className="mt-2 mb-3 d-flex align-items-center h4 text-light">
@@ -85,7 +88,7 @@ export default function Sidebar({ values, setFieldValue, setValues }) {
             <span className="text-end">Cable Builder</span>
           </h1>
           <hr className="border-white mt-0" />
-          <Accordion alwaysOpen activeKey={activeKey} onSelect={setActiveKey}>
+          <Accordion alwaysOpen defaultActiveKey={['Cable']}>
             <SidebarPane title="Cable">
               <Form>
                 <Form.Group className="mb-2">
@@ -96,11 +99,7 @@ export default function Sidebar({ values, setFieldValue, setValues }) {
                     }
                     value={values.cable.model}
                   >
-                    {Object.entries(cableTypes).map(([key, val]) => (
-                      <option key={key} value={key}>
-                        {val}
-                      </option>
-                    ))}
+                    <ObjectOptions object={cableTypes} />
                   </Form.Select>
                 </Form.Group>
                 <Form.Group>
@@ -140,11 +139,7 @@ export default function Sidebar({ values, setFieldValue, setValues }) {
                     onChange={updateField('hostConnector.connectorFinish')}
                     value={values.hostConnector.connectorFinish}
                   >
-                    {Object.entries(connectorFinishes).map(([key, val]) => (
-                      <option key={key} value={key}>
-                        {val}
-                      </option>
-                    ))}
+                    <ObjectOptions object={connectorFinishes} />
                   </Form.Select>
                 </Form.Group>
                 <Form.Group className="mb-2">
@@ -169,7 +164,6 @@ export default function Sidebar({ values, setFieldValue, setValues }) {
                     checked={values.hostConnector.housingType === 'CNC'}
                   />
                 </Form.Group>
-
                 {values.hostConnector.housingType === 'Heatshrink' ? (
                   <Form.Group>
                     <Form.Label className="text-light">
@@ -202,11 +196,7 @@ export default function Sidebar({ values, setFieldValue, setValues }) {
                       }
                       value={values.hostConnector.housingFinish}
                     >
-                      {Object.entries(cncHousingFinishes).map(([key, val]) => (
-                        <option key={key} value={key}>
-                          {val}
-                        </option>
-                      ))}
+                      <ObjectOptions object={cncHousingFinishes} />
                     </Form.Select>
                   </Form.Group>
                 )}
@@ -236,11 +226,7 @@ export default function Sidebar({ values, setFieldValue, setValues }) {
                     onChange={updateField('deviceConnector.connectorFinish')}
                     value={values.deviceConnector.connectorFinish}
                   >
-                    {Object.entries(connectorFinishes).map(([key, val]) => (
-                      <option key={key} value={key}>
-                        {val}
-                      </option>
-                    ))}
+                    <ObjectOptions object={connectorFinishes} />
                   </Form.Select>
                 </Form.Group>
                 <Form.Group className="mb-2">
@@ -290,13 +276,7 @@ export default function Sidebar({ values, setFieldValue, setValues }) {
                         onChange={updateField('deviceConnector.subHousingType')}
                         value={values.deviceConnector.subHousingType}
                       >
-                        {Object.entries(cncHousingTypes.USB_C).map(
-                          ([key, val]) => (
-                            <option key={key} value={key}>
-                              {val}
-                            </option>
-                          )
-                        )}
+                        <ObjectOptions object={cncHousingTypes.USB_C} />
                       </Form.Select>
                     </Form.Group>
                     <Form.Group className="mb-2">
@@ -319,13 +299,7 @@ export default function Sidebar({ values, setFieldValue, setValues }) {
                         }
                         value={values.deviceConnector.housingFinish}
                       >
-                        {Object.entries(cncHousingFinishes).map(
-                          ([key, val]) => (
-                            <option key={key} value={key}>
-                              {val}
-                            </option>
-                          )
-                        )}
+                        <ObjectOptions object={cncHousingFinishes} />
                       </Form.Select>
                     </Form.Group>
                   </Fragment>
@@ -349,11 +323,11 @@ export default function Sidebar({ values, setFieldValue, setValues }) {
             <SidebarPane title="Summary">
               <Container fluid className="text-light">
                 <Row>
-                  <Col xs={6}>Cable Type</Col>
+                  <Col xs={6}>Cable</Col>
                   <Col xs={6}>{cableTypes[values.cable.model]}</Col>
                 </Row>
                 <Row>
-                  <Col xs={6}>Outer Sleeve</Col>
+                  <Col xs={6}>Sleeve</Col>
                   <Col xs={6}>
                     {
                       sleeveColors.find(
@@ -364,7 +338,7 @@ export default function Sidebar({ values, setFieldValue, setValues }) {
                   </Col>
                 </Row>
                 <Row>
-                  <Col xs={6}>Host Connector</Col>
+                  <Col xs={6}>Host Side</Col>
                   <Col xs={6}>
                     {connectorTypes[values.hostConnector.model]} (
                     {hostConnectorDesc}) w/{' '}
@@ -373,7 +347,7 @@ export default function Sidebar({ values, setFieldValue, setValues }) {
                   </Col>
                 </Row>
                 <Row>
-                  <Col xs={6}>Device Connector</Col>
+                  <Col xs={6}>Device Side</Col>
                   <Col xs={6}>
                     {connectorTypes[values.deviceConnector.model]} (
                     {deviceConnectorDesc}) w/{' '}

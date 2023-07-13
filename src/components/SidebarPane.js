@@ -13,6 +13,10 @@ export default function SidebarPane({ children, title }) {
   const { activeEventKey } = useContext(AccordionContext);
   const onClick = useAccordionButton(title);
 
+  const isOpen = Array.isArray(activeEventKey)
+    ? activeEventKey.includes(title)
+    : activeEventKey === title;
+
   return (
     <Fragment>
       <Button
@@ -22,7 +26,7 @@ export default function SidebarPane({ children, title }) {
         <span>{title}</span>
         <FontAwesomeIcon
           className="ms-auto"
-          icon={activeEventKey === title ? faCaretUp : faCaretDown}
+          icon={isOpen ? faCaretUp : faCaretDown}
         />
       </Button>
       <Accordion.Collapse eventKey={title}>
