@@ -3,6 +3,9 @@
 @import "~bootstrap/scss/bootstrap";
 @import "~bootswatch/dist/minty/bootswatch";
 
+// Component styles
+@import "components/ColorPicker";
+
 html,
 body {
   height: 100vh;

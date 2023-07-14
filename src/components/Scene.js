@@ -12,9 +12,10 @@ import {
 import { EffectComposer, N8AO } from '@react-three/postprocessing';
 
 import Cable from 'components/Cable';
-import Connector from 'components/Connector';
+import USBConnector from 'components/USBConnector';
 import { cableAttachments } from 'utils';
 import { useEffect, useState } from 'react';
+import CableConnector from './CableConnector';
 
 export default function Scene({ settings }) {
   const [showStats, setShowStats] = useState(false);
@@ -39,10 +40,13 @@ export default function Scene({ settings }) {
         <Center rotation={[Math.PI / 2, 0, Math.PI]}>
           <Cable {...settings.cable} />
           <group position={attachments?.deviceConnector ?? [0, 0, 0]}>
-            <Connector {...settings.deviceConnector} />
+            <USBConnector {...settings.deviceConnector} />
           </group>
           <group position={attachments?.hostConnector ?? [0, 0, 0]}>
-            <Connector {...settings.hostConnector} />
+            <USBConnector {...settings.hostConnector} />
+          </group>
+          <group position={attachments?.cableConnector ?? [0, 0, 0]}>
+            <CableConnector {...settings.cableConnector} />
           </group>
         </Center>
       </Stage>

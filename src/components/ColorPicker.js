@@ -6,25 +6,31 @@ export default function ColorPicker({ colors, onChange, value }) {
   return (
     <Container fluid className="g-0 d-flex">
       <Row className="g-0 w-100">
-        {colors.map(({ id, name, hex }) => (
+        {colors.map(({ id, name, hex, image }) => (
           <Col xs={2} key={id} className="g-2 d-flex justify-content-center">
             <OverlayTrigger
               placement="bottom"
               overlay={<Tooltip>{name}</Tooltip>}
             >
               <button
-                className="btn btn-sm"
-                style={{
-                  display: 'block',
-                  height: 32,
-                  width: 32,
-                  backgroundColor: hex,
-                  cursor: 'pointer',
-                  border:
-                    value === id
-                      ? `2px dashed ${contrastColor({ bgColor: hex })}`
-                      : null
-                }}
+                className="btn btn-sm sr-color-picker-swatch"
+                style={
+                  image
+                    ? {
+                        backgroundImage: `url(${image})`,
+                        border:
+                          value === id
+                            ? `2px dashed ${contrastColor({ bgColor: hex })}`
+                            : null
+                      }
+                    : {
+                        backgroundColor: hex,
+                        border:
+                          value === id
+                            ? `2px dashed ${contrastColor({ bgColor: hex })}`
+                            : null
+                      }
+                }
                 onClick={(event) => {
                   event.preventDefault();
                   onChange(id);

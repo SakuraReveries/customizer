@@ -10,14 +10,14 @@ import {
   cerakoteColors,
   cncHousingFinishes,
   cncHousingTypes,
-  colors,
   connectorFinishes,
   connectorTypes,
   housingTypes,
   heatshrinkColors,
   mdpcxColors,
   sleeveTypes,
-  techFlexColors
+  techFlexColors,
+  ledColors
 } from 'utils';
 import ObjectOptions from './ObjectOptions';
 
@@ -170,7 +170,7 @@ export default function Sidebar({ values, setFieldValue, setValues }) {
                       Heatshrink Color
                     </Form.Label>
                     <ColorPicker
-                      colors={colors}
+                      colors={heatshrinkColors}
                       onChange={(color) =>
                         setFieldValue('hostConnector.heatshrinkColor', color)
                       }
@@ -235,18 +235,15 @@ export default function Sidebar({ values, setFieldValue, setValues }) {
                     type="switch"
                     className="text-light ms-3"
                     label={housingTypes[values.deviceConnector.housingType]}
-                    onChange={(event) =>
+                    onChange={({ target: { checked } }) =>
                       setValues((values) => ({
                         ...values,
                         deviceConnector: {
                           ...values.deviceConnector,
-                          housingType: event.target.checked
-                            ? 'CNC'
-                            : 'Heatshrink',
-                          subHousingType: event.target.checked
-                            ? 'MonoRing'
-                            : null,
-                          housingFinish: event.target.checked ? 'Silver' : null
+                          housingType: checked ? 'CNC' : 'Heatshrink',
+                          subHousingType: checked ? 'MonoRing' : null,
+                          housingFinish: checked ? 'Silver' : null,
+                          ledColor: checked ? 'red' : null
                         }
                       }))
                     }
@@ -259,7 +256,7 @@ export default function Sidebar({ values, setFieldValue, setValues }) {
                       Heatshrink Color
                     </Form.Label>
                     <ColorPicker
-                      colors={colors}
+                      colors={heatshrinkColors}
                       onChange={(color) =>
                         setFieldValue('deviceConnector.heatshrinkColor', color)
                       }
@@ -302,6 +299,20 @@ export default function Sidebar({ values, setFieldValue, setValues }) {
                         <ObjectOptions object={cncHousingFinishes} />
                       </Form.Select>
                     </Form.Group>
+                    {values.deviceConnector.subHousingType === 'GlowRing' && (
+                      <Form.Group>
+                        <Form.Label className="text-light">
+                          LED Color
+                        </Form.Label>
+                        <ColorPicker
+                          colors={ledColors}
+                          onChange={(color) =>
+                            setFieldValue('deviceConnector.ledColor', color)
+                          }
+                          value={values.deviceConnector.ledColor}
+                        />
+                      </Form.Group>
+                    )}
                   </Fragment>
                 )}
                 {values.deviceConnector.housingFinish === 'Cerakote' && (

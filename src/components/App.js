@@ -14,6 +14,7 @@ const initialValues = {
     sleeveType: 'MDPC_X',
     sleeveColor: 'black'
   },
+  cableConnector: {},
   hostConnector: {
     model: 'USB_A',
     connectorFinish: 'Nickel',
@@ -30,7 +31,8 @@ const initialValues = {
     subHousingType: null,
     housingFinish: null,
     heatshrinkColor: 'black',
-    cerakoteColor: null
+    cerakoteColor: null,
+    ledColor: null
   }
 };
 

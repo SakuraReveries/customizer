@@ -1,3 +1,6 @@
+import rgbImage from 'images/rgb.png';
+import transparentImage from 'images/transparent.png';
+
 export const colors = [
   { id: 'red', name: 'Red', hex: '#ff0000' },
   { id: 'green', name: 'Green', hex: '#00ff00' },
@@ -9,13 +12,32 @@ export const colors = [
   { id: 'black', name: 'Black', hex: '#000000' }
 ];
 
-export const heatshrinkColors = colors.slice();
+export const heatshrinkColors = [
+  { id: 'white', name: 'White', hex: '#ffffff' },
+  { id: 'black', name: 'Black', hex: '#000000' },
+  { id: 'grey', name: 'Grey', hex: '#666666' },
+  { id: 'brown', name: 'Brown', hex: '#593200' },
+  { id: 'green', name: 'Green', hex: '#00974b' },
+  { id: 'purple', name: 'Purple', hex: '#7c498d' },
+  { id: 'red', name: 'Red', hex: '#b22739' },
+  { id: 'orange', name: 'Orange', hex: '#f26817' },
+  { id: 'yellow', name: 'Yellow', hex: '#ffc63d' },
+  { id: 'blue', name: 'Blue', hex: '#316bed' },
+  { id: 'clear', name: 'Clear', hex: '#ffffff', image: transparentImage }
+];
 
 export const techFlexColors = colors.slice();
 
 export const mdpcxColors = colors.slice();
 
 export const cerakoteColors = colors.slice();
+
+export const ledColors = [
+  { id: 'red', name: 'Red', hex: '#ff0000' },
+  { id: 'green', name: 'Green', hex: '#00ff00' },
+  { id: 'blue', name: 'Blue', hex: '#0000ff' },
+  { id: 'rgb', name: 'RGB', hex: '#ffffff', image: rgbImage }
+];
 
 export const cableTypes = {
   Charger: 'Charger',
@@ -94,7 +116,7 @@ export const connectorOffsets = {
   },
   USB_C: {
     Heatshrink: [0, -20, -3.25],
-    GlowRing: [0, 0, 0],
+    GlowRing: [0, -10, -6],
     MonoRing: [0, -10, 6],
     RightAngle: [0, 0, 0]
   }
