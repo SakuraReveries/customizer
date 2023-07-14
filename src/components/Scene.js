@@ -6,7 +6,8 @@ import {
   OrbitControls,
   PerspectiveCamera,
   Stats,
-  useKeyboardControls
+  useKeyboardControls,
+  PerformanceMonitor
 } from '@react-three/drei';
 // eslint-disable-next-line import/no-unresolved
 import { EffectComposer, N8AO } from '@react-three/postprocessing';
@@ -17,7 +18,11 @@ import { cableAttachments } from 'utils';
 import { useEffect, useState } from 'react';
 import CableConnector from './CableConnector';
 
+const getPerformanceBounds = (refreshRate) =>
+  refreshRate > 60 ? [40, refreshRate] : [40, 60];
+
 export default function Scene({ settings }) {
+  const [degradedPerformance, setDegradedPerformance] = useState(false);
   const [showStats, setShowStats] = useState(false);
   const attachments = cableAttachments[settings.cable.model];
   const toggleStats = useKeyboardControls((state) => state.toggleStats);
@@ -29,7 +34,12 @@ export default function Scene({ settings }) {
   }, [toggleStats]);
 
   return (
-    <Canvas shadows gl={{ antialias: false }} style={{ height: '100vh' }}>
+    <Canvas
+      shadows={!degradedPerformance}
+      gl={{ antialias: false }}
+      style={{ height: '100vh' }}
+      dpr={degradedPerformance ? 0.75 : 1.5}
+    >
       <color attach="background" args={['#f3969a']} />
       <Stage
         intensity={0.1}
@@ -53,9 +63,20 @@ export default function Scene({ settings }) {
       <PerspectiveCamera makeDefault fov={20} position={[-12, 8, 10]} />
       <OrbitControls makeDefault maxPolarAngle={Math.PI / 2} panSpeed={0} />
       {showStats && <Stats />}
-      <EffectComposer disableNormalPass>
-        <N8AO aoRadius={4} intensity={10} distanceFalloff={1} />
-      </EffectComposer>
+      {!degradedPerformance && (
+        <EffectComposer disableNormalPass>
+          <N8AO aoRadius={4} intensity={10} distanceFalloff={1} />
+        </EffectComposer>
+      )}
+      <PerformanceMonitor
+        iterations={5}
+        threshold={0.6}
+        factor={1}
+        step={-1}
+        bounds={getPerformanceBounds}
+        onIncline={() => setDegradedPerformance(false)}
+        onDecline={() => setDegradedPerformance(true)}
+      />
     </Canvas>
   );
 }
