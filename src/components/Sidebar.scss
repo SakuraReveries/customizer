@@ -1,0 +1,9 @@
+.sr-sidebar {
+  &-logo {
+    height: 32px;
+
+    @include media-breakpoint-up(lg) {
+      height: 96px;
+    }
+  }
+}

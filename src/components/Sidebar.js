@@ -82,8 +82,7 @@ export default function Sidebar({ values, setFieldValue, setValues }) {
             <img
               src={logo}
               alt="Sakura Reveries"
-              style={{ height: 96 }}
-              className="mx-4"
+              className="mx-4 sr-sidebar-logo"
             />
             <span className="text-end">Cable Builder</span>
           </h1>
