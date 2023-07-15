@@ -47,12 +47,12 @@ export default function App() {
       <Helmet title="Sakura Reveries Cable Builder" />
       <Container fluid className="g-0 h-100">
         <Row className="g-0 h-100">
-          <Col xs={8} sm={9}>
+          <Col xs={6} md={8} lg={9}>
             <KeyboardControls map={controlMap}>
               <Scene settings={values} />
             </KeyboardControls>
           </Col>
-          <Col xs={4} sm={3}>
+          <Col xs={6} md={4} lg={3}>
             <Sidebar
               values={values}
               setFieldValue={setFieldValue}
