@@ -14,7 +14,7 @@ import { EffectComposer, N8AO } from '@react-three/postprocessing';
 
 import Cable from 'components/Cable';
 import USBConnector from 'components/USBConnector';
-import { cableAttachments } from 'utils';
+import { cableAttachments, cableRotations } from 'utils';
 import { useEffect, useState } from 'react';
 import CableConnector from './CableConnector';
 
@@ -47,7 +47,7 @@ export default function Scene({ settings }) {
         shadows={{ type: 'accumulative', frames: 20 }}
         environment="apartment"
       >
-        <Center rotation={[Math.PI / 2, 0, Math.PI]}>
+        <Center rotation={cableRotations[settings.cable.model]}>
           <Cable {...settings.cable} />
           <group position={attachments?.deviceConnector ?? [0, 0, 0]}>
             <USBConnector {...settings.deviceConnector} />

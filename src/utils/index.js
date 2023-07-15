@@ -96,17 +96,45 @@ export const cncHousingFinishColors = {
   Silver: '#c0c0c0'
 };
 
+export const cableRotations = {
+  Charger: [Math.PI / 2, 0, Math.PI],
+  Straight: [0, 0, 0],
+  StraightExit: [Math.PI * 1.5, 0, Math.PI],
+  LeftParallel: [0, 0, 0],
+  LeftRearExit: [0, 0, 0],
+  RightParallel: [0, 0, 0],
+  RightRearExit: [0, 0, 0]
+};
+
 export const cableAttachments = {
   Charger: {
     hostConnector: [87.5, -50, 8],
     deviceConnector: [0, -50, -8]
   },
-  Straight: {},
-  StraightExit: {},
-  LeftParallel: {},
-  LeftRearExit: {},
-  RightParallel: {},
-  RightRearExit: {}
+  Straight: {
+    hostConnector: [0, 0, 0],
+    deviceConnector: [0, 0, 0]
+  },
+  StraightExit: {
+    hostConnector: [100, 0, 0],
+    deviceConnector: [0, 0, 0]
+  },
+  LeftParallel: {
+    hostConnector: [0, 0, 0],
+    deviceConnector: [0, 0, 0]
+  },
+  LeftRearExit: {
+    hostConnector: [0, 0, 0],
+    deviceConnector: [0, 0, 0]
+  },
+  RightParallel: {
+    hostConnector: [0, 0, 0],
+    deviceConnector: [0, 0, 0]
+  },
+  RightRearExit: {
+    hostConnector: [0, 0, 0],
+    deviceConnector: [0, 0, 0]
+  }
 };
 
 export const connectorOffsets = {
