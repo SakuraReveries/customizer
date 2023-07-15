@@ -299,18 +299,40 @@ export default function Sidebar({ values, setFieldValue, setValues }) {
                       </Form.Select>
                     </Form.Group>
                     {values.deviceConnector.subHousingType === 'GlowRing' && (
-                      <Form.Group>
-                        <Form.Label className="text-light">
-                          LED Color
-                        </Form.Label>
-                        <ColorPicker
-                          colors={ledColors}
-                          onChange={(color) =>
-                            setFieldValue('deviceConnector.ledColor', color)
-                          }
-                          value={values.deviceConnector.ledColor}
-                        />
-                      </Form.Group>
+                      <Fragment>
+                        <Form.Group className="mb-2">
+                          <Form.Label className="text-light">
+                            LED Color
+                          </Form.Label>
+                          <ColorPicker
+                            colors={ledColors}
+                            onChange={(color) =>
+                              setFieldValue('deviceConnector.ledColor', color)
+                            }
+                            value={values.deviceConnector.ledColor}
+                          />
+                        </Form.Group>
+                        <Alert variant="info">
+                          Glow CNC offers the option to enhance the cable with
+                          an LED light, which can be either a static color or a
+                          non-addressable RGB (meaning the RGB auto cycles at a
+                          predetermined speed between colors without control
+                          over speed or color). When the cable is powered off,
+                          the unique diffuser ring appears white, but when
+                          powered on, it takes on the color of the Static or RGB
+                          LED inside. Cool White is the most popular option for
+                          these connectors. For static colors that are not
+                          achievable with LED colors alone, please contact me to
+                          inquire about custom dyed diffuser rings, which come
+                          at an additional cost. These customized rings, paired
+                          with a white static LED, can create unique accent
+                          colors for the Glow CNC when powered on or off. Please
+                          note that the lighting cannot be disabled; if the
+                          cable is connected to a power source, the LED will
+                          activate. These cables do not have any accompanying
+                          software.
+                        </Alert>
+                      </Fragment>
                     )}
                   </Fragment>
                 )}
