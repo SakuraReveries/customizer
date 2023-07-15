@@ -47,7 +47,7 @@ export default function USBConnector({
       return;
     }
 
-    if (ledColor === 'rgb') {
+    if (ledColor?.startsWith?.('rgb')) {
       const interpolatorKey =
         (scene.clock.getElapsedTime() / 20) % 1 > 0.5 ? 'rising' : 'falling';
       const lerpAlpha = (scene.clock.getElapsedTime() / 10) % 1;
