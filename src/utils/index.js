@@ -33,9 +33,15 @@ export const mdpcxColors = colors.slice();
 export const cerakoteColors = colors.slice();
 
 export const ledColors = [
-  { id: 'red', name: 'Red', hex: '#ff0000' },
-  { id: 'green', name: 'Green', hex: '#00ff00' },
-  { id: 'blue', name: 'Blue', hex: '#0000ff' },
+  { id: 'coolWhite', name: 'Cool White', hex: '#eef2ff' },
+  { id: 'warmWhite', name: 'Warm White', hex: '#ffda8c' },
+  { id: 'amberOrange', name: 'Amber Orange', hex: '#fe9c1b' },
+  { id: 'yellowGold', name: 'Yellow Gold', hex: '#edc918' },
+  { id: 'blue', name: 'Blue', hex: '#1c00ff' },
+  { id: 'uvPurple', name: 'UV Purple', hex: '#c44eff' },
+  { id: 'red', name: 'Red', hex: '#ff1700' },
+  { id: 'pink', name: 'Pink', hex: '#fe4dca' },
+  { id: 'pureGreen', name: 'Pure Green', hex: '#5ffb5f' },
   { id: 'rgb', name: 'RGB', hex: '#ffffff', image: rgbImage }
 ];
 
