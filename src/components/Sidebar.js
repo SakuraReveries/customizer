@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import { Fragment, useCallback } from 'react';
-import { Accordion, Col, Container, Form, Row } from 'react-bootstrap';
+import { Accordion, Alert, Col, Container, Form, Row } from 'react-bootstrap';
 
 import logo from 'images/logo.png';
 import ColorPicker from 'components/ColorPicker';
@@ -334,12 +334,18 @@ export default function Sidebar({ values, setFieldValue, setValues }) {
             <SidebarPane title="Summary">
               <Container fluid className="text-light">
                 <Row>
-                  <Col xs={6}>Cable</Col>
-                  <Col xs={6}>{cableTypes[values.cable.model]}</Col>
+                  <Col xs={6} md={3}>
+                    Cable
+                  </Col>
+                  <Col xs={6} md={9}>
+                    {cableTypes[values.cable.model]}
+                  </Col>
                 </Row>
                 <Row>
-                  <Col xs={6}>Sleeve</Col>
-                  <Col xs={6}>
+                  <Col xs={6} md={3}>
+                    Sleeve
+                  </Col>
+                  <Col xs={6} md={9}>
                     {
                       sleeveColors.find(
                         (color) => color.id === values.cable.sleeveColor
@@ -349,8 +355,10 @@ export default function Sidebar({ values, setFieldValue, setValues }) {
                   </Col>
                 </Row>
                 <Row>
-                  <Col xs={6}>Host Side</Col>
-                  <Col xs={6}>
+                  <Col xs={6} md={3}>
+                    Host Side
+                  </Col>
+                  <Col xs={6} md={9}>
                     {connectorTypes[values.hostConnector.model]} (
                     {hostConnectorDesc}) w/{' '}
                     {connectorFinishes[values.hostConnector.connectorFinish]}{' '}
@@ -358,12 +366,26 @@ export default function Sidebar({ values, setFieldValue, setValues }) {
                   </Col>
                 </Row>
                 <Row>
-                  <Col xs={6}>Device Side</Col>
-                  <Col xs={6}>
+                  <Col xs={6} md={3}>
+                    Device Side
+                  </Col>
+                  <Col xs={6} md={9}>
                     {connectorTypes[values.deviceConnector.model]} (
                     {deviceConnectorDesc}) w/{' '}
                     {connectorFinishes[values.deviceConnector.connectorFinish]}{' '}
                     finish
+                  </Col>
+                </Row>
+                <Row className="mt-2">
+                  <Col xs={12}>
+                    <Alert variant="info">
+                      Please be aware that the colors displayed in this tool may
+                      not precisely match the final product&apos;s actual colors
+                      due to variations in computer-generated representation,
+                      materials, and lighting conditions. Consider the displayed
+                      colors as a reference rather than an exact true to life
+                      depiction.
+                    </Alert>
                   </Col>
                 </Row>
               </Container>
