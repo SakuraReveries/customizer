@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import { useEffect, useState } from 'react';
 import { Canvas } from '@react-three/fiber';
 import {
   Stage,
@@ -14,9 +15,8 @@ import { EffectComposer, N8AO } from '@react-three/postprocessing';
 
 import Cable from 'components/Cable';
 import USBConnector from 'components/USBConnector';
+import CableConnector from 'components/CableConnector';
 import { cableAttachments, cableRotations } from 'utils';
-import { useEffect, useState } from 'react';
-import CableConnector from './CableConnector';
 
 const getPerformanceBounds = (refreshRate) =>
   refreshRate > 60 ? [40, refreshRate] : [40, 60];
@@ -49,15 +49,17 @@ export default function Scene({ settings }) {
       >
         <Center rotation={cableRotations[settings.cable.model]}>
           <Cable {...settings.cable} />
-          <group position={attachments?.deviceConnector ?? [0, 0, 0]}>
+          <group {...attachments?.deviceConnector}>
             <USBConnector {...settings.deviceConnector} />
           </group>
-          <group position={attachments?.hostConnector ?? [0, 0, 0]}>
+          <group {...attachments?.hostConnector}>
             <USBConnector {...settings.hostConnector} />
           </group>
-          <group position={attachments?.cableConnector ?? [0, 0, 0]}>
-            <CableConnector {...settings.cableConnector} />
-          </group>
+          {settings.cable.model !== 'Charger' && (
+            <group {...attachments?.cableConnector}>
+              <CableConnector {...settings.cable.connector} />
+            </group>
+          )}
         </Center>
       </Stage>
       <PerspectiveCamera makeDefault fov={20} position={[-12, 8, 10]} />

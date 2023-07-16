@@ -1,7 +1,7 @@
 import rgbImage from 'images/rgb.png';
 import transparentImage from 'images/transparent.png';
 
-export const colors = [
+const colors = [
   { id: 'red', name: 'Red', hex: '#ff0000' },
   { id: 'green', name: 'Green', hex: '#00ff00' },
   { id: 'blue', name: 'Blue', hex: '#0000ff' },
@@ -55,14 +55,19 @@ export const cableTypes = {
   RightRearExit: 'Right Rear Exit'
 };
 
-export const connectorFinishes = {
-  Nickel: 'Nickel',
-  Gold: 'Gold-plated'
+export const cableConnectorTypes = {
+  FEMO: 'FEMO'
 };
 
-export const connectorFinishColors = {
-  Nickel: '#727472',
-  Gold: '#d4af37'
+export const connectorFinishes = {
+  Nickel: {
+    name: 'Nickel',
+    hex: '#727472'
+  },
+  Gold: {
+    name: 'Gold-plated',
+    hex: '#d4af37'
+  }
 };
 
 export const housingTypes = {
@@ -92,14 +97,17 @@ export const cncHousingTypes = {
 };
 
 export const cncHousingFinishes = {
-  Gold: 'Gold-plated',
-  Silver: 'Silver-plated',
-  Cerakote: 'Cerakote'
-};
-
-export const cncHousingFinishColors = {
-  Gold: '#d4af37',
-  Silver: '#c0c0c0'
+  Gold: {
+    name: 'Gold-plated',
+    hex: '#d4af37'
+  },
+  Silver: {
+    name: 'Silver-plated',
+    hex: '#c0c0c0'
+  },
+  Cerakote: {
+    name: 'Cerakote'
+  }
 };
 
 export const cableRotations = {
@@ -114,32 +122,51 @@ export const cableRotations = {
 
 export const cableAttachments = {
   Charger: {
-    hostConnector: [87.5, -50, 8],
-    deviceConnector: [0, -50, -8]
+    hostConnector: {
+      position: [0, 0, 0]
+    },
+    deviceConnector: {
+      position: [120, 15, -10],
+      rotation: [0, 0, Math.PI * 0.8]
+    }
   },
   Straight: {
-    hostConnector: [0, 0, 0],
-    deviceConnector: [0, 0, 0]
+    hostConnector: {
+      position: [0, 0, 0],
+      rotation: [Math.PI / 2, 0, -Math.PI / 2]
+    },
+    deviceConnector: {
+      position: [200, 0, 0],
+      rotation: [Math.PI / 2, 0, Math.PI / 2]
+    },
+    cableConnector: {
+      position: [100, 0, -4.75]
+    }
   },
   StraightExit: {
-    hostConnector: [100, 0, 0],
-    deviceConnector: [0, 0, 0]
+    hostConnector: {},
+    deviceConnector: {},
+    cableConnector: {}
   },
   LeftParallel: {
-    hostConnector: [0, 0, 0],
-    deviceConnector: [0, 0, 0]
+    hostConnector: {},
+    deviceConnector: {},
+    cableConnector: {}
   },
   LeftRearExit: {
-    hostConnector: [0, 0, 0],
-    deviceConnector: [0, 0, 0]
+    hostConnector: {},
+    deviceConnector: {},
+    cableConnector: {}
   },
   RightParallel: {
-    hostConnector: [0, 0, 0],
-    deviceConnector: [0, 0, 0]
+    hostConnector: {},
+    deviceConnector: {},
+    cableConnector: {}
   },
   RightRearExit: {
-    hostConnector: [0, 0, 0],
-    deviceConnector: [0, 0, 0]
+    hostConnector: {},
+    deviceConnector: {},
+    cableConnector: {}
   }
 };
 

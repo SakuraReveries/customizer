@@ -128,6 +128,61 @@ export default function Sidebar({ values, setFieldValue, setValues }) {
                 </Form.Group>
               </Form>
             </SidebarPane>
+            {values.cable.model !== 'Charger' && (
+              <SidebarPane title="Cable Connector">
+                <Form>
+                  <Form.Group className="mb-2">
+                    <Form.Label className="text-light">
+                      Heatshrink Color
+                    </Form.Label>
+                    <ColorPicker
+                      colors={heatshrinkColors}
+                      onChange={(color) =>
+                        setFieldValue('cable.connector.heatshrinkColor', color)
+                      }
+                      value={values.cable.connector.heatshrinkColor}
+                    />
+                  </Form.Group>
+                  <Form.Group className="mb-2">
+                    <Form.Label className="text-light">
+                      Connector Finish
+                    </Form.Label>
+                    <Form.Select
+                      onChange={(event) =>
+                        setValues((values) => ({
+                          ...values,
+                          cable: {
+                            ...values.cable,
+                            connector: {
+                              ...values.cable.connector,
+                              finish: event.target.value,
+                              cerakoteColor: event.target.value ? 'black' : null
+                            }
+                          }
+                        }))
+                      }
+                      value={values.cable.connector.finish}
+                    >
+                      <ObjectOptions object={cncHousingFinishes} />
+                    </Form.Select>
+                  </Form.Group>
+                  {values.cable.connector.finish === 'Cerakote' && (
+                    <Form.Group>
+                      <Form.Label className="text-light">
+                        Cerakote Color
+                      </Form.Label>
+                      <ColorPicker
+                        colors={cerakoteColors}
+                        onChange={(color) =>
+                          setFieldValue('cable.connector.cerakoteColor', color)
+                        }
+                        value={values.cable.connector.cerakoteColor}
+                      />
+                    </Form.Group>
+                  )}
+                </Form>
+              </SidebarPane>
+            )}
             <SidebarPane title="Host Connector">
               <Form>
                 <Form.Group className="mb-2">
@@ -355,18 +410,18 @@ export default function Sidebar({ values, setFieldValue, setValues }) {
             <SidebarPane title="Summary">
               <Container fluid className="text-light">
                 <Row>
-                  <Col xs={6} md={3}>
+                  <Col xs={3} md={4} lg={6}>
                     Cable
                   </Col>
-                  <Col xs={6} md={9}>
+                  <Col xs={9} md={8} lg={6}>
                     {cableTypes[values.cable.model]}
                   </Col>
                 </Row>
                 <Row>
-                  <Col xs={6} md={3}>
+                  <Col xs={3} md={4} lg={6}>
                     Sleeve
                   </Col>
-                  <Col xs={6} md={9}>
+                  <Col xs={9} md={8} lg={6}>
                     {
                       sleeveColors.find(
                         (color) => color.id === values.cable.sleeveColor
@@ -376,24 +431,32 @@ export default function Sidebar({ values, setFieldValue, setValues }) {
                   </Col>
                 </Row>
                 <Row>
-                  <Col xs={6} md={3}>
+                  <Col xs={3} md={4} lg={6}>
+                    {' '}
                     Host Side
                   </Col>
-                  <Col xs={6} md={9}>
+                  <Col xs={9} md={8} lg={6}>
                     {connectorTypes[values.hostConnector.model]} (
                     {hostConnectorDesc}) w/{' '}
-                    {connectorFinishes[values.hostConnector.connectorFinish]}{' '}
+                    {
+                      connectorFinishes[values.hostConnector.connectorFinish]
+                        .name
+                    }{' '}
                     finish
                   </Col>
                 </Row>
                 <Row>
-                  <Col xs={6} md={3}>
+                  <Col xs={3} md={4} lg={6}>
+                    {' '}
                     Device Side
                   </Col>
-                  <Col xs={6} md={9}>
+                  <Col xs={9} md={8} lg={6}>
                     {connectorTypes[values.deviceConnector.model]} (
                     {deviceConnectorDesc}) w/{' '}
-                    {connectorFinishes[values.deviceConnector.connectorFinish]}{' '}
+                    {
+                      connectorFinishes[values.deviceConnector.connectorFinish]
+                        .name
+                    }{' '}
                     finish
                   </Col>
                 </Row>

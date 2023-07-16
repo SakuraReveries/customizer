@@ -12,9 +12,13 @@ const initialValues = {
   cable: {
     model: 'Charger',
     sleeveType: 'MDPC_X',
-    sleeveColor: 'black'
+    sleeveColor: 'black',
+    connector: {
+      model: 'FEMO',
+      finish: 'Silver',
+      heatshrinkColor: 'green'
+    }
   },
-  cableConnector: {},
   hostConnector: {
     model: 'USB_A',
     connectorFinish: 'Nickel',
@@ -37,7 +41,13 @@ const initialValues = {
 };
 
 export default function App() {
-  const controlMap = useMemo(() => [{ name: 'toggleStats', keys: ['F4'] }], []);
+  const controlMap = useMemo(
+    () => [
+      { name: 'toggleStats', keys: ['F4'] },
+      { name: 'toggleGrid', keys: ['F8'] }
+    ],
+    []
+  );
   const { values, setFieldValue, setValues } = useFormik({
     initialValues
   });

@@ -1,19 +1,19 @@
 import PropTypes from 'prop-types';
 import { interpolateHslLong } from 'd3-interpolate';
-import { useMemo, useLayoutEffect, useRef } from 'react';
-import { useFrame, useGraph, useLoader } from '@react-three/fiber';
-import { ThreeMFLoader } from 'three/examples/jsm/loaders/3MFLoader';
+import { useRef } from 'react';
+import { useFrame } from '@react-three/fiber';
 // eslint-disable-next-line import/no-unresolved
 import { Color } from 'three';
 
+import useModel from 'hooks/useModel';
 import {
   connectorOffsets,
   connectorRotations,
-  cncHousingFinishColors,
-  connectorFinishColors,
   cerakoteColors,
   heatshrinkColors,
-  ledColors
+  ledColors,
+  cncHousingFinishes,
+  connectorFinishes
 } from 'utils';
 
 const interpolators = {
@@ -32,43 +32,36 @@ export default function USBConnector({
   model,
   ...props
 }) {
-  const cachedObj = useLoader(
-    ThreeMFLoader,
-    `./connectors/${model}_${housingType}${
+  const ledMatRef = useRef(null);
+  const nodes = useModel({
+    path: `./connectors/${model}_${housingType}${
       subHousingType ? `_${subHousingType}` : ''
     }.3mf`
-  );
-  const obj = useMemo(() => cachedObj.clone(), [cachedObj]);
-  const ledMatRef = useRef();
-  const { nodes } = useGraph(obj);
+  });
 
   useFrame((scene) => {
     if (!ledMatRef.current) {
       return;
     }
 
+    let newColor = new Color();
+
     if (ledColor?.startsWith?.('rgb')) {
       const interpolatorKey =
         (scene.clock.getElapsedTime() / 20) % 1 > 0.5 ? 'rising' : 'falling';
       const lerpAlpha = (scene.clock.getElapsedTime() / 10) % 1;
       const interpolator = interpolators[interpolatorKey];
-      const newColor = new Color(interpolator(lerpAlpha));
 
-      ledMatRef.current.color.set(newColor);
-      ledMatRef.current.emissive.set(newColor);
+      newColor = new Color(interpolator(lerpAlpha));
     } else {
       const { hex } = ledColors.find((color) => color.id === ledColor);
 
-      ledMatRef.current.color.set(hex);
-      ledMatRef.current.emissive.set(hex);
+      newColor = new Color(hex);
     }
-  });
 
-  useLayoutEffect(() => {
-    Object.values(nodes).forEach((node) =>
-      node.geometry.computeVertexNormals()
-    );
-  }, [nodes]);
+    ledMatRef.current.color.set(newColor);
+    ledMatRef.current.emissive.set(newColor);
+  });
 
   return (
     <group
@@ -83,7 +76,7 @@ export default function USBConnector({
     >
       <mesh castShadow receiveShadow geometry={nodes.Connector.geometry}>
         <meshPhysicalMaterial
-          color={connectorFinishColors[connectorFinish]}
+          color={connectorFinishes[connectorFinish].hex}
           metalness={1}
           roughness={0}
         />
@@ -112,7 +105,7 @@ export default function USBConnector({
             color={
               housingFinish === 'Cerakote'
                 ? cerakoteColors.find((color) => color.id === cerakoteColor).hex
-                : cncHousingFinishColors[housingFinish]
+                : cncHousingFinishes[housingFinish].hex
             }
             metalness={housingFinish === 'Cerakote' ? 0.4 : 1}
             roughness={housingFinish === 'Cerakote' ? 0.7 : 0.5}
