@@ -72,7 +72,39 @@ export const techFlexColors = [
   { id: 'white', name: 'White', hex: '#FFFFFF' }
 ];
 
-export const mdpcxColors = colors.slice();
+export const mdpcxColors = [
+  { id: 'blackestBlack', name: 'Blackest Black', hex: '#000000' },
+  { id: 'shade19', name: 'Shade 19', hex: '#303030' },
+  { id: 'titaniumGrey', name: 'Titanium Grey', hex: '#454445' },
+  { id: 'platinumX', name: 'Platinum X', hex: '#6e6e6e' },
+  { id: 'aluminumGrey', name: 'Aluminum Grey', hex: '#8C8F91' },
+  { id: 'hazeGrey', name: 'Haze Grey', hex: '#939393' },
+  { id: 'naturalWhite', name: 'Natural White', hex: '#F8F8F8' },
+  { id: 'xxxWhite', name: 'XXX White', hex: '#FFFFFF' },
+  { id: 'gold', name: 'Gold', hex: '#b4962f' },
+  { id: 'copperBrown', name: 'Copper Brown', hex: '#863200' },
+  { id: 'vanillaSands', name: 'Vanilla Sands', hex: '#b69a56' },
+  { id: 'mellowYellow', name: 'Mellow Yellow', hex: '#dcba00' },
+  { id: 'area51', name: 'Area 51', hex: '#ecff47' },
+  { id: 'lamboGreeny', name: 'Lambo Greeny', hex: '#79db43' },
+  { id: 'atomicGreen', name: 'Atomic Green', hex: '#3be31a' },
+  { id: 'commandoGreen', name: 'Commando Green', hex: '#4B5320' },
+  { id: 'vividViolet', name: 'Vivid Violet', hex: '#944cd6' },
+  { id: 'grandBleu', name: 'Grand Bleu', hex: '#000b6f' },
+  { id: 'bMagic', name: 'B-Magic', hex: '#0e20ca' },
+  { id: 'rivieraBlue', name: 'Riviera Blue', hex: '#1188d3' },
+  { id: 'gulfBlue', name: 'Gulf Blue', hex: '#9ad8ff' },
+  { id: 'theTurquoise', name: 'The Turquoise', hex: '#40E0D0' },
+  { id: 'plumPurple', name: 'Plum Purple', hex: '#940158' },
+  { id: 'perfectPink', name: 'Perfect Pink', hex: '#cf348f' },
+  { id: 'codeRed', name: 'Code Red', hex: '#da2d35' },
+  { id: 'italianRed', name: 'Italian Red', hex: '#c20009' },
+  { id: 'bloodline', name: 'Bloodline', hex: '#8d0107' },
+  { id: 'diamondRed', name: 'Diamond Red', hex: '#7d1015' },
+  { id: 'oxideOrange', name: 'Oxide Orange', hex: '#c25700' },
+  { id: 'papayaOrange', name: 'Papaya Orange', hex: '#f1852d' },
+  { id: 'lavaOrange', name: 'Lava Orange', hex: '#ff4200' }
+];
 
 export const cerakoteColors = colors.slice();
 
@@ -155,8 +187,8 @@ export const cncHousingFinishes = {
 };
 
 export const cableRotations = {
-  Charger: [Math.PI / 2, 0, Math.PI],
-  Straight: [0, 0, 0],
+  Charger: [-Math.PI / 2, 0, Math.PI],
+  Straight: [-Math.PI / 2, 0, 0],
   StraightExit: [Math.PI * 1.5, 0, Math.PI],
   LeftParallel: [0, 0, 0],
   LeftRearExit: [0, 0, 0],
@@ -167,24 +199,25 @@ export const cableRotations = {
 export const cableAttachments = {
   Charger: {
     hostConnector: {
-      position: [0, 0, 0]
+      position: [0, -8, -40],
+      rotation: [Math.PI / 2, 0, 0]
     },
     deviceConnector: {
-      position: [120, 15, -10],
-      rotation: [0, 0, Math.PI * 0.8]
+      position: [-85, -8, 40],
+      rotation: [-Math.PI / 2, 0, 0]
     }
   },
   Straight: {
     hostConnector: {
-      position: [0, 0, 0],
+      position: [20, 20, -20],
       rotation: [Math.PI / 2, 0, -Math.PI / 2]
     },
     deviceConnector: {
-      position: [200, 0, 0],
+      position: [180, 0, 0],
       rotation: [Math.PI / 2, 0, Math.PI / 2]
     },
     cableConnector: {
-      position: [100, 0, -4.75]
+      position: [110, 0, -4.75]
     }
   },
   StraightExit: {

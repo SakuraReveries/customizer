@@ -12,9 +12,9 @@ const initialValues = {
   cable: {
     model: 'Charger',
     innerSleeveType: 'MDPC_X',
-    innerSleeveColor: 'black',
+    innerSleeveColor: 'grandBleu',
     outerSleeveType: 'MDPC_X',
-    outerSleeveColor: 'black',
+    outerSleeveColor: 'blackestBlack',
     connector: {
       model: 'FEMO',
       finish: 'Silver',

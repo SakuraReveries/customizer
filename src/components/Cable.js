@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 
 import useModel from 'hooks/useModel';
-import { mdpcxColors, techFlexColors } from 'utils';
+import { mdpcxColors, techFlexColors, cableRotations } from 'utils';
 
 export default function Cable({
   innerSleeveType,
@@ -26,7 +26,7 @@ export default function Cable({
   ).hex;
 
   return (
-    <group>
+    <group rotation={cableRotations[model]}>
       <mesh
         {...props}
         castShadow

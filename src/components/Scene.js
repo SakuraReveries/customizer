@@ -16,7 +16,7 @@ import { EffectComposer, N8AO } from '@react-three/postprocessing';
 import Cable from 'components/Cable';
 import USBConnector from 'components/USBConnector';
 import CableConnector from 'components/CableConnector';
-import { cableAttachments, cableRotations } from 'utils';
+import { cableAttachments } from 'utils';
 
 const getPerformanceBounds = (refreshRate) =>
   refreshRate > 60 ? [40, refreshRate] : [40, 60];
@@ -47,7 +47,7 @@ export default function Scene({ settings }) {
         shadows={{ type: 'accumulative', frames: 20 }}
         environment="apartment"
       >
-        <Center rotation={cableRotations[settings.cable.model]}>
+        <Center>
           <Cable {...settings.cable} />
           <group {...attachments?.deviceConnector}>
             <USBConnector {...settings.deviceConnector} />
