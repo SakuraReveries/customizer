@@ -110,10 +110,18 @@ export default function Sidebar({ values, setFieldValue, setValues }) {
                     className="text-light ms-3"
                     label={sleeveTypes[values.cable.outerSleeveType]}
                     onChange={(event) =>
-                      setFieldValue(
-                        'cable.outerSleeveType',
-                        event.target.checked ? 'MDPC_X' : 'TechFlex'
-                      )
+                      setValues((values) => ({
+                        ...values,
+                        cable: {
+                          ...values.cable,
+                          outerSleeveType: event.target.checked
+                            ? 'MDPC_X'
+                            : 'TechFlex',
+                          outerSleeveColor: event.target.checked
+                            ? mdpcxColors[0].id
+                            : techFlexColors[0].id
+                        }
+                      }))
                     }
                     checked={values.cable.outerSleeveType === 'MDPC_X'}
                   />
@@ -130,18 +138,20 @@ export default function Sidebar({ values, setFieldValue, setValues }) {
                     value={values.cable.outerSleeveColor}
                   />
                 </Form.Group>
-                <Form.Group>
-                  <Form.Label className="text-light">
-                    Inner Sleeve Color
-                  </Form.Label>
-                  <ColorPicker
-                    colors={innerSleeveColors}
-                    onChange={(color) =>
-                      setFieldValue('cable.innerSleeveColor', color)
-                    }
-                    value={values.cable.innerSleeveColor}
-                  />
-                </Form.Group>
+                {values.cable.outerSleeveType === 'TechFlex' && (
+                  <Form.Group>
+                    <Form.Label className="text-light">
+                      Inner Sleeve Color
+                    </Form.Label>
+                    <ColorPicker
+                      colors={innerSleeveColors}
+                      onChange={(color) =>
+                        setFieldValue('cable.innerSleeveColor', color)
+                      }
+                      value={values.cable.innerSleeveColor}
+                    />
+                  </Form.Group>
+                )}
               </Form>
             </SidebarPane>
             {values.cable.model !== 'Charger' && (
