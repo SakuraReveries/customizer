@@ -26,24 +26,30 @@ export default function Cable({
   ).hex;
 
   return (
-    <group rotation={cableRotations[model]}>
+    <group {...props} rotation={cableRotations[model]}>
       <mesh
-        {...props}
         castShadow
         receiveShadow
         geometry={nodes['OpenSCAD Model'].geometry}
         dispose={null}
       >
-        <meshPhysicalMaterial color={innerColor} />
+        <meshPhysicalMaterial
+          color={innerColor}
+          transparent
+          opacity={innerSleeveColor === 'clear' ? 0.2 : 1.0}
+        />
       </mesh>
       <mesh
-        {...props}
         castShadow
         receiveShadow
         geometry={nodes['OpenSCAD Model'].geometry}
         dispose={null}
       >
-        <meshPhysicalMaterial color={outerColor} opacity={0.6} />
+        <meshPhysicalMaterial
+          color={outerColor}
+          transparent
+          opacity={outerSleeveColor === 'clear' ? 0.2 : 0.6}
+        />
       </mesh>
     </group>
   );

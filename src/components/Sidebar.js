@@ -270,7 +270,9 @@ export default function Sidebar({ values, setFieldValue, setValues }) {
                             ...values.hostConnector,
                             housingFinish: event.target.value,
                             cerakoteColor:
-                              event.target.value === 'Cerakote' ? 'black' : null
+                              event.target.value === 'Cerakote'
+                                ? cerakoteColors[0].id
+                                : null
                           }
                         }))
                       }
@@ -323,7 +325,7 @@ export default function Sidebar({ values, setFieldValue, setValues }) {
                           housingType: checked ? 'CNC' : 'Heatshrink',
                           subHousingType: checked ? 'MonoRing' : null,
                           housingFinish: checked ? 'Silver' : null,
-                          ledColor: checked ? 'red' : null
+                          ledColor: checked ? ledColors[0].id : null
                         }
                       }))
                     }

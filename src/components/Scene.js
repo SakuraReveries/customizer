@@ -3,7 +3,6 @@ import { useEffect, useState } from 'react';
 import { Canvas } from '@react-three/fiber';
 import {
   Stage,
-  Center,
   OrbitControls,
   PerspectiveCamera,
   Stats,
@@ -16,7 +15,7 @@ import { EffectComposer, N8AO } from '@react-three/postprocessing';
 import Cable from 'components/Cable';
 import USBConnector from 'components/USBConnector';
 import CableConnector from 'components/CableConnector';
-import { cableAttachments } from 'utils';
+import { cableAttachments, cableOffsets } from 'utils';
 
 const getPerformanceBounds = (refreshRate) =>
   refreshRate > 60 ? [40, refreshRate] : [40, 60];
@@ -47,7 +46,7 @@ export default function Scene({ settings }) {
         shadows={{ type: 'accumulative', frames: 20 }}
         environment="apartment"
       >
-        <Center>
+        <group position={cableOffsets[settings.cable.model]}>
           <Cable {...settings.cable} />
           <group {...attachments?.deviceConnector}>
             <USBConnector {...settings.deviceConnector} />
@@ -60,7 +59,7 @@ export default function Scene({ settings }) {
               <CableConnector {...settings.cable.connector} />
             </group>
           )}
-        </Center>
+        </group>
       </Stage>
       <PerspectiveCamera makeDefault fov={20} position={[-12, 8, 10]} />
       <OrbitControls makeDefault maxPolarAngle={Math.PI / 2} panSpeed={0} />
