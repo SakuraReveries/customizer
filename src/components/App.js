@@ -11,8 +11,10 @@ import { KeyboardControls } from '@react-three/drei';
 const initialValues = {
   cable: {
     model: 'Charger',
-    sleeveType: 'MDPC_X',
-    sleeveColor: 'black',
+    innerSleeveType: 'MDPC_X',
+    innerSleeveColor: 'black',
+    outerSleeveType: 'MDPC_X',
+    outerSleeveColor: 'black',
     connector: {
       model: 'FEMO',
       finish: 'Silver',

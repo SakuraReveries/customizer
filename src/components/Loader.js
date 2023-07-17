@@ -5,7 +5,7 @@ export default function Loader() {
         className="display-1 text-light"
         style={{ textShadow: '5px 4px 4px #262323' }}
       >
-        Loading...
+        Loading&hellip;
       </h1>
     </div>
   );

@@ -26,7 +26,51 @@ export const heatshrinkColors = [
   { id: 'clear', name: 'Clear', hex: '#ffffff', image: transparentImage }
 ];
 
-export const techFlexColors = colors.slice();
+export const techFlexColors = [
+  { id: 'aquaBlue', name: 'Aqua Blue', hex: '#8cdeef' },
+  { id: 'blue', name: 'Blue', hex: '#083265' },
+  { id: 'neonBlue', name: 'Neon Blue', hex: '#1c6cd6' },
+  { id: 'tealBlue', name: 'Teal Blue', hex: '#049cb7' },
+  { id: 'forestGreen', name: 'Forest Green', hex: '#344c40' },
+  { id: 'green', name: 'Green', hex: '#04845f' },
+  { id: 'neonGreen', name: 'Neon Green', hex: '#04a843' },
+  { id: 'oliveDrab', name: 'Olive Drab', hex: '#3c4c33' },
+  { id: 'gray', name: 'Gray', hex: '#b6b8c0' },
+  {
+    id: 'platinumGray',
+    name: 'Platinum Gray',
+    hex: '#747c8d',
+    sheen: 0.4,
+    sheenColor: '#ffffff'
+  },
+  { id: 'shimmer', name: 'Shimmer (Gray/Clear)', hex: '#b6b8c0' },
+  { id: 'darkPurple', name: 'Dark Purple', hex: '#5450b3' },
+  { id: 'purple', name: 'Purple', hex: '#c9a9fc' },
+  {
+    id: 'blackMagic',
+    name: 'Black Magic (Black/Dark Purple)',
+    hex: '#000000',
+    sheen: 0.6,
+    sheenColor: '#5450b3'
+  },
+  { id: 'neonRed', name: 'Neon Red', hex: '#fa745c' },
+  { id: 'red', name: 'Red', hex: '#cf4853' },
+  { id: 'neonYellow', name: 'Neon Yellow', hex: '#fcbd1d' },
+  { id: 'yellow', name: 'Yellow', hex: '#f9c14e' },
+  { id: 'neonOrange', name: 'Neon Orange', hex: '#f47930' },
+  { id: 'orange', name: 'Orange', hex: '#f99a75' },
+  { id: 'brown', name: 'Brown', hex: '#543c34' },
+  { id: 'black', name: 'Black', hex: '#000000' },
+  {
+    id: 'carbon',
+    name: 'Carbon (Black/Clear)',
+    hex: '#000000',
+    sheen: 0.5,
+    sheenColor: '#ffffff'
+  },
+  { id: 'beige', name: 'Beige', hex: '#8c7c74' },
+  { id: 'white', name: 'White', hex: '#FFFFFF' }
+];
 
 export const mdpcxColors = colors.slice();
 

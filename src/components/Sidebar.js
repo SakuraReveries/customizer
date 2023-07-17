@@ -27,8 +27,10 @@ export default function Sidebar({ values, setFieldValue, setValues }) {
     [setFieldValue]
   );
 
-  const sleeveColors =
-    values.cable.sleeveType === 'TechFlex' ? techFlexColors : mdpcxColors;
+  const innerSleeveColors =
+    values.cable.innerSleeveType === 'TechFlex' ? techFlexColors : mdpcxColors;
+  const outerSleeveColors =
+    values.cable.outerSleeveType === 'TechFlex' ? techFlexColors : mdpcxColors;
   const hostHeatshrink = !values.hostConnector.subHousingType;
   const deviceHeatshrink = !values.deviceConnector.subHousingType;
 
@@ -106,24 +108,38 @@ export default function Sidebar({ values, setFieldValue, setValues }) {
                   <Form.Check
                     type="switch"
                     className="text-light ms-3"
-                    label={sleeveTypes[values.cable.sleeveType]}
+                    label={sleeveTypes[values.cable.outerSleeveType]}
                     onChange={(event) =>
                       setFieldValue(
-                        'cable.sleeveType',
+                        'cable.outerSleeveType',
                         event.target.checked ? 'MDPC_X' : 'TechFlex'
                       )
                     }
-                    checked={values.cable.sleeveType === 'MDPC_X'}
+                    checked={values.cable.outerSleeveType === 'MDPC_X'}
+                  />
+                </Form.Group>
+                <Form.Group className="mb-2">
+                  <Form.Label className="text-light">
+                    Outer Sleeve Color
+                  </Form.Label>
+                  <ColorPicker
+                    colors={outerSleeveColors}
+                    onChange={(color) =>
+                      setFieldValue('cable.outerSleeveColor', color)
+                    }
+                    value={values.cable.outerSleeveColor}
                   />
                 </Form.Group>
                 <Form.Group>
-                  <Form.Label className="text-light">Sleeve Color</Form.Label>
+                  <Form.Label className="text-light">
+                    Inner Sleeve Color
+                  </Form.Label>
                   <ColorPicker
-                    colors={sleeveColors}
+                    colors={innerSleeveColors}
                     onChange={(color) =>
-                      setFieldValue('cable.sleeveColor', color)
+                      setFieldValue('cable.innerSleeveColor', color)
                     }
-                    value={values.cable.sleeveColor}
+                    value={values.cable.innerSleeveColor}
                   />
                 </Form.Group>
               </Form>
@@ -423,11 +439,11 @@ export default function Sidebar({ values, setFieldValue, setValues }) {
                   </Col>
                   <Col xs={9} md={8} lg={6}>
                     {
-                      sleeveColors.find(
-                        (color) => color.id === values.cable.sleeveColor
+                      innerSleeveColors.find(
+                        (color) => color.id === values.cable.innerSleeveColor
                       ).name
                     }{' '}
-                    {sleeveTypes[values.cable.sleeveType]}
+                    {sleeveTypes[values.cable.innerSleeveType]}
                   </Col>
                 </Row>
                 <Row>
