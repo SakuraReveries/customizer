@@ -130,12 +130,6 @@ export default {
           name: 'vendor-react',
           chunks: 'all',
           test: /[\\/]node_modules[\\/](react|prop-types)/
-        },
-        bg: {
-          priority: 0,
-          name: 'vendor-bg',
-          chunks: 'all',
-          test: /[\\/]node_modules[\\/](d3|@bulletlogic)/
         }
       }
     }
