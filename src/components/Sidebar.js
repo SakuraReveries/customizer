@@ -17,7 +17,8 @@ import {
   mdpcxColors,
   sleeveTypes,
   techFlexColors,
-  ledColors
+  ledColors,
+  opalColors
 } from 'utils';
 import ObjectOptions from './ObjectOptions';
 
@@ -126,6 +127,42 @@ export default function Sidebar({ values, setFieldValue, setValues }) {
                     checked={values.cable.outerSleeveType === 'MDPC_X'}
                   />
                 </Form.Group>
+                {values.cable.outerSleeveType === 'TechFlex' && (
+                  <Form.Group className="mb-2">
+                    <Form.Check
+                      type="switch"
+                      className="text-light ms-3"
+                      label="Opal Sleeve?"
+                      onChange={(event) =>
+                        setValues((values) => ({
+                          ...values,
+                          cable: {
+                            ...values.cable,
+                            opalSleeve: event.target.checked,
+                            opalSleeveColor: event.target.checked
+                              ? opalColors[0].id
+                              : null
+                          }
+                        }))
+                      }
+                      checked={values.cable.opalSleeve}
+                    />
+                  </Form.Group>
+                )}
+                {values.cable.opalSleeve && (
+                  <Form.Group className="mb-2">
+                    <Form.Label className="text-light">
+                      Opal Sleeve Color
+                    </Form.Label>
+                    <ColorPicker
+                      colors={opalColors}
+                      onChange={(color) =>
+                        setFieldValue('cable.opalSleeveColor', color)
+                      }
+                      value={values.cable.opalSleeveColor}
+                    />
+                  </Form.Group>
+                )}
                 <Form.Group className="mb-2">
                   <Form.Label className="text-light">
                     Outer Sleeve Color
@@ -438,32 +475,38 @@ export default function Sidebar({ values, setFieldValue, setValues }) {
             <SidebarPane title="Summary">
               <Container fluid className="text-light">
                 <Row>
-                  <Col xs={3} md={4} lg={6}>
+                  <Col xs={3} md={4}>
                     Cable
                   </Col>
-                  <Col xs={9} md={8} lg={6}>
+                  <Col xs={9} md={8}>
                     {cableTypes[values.cable.model]}
                   </Col>
                 </Row>
                 <Row>
-                  <Col xs={3} md={4} lg={6}>
+                  <Col xs={3} md={4}>
                     Sleeve
                   </Col>
-                  <Col xs={9} md={8} lg={6}>
+                  <Col xs={9} md={8}>
                     {
                       innerSleeveColors.find(
                         (color) => color.id === values.cable.innerSleeveColor
                       ).name
                     }{' '}
-                    {sleeveTypes[values.cable.innerSleeveType]}
+                    {sleeveTypes[values.cable.innerSleeveType]} under{' '}
+                    {
+                      outerSleeveColors.find(
+                        (color) => color.id === values.cable.outerSleeveColor
+                      ).name
+                    }{' '}
+                    {sleeveTypes[values.cable.outerSleeveType]}
                   </Col>
                 </Row>
                 <Row>
-                  <Col xs={3} md={4} lg={6}>
+                  <Col xs={3} md={4}>
                     {' '}
                     Host Side
                   </Col>
-                  <Col xs={9} md={8} lg={6}>
+                  <Col xs={9} md={8}>
                     {connectorTypes[values.hostConnector.model]} (
                     {hostConnectorDesc}) w/{' '}
                     {
@@ -474,11 +517,11 @@ export default function Sidebar({ values, setFieldValue, setValues }) {
                   </Col>
                 </Row>
                 <Row>
-                  <Col xs={3} md={4} lg={6}>
+                  <Col xs={3} md={4}>
                     {' '}
                     Device Side
                   </Col>
-                  <Col xs={9} md={8} lg={6}>
+                  <Col xs={9} md={8}>
                     {connectorTypes[values.deviceConnector.model]} (
                     {deviceConnectorDesc}) w/{' '}
                     {

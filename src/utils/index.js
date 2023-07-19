@@ -145,6 +145,10 @@ export const ledColors = [
   { id: 'rgb', name: 'RGB', hex: '#ffffff', image: rgbImage }
 ];
 
+export const opalColors = [
+  { id: 'whiteOpal', name: 'White Opal', hex: '#fefefe' }
+];
+
 export const cableTypes = {
   Charger: 'Charger',
   Straight: 'Straight',
