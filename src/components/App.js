@@ -20,8 +20,15 @@ const initialValues = {
     connector: {
       model: 'FEMO',
       finish: 'Silver',
-      heatshrinkColor: 'black',
-      cerakoteColor: null
+      innerHeatshrink: false,
+      innerHeatshrinkColor: null,
+      collarHeatshrink: false,
+      collarHeatshrinkColor: null,
+      collarAccent: false,
+      collarAccentColor: null,
+      cerakoteColor: null,
+      hostDotColor: 'white',
+      deviceDotColor: 'white'
     }
   },
   hostConnector: {

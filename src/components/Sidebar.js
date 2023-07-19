@@ -3,6 +3,8 @@ import { Fragment, useCallback } from 'react';
 import { Accordion, Alert, Col, Container, Form, Row } from 'react-bootstrap';
 
 import logo from 'images/logo.png';
+import DualColorPicker from 'components/DualColorPicker';
+import ObjectOptions from 'components/ObjectOptions';
 import ColorPicker from 'components/ColorPicker';
 import SidebarPane from 'components/SidebarPane';
 import {
@@ -18,9 +20,9 @@ import {
   sleeveTypes,
   techFlexColors,
   ledColors,
-  opalColors
+  opalColors,
+  alignmentDotColors
 } from 'utils';
-import ObjectOptions from './ObjectOptions';
 
 export default function Sidebar({ values, setFieldValue, setValues }) {
   const updateField = useCallback(
@@ -106,8 +108,7 @@ export default function Sidebar({ values, setFieldValue, setValues }) {
                 </Form.Group>
                 <Form.Group>
                   <Form.Label className="text-light">Outer Sleeve</Form.Label>
-                  <Form.Check
-                    type="switch"
+                  <Form.Switch
                     className="text-light ms-3"
                     label={sleeveTypes[values.cable.outerSleeveType]}
                     onChange={(event) =>
@@ -129,8 +130,7 @@ export default function Sidebar({ values, setFieldValue, setValues }) {
                 </Form.Group>
                 {values.cable.outerSleeveType === 'TechFlex' && (
                   <Form.Group className="mb-2">
-                    <Form.Check
-                      type="switch"
+                    <Form.Switch
                       className="text-light ms-3"
                       label="Opal Sleeve?"
                       onChange={(event) =>
@@ -196,16 +196,88 @@ export default function Sidebar({ values, setFieldValue, setValues }) {
                 <Form>
                   <Form.Group className="mb-2">
                     <Form.Label className="text-light">
-                      Heatshrink Color
+                      Inner Heatshrink?
                     </Form.Label>
-                    <ColorPicker
-                      colors={heatshrinkColors}
-                      onChange={(color) =>
-                        setFieldValue('cable.connector.heatshrinkColor', color)
+                    <Form.Switch
+                      checked={values.cable.connector.innerHeatshrink}
+                      onChange={(event) =>
+                        setValues((values) => ({
+                          ...values,
+                          cable: {
+                            ...values.cable,
+                            connector: {
+                              ...values.cable.connector,
+                              innerHeatshrink: event.target.checked,
+                              innerHeatshrinkColor: event.target.checked
+                                ? heatshrinkColors[0].id
+                                : null
+                            }
+                          }
+                        }))
                       }
-                      value={values.cable.connector.heatshrinkColor}
                     />
                   </Form.Group>
+                  {values.cable.connector.innerHeatshrink && (
+                    <Form.Group className="mb-2">
+                      <Form.Label className="text-light">
+                        Inner Heatshrink Color
+                      </Form.Label>
+                      <ColorPicker
+                        colors={heatshrinkColors.filter(
+                          ({ id }) => id !== 'clear'
+                        )}
+                        onChange={(color) =>
+                          setFieldValue(
+                            'cable.connector.innerHeatshrinkColor',
+                            color
+                          )
+                        }
+                        value={values.cable.connector.innerHeatshrinkColor}
+                      />
+                    </Form.Group>
+                  )}
+                  <Form.Group className="mb-2">
+                    <Form.Label className="text-light">
+                      Collar Heatshrink?
+                    </Form.Label>
+                    <Form.Switch
+                      checked={values.cable.connector.collarHeatshrink}
+                      onChange={(event) =>
+                        setValues((values) => ({
+                          ...values,
+                          cable: {
+                            ...values.cable,
+                            connector: {
+                              ...values.cable.connector,
+                              collarHeatshrink: event.target.checked,
+                              collarHeatshrinkColor: event.target.checked
+                                ? heatshrinkColors[0].id
+                                : null
+                            }
+                          }
+                        }))
+                      }
+                    />
+                  </Form.Group>
+                  {values.cable.connector.collarHeatshrink && (
+                    <Form.Group className="mb-2">
+                      <Form.Label className="text-light">
+                        Collar Heatshrink Color
+                      </Form.Label>
+                      <ColorPicker
+                        colors={heatshrinkColors.filter(
+                          ({ id }) => id !== 'clear'
+                        )}
+                        onChange={(color) =>
+                          setFieldValue(
+                            'cable.connector.collarHeatshrinkColor',
+                            color
+                          )
+                        }
+                        value={values.cable.connector.collarHeatshrinkColor}
+                      />
+                    </Form.Group>
+                  )}
                   <Form.Group className="mb-2">
                     <Form.Label className="text-light">
                       Connector Finish
@@ -219,7 +291,10 @@ export default function Sidebar({ values, setFieldValue, setValues }) {
                             connector: {
                               ...values.cable.connector,
                               finish: event.target.value,
-                              cerakoteColor: event.target.value ? 'black' : null
+                              cerakoteColor:
+                                event.target.value === 'Cerakote'
+                                  ? cerakoteColors[0].id
+                                  : null
                             }
                           }
                         }))
@@ -230,19 +305,84 @@ export default function Sidebar({ values, setFieldValue, setValues }) {
                     </Form.Select>
                   </Form.Group>
                   {values.cable.connector.finish === 'Cerakote' && (
-                    <Form.Group>
-                      <Form.Label className="text-light">
-                        Cerakote Color
-                      </Form.Label>
-                      <ColorPicker
-                        colors={cerakoteColors}
-                        onChange={(color) =>
-                          setFieldValue('cable.connector.cerakoteColor', color)
-                        }
-                        value={values.cable.connector.cerakoteColor}
-                      />
-                    </Form.Group>
+                    <Fragment>
+                      <Form.Group className="mb-2">
+                        <Form.Label className="text-light">
+                          Cerakote Color
+                        </Form.Label>
+                        <ColorPicker
+                          colors={cerakoteColors}
+                          onChange={(color) =>
+                            setFieldValue(
+                              'cable.connector.cerakoteColor',
+                              color
+                            )
+                          }
+                          value={values.cable.connector.cerakoteColor}
+                        />
+                      </Form.Group>
+                      <Form.Group className="mb-2">
+                        <Form.Label className="text-light">
+                          Accent Collar?
+                        </Form.Label>
+                        <Form.Switch
+                          checked={values.cable.connector.accentCollar}
+                          onChange={(event) =>
+                            setValues((values) => ({
+                              ...values,
+                              cable: {
+                                ...values.cable,
+                                connector: {
+                                  ...values.cable.connector,
+                                  accentCollar: event.target.checked,
+                                  accentCollarColor: event.target.checked
+                                    ? cerakoteColors[0].id
+                                    : null
+                                }
+                              }
+                            }))
+                          }
+                        />
+                      </Form.Group>
+                      {values.cable.connector.accentCollar && (
+                        <Form.Group className="mb-2">
+                          <Form.Label className="text-light">
+                            Accent Collar Color
+                          </Form.Label>
+                          <ColorPicker
+                            colors={cerakoteColors}
+                            onChange={(color) =>
+                              setFieldValue(
+                                'cable.connector.accentCollarColor',
+                                color
+                              )
+                            }
+                            value={values.cable.connector.accentCollarColor}
+                          />
+                        </Form.Group>
+                      )}
+                    </Fragment>
                   )}
+                  <Form.Group className="mb-2">
+                    <Form.Label className="text-light">
+                      Alignment Dot Color
+                    </Form.Label>
+                    <DualColorPicker
+                      colors={alignmentDotColors}
+                      onChange={(type, color) =>
+                        setFieldValue(`cable.connector.${type}DotColor`, color)
+                      }
+                      hostValue={values.cable.connector.hostDotColor}
+                      deviceValue={values.cable.connector.deviceDotColor}
+                    />
+                  </Form.Group>
+                  <Alert variant="info">
+                    For alignment dot colors not listed or custom color tones
+                    please contact me for a one on one consultation. Please note
+                    colors are an approximate representation of the real to life
+                    colors and can vary based on display and lighting
+                    conditions.
+                  </Alert>
                 </Form>
               </SidebarPane>
             )}
@@ -261,8 +401,7 @@ export default function Sidebar({ values, setFieldValue, setValues }) {
                 </Form.Group>
                 <Form.Group className="mb-2">
                   <Form.Label className="text-light">Housing Type</Form.Label>
-                  <Form.Check
-                    type="switch"
+                  <Form.Switch
                     className="text-light ms-3"
                     label={housingTypes[values.hostConnector.housingType]}
                     onChange={(event) =>
@@ -350,8 +489,7 @@ export default function Sidebar({ values, setFieldValue, setValues }) {
                 </Form.Group>
                 <Form.Group className="mb-2">
                   <Form.Label className="text-light">Housing Type</Form.Label>
-                  <Form.Check
-                    type="switch"
+                  <Form.Switch
                     className="text-light ms-3"
                     label={housingTypes[values.deviceConnector.housingType]}
                     onChange={({ target: { checked } }) =>

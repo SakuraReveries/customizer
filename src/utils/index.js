@@ -132,6 +132,33 @@ export const cerakoteColors = [
   { id: 'tungstenGrey', name: 'Tungsten Grey', hex: '#636363' }
 ];
 
+export const alignmentDotColors = [
+  { id: 'white', name: 'White', hex: '#FFFFFF' },
+  { id: 'gray', name: 'Gray', hex: '#808080' },
+  { id: 'black', name: 'Black', hex: '#000000' },
+  { id: 'red', name: 'Red', hex: '#c4000f' },
+  { id: 'wine', name: 'Wine', hex: '#95484e' },
+  { id: 'blue', name: 'Blue', hex: '#0000FF' },
+  { id: 'navyBlue', name: 'Navy Blue', hex: '#000080' },
+  { id: 'teal', name: 'Teal', hex: '#008080' },
+  { id: 'turquoise', name: 'Turquoise', hex: '#40E0D0' },
+  { id: 'green', name: 'Green', hex: '#008000' },
+  { id: 'yellow', name: 'Yellow', hex: '#FFFF00' },
+  { id: 'orange', name: 'Orange', hex: '#ffa311' },
+  { id: 'pastelPink', name: 'Pastel Pink', hex: '#FFD1DC' },
+  { id: 'purple', name: 'Purple', hex: '#800080' },
+  { id: 'magenta', name: 'Magenta', hex: '#c1378f' },
+  { id: 'pastelViolet', name: 'Pastel Violet', hex: '#b087d6' },
+  { id: 'brown', name: 'Brown', hex: '#805a00' },
+  { id: 'goldMetallic', name: 'Gold Metallic', hex: '#e1ac25' },
+  { id: 'copperMetallic', name: 'Copper Metallic', hex: '#9c6226' },
+  { id: 'silverMetallic', name: 'Silver Metallic', hex: '#C0C0C0' },
+  { id: 'aluminumMetallic', name: 'Aluminum Metallic', hex: '#929292' },
+  { id: 'sunsetRedMetallic', name: 'Sunset Red Metallic', hex: '#be1e5b' },
+  { id: 'greenMistMetallic', name: 'Green Mist Metallic', hex: '#0d965e' },
+  { id: 'balticBlueMetallic', name: 'Baltic Blue Metallic', hex: '#0769af' }
+];
+
 export const ledColors = [
   { id: 'coolWhite', name: 'Cool White', hex: '#eef2ff' },
   { id: 'warmWhite', name: 'Warm White', hex: '#ffda8c' },
