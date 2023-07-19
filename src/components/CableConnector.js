@@ -22,6 +22,8 @@ export default function CableConnector({
             heatshrinkColors.find((color) => color.id === heatshrinkColor).hex
           }
           roughness={0.7}
+          transparent={heatshrinkColor === 'clear'}
+          opacity={heatshrinkColor === 'clear' ? 0.4 : 1}
         />
       </mesh>
       <mesh castShadow receiveShadow geometry={nodes.Connector.geometry}>
@@ -41,6 +43,8 @@ export default function CableConnector({
             heatshrinkColors.find((color) => color.id === heatshrinkColor).hex
           }
           roughness={0.7}
+          transparent={heatshrinkColor === 'clear'}
+          opacity={heatshrinkColor === 'clear' ? 0.4 : 1}
         />
       </mesh>
     </group>
