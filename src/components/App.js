@@ -15,6 +15,8 @@ const initialValues = {
     innerSleeveColor: 'grandBleu',
     outerSleeveType: 'MDPC_X',
     outerSleeveColor: 'blackestBlack',
+    opalSleeve: false,
+    opalSleeveColor: '',
     connector: {
       model: 'FEMO',
       finish: 'Silver',
