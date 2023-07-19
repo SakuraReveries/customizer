@@ -192,12 +192,10 @@ export default function Sidebar({ values, setFieldValue, setValues }) {
               </Form>
             </SidebarPane>
             {values.cable.model !== 'Charger' && (
-              <SidebarPane title="Cable Connector">
+              <SidebarPane title="Cable Detachable">
                 <Form>
                   <Form.Group className="mb-2">
-                    <Form.Label className="text-light">
-                      Inner Heatshrink?
-                    </Form.Label>
+                    <Form.Label className="text-light">Heatshrink?</Form.Label>
                     <Form.Switch
                       checked={values.cable.connector.innerHeatshrink}
                       onChange={(event) =>
@@ -220,7 +218,7 @@ export default function Sidebar({ values, setFieldValue, setValues }) {
                   {values.cable.connector.innerHeatshrink && (
                     <Form.Group className="mb-2">
                       <Form.Label className="text-light">
-                        Inner Heatshrink Color
+                        Heatshrink Color
                       </Form.Label>
                       <ColorPicker
                         colors={heatshrinkColors.filter(
@@ -238,7 +236,7 @@ export default function Sidebar({ values, setFieldValue, setValues }) {
                   )}
                   <Form.Group className="mb-2">
                     <Form.Label className="text-light">
-                      Collar Heatshrink?
+                      Heatshrink Accents?
                     </Form.Label>
                     <Form.Switch
                       checked={values.cable.connector.collarHeatshrink}
@@ -262,7 +260,7 @@ export default function Sidebar({ values, setFieldValue, setValues }) {
                   {values.cable.connector.collarHeatshrink && (
                     <Form.Group className="mb-2">
                       <Form.Label className="text-light">
-                        Collar Heatshrink Color
+                        Heatshrink Accents Color
                       </Form.Label>
                       <ColorPicker
                         colors={heatshrinkColors.filter(
@@ -553,7 +551,9 @@ export default function Sidebar({ values, setFieldValue, setValues }) {
                         }
                         value={values.deviceConnector.housingFinish}
                       >
-                        <ObjectOptions object={cncHousingFinishes} />
+                        <ObjectOptions
+                          object={{ ...cncHousingFinishes, Gold: undefined }}
+                        />
                       </Form.Select>
                     </Form.Group>
                     {values.deviceConnector.subHousingType === 'GlowRing' && (
