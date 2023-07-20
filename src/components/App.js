@@ -66,13 +66,7 @@ export default function App() {
     initialValues
   });
 
-  let maxWidth = '50%';
-
-  if (width >= 1200) {
-    maxWidth = '25%';
-  } else if (width >= 768) {
-    maxWidth = '33%';
-  }
+  const maxWidth = width >= 768 ? '25%' : '40%';
 
   return (
     <ForceOrientation allowLandscape>
