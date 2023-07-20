@@ -7,6 +7,7 @@ import { KeyboardControls } from '@react-three/drei';
 import Loader from 'components/Loader';
 import Sidebar from 'components/Sidebar';
 import Scene from 'components/Scene';
+import ForceOrientation from './ForceOrientation';
 
 const initialValues = {
   cable: {
@@ -74,23 +75,25 @@ export default function App() {
   }
 
   return (
-    <Suspense fallback={<Loader />}>
-      <Helmet title="Sakura Reveries Cable Builder" />
-      <div className="sr-app-scene">
-        <KeyboardControls map={controlMap}>
-          <Scene settings={values} />
-        </KeyboardControls>
-      </div>
-      <div
-        style={{ maxWidth }}
-        className="border-4 border-primary border-start h-100 sr-app-sidebar"
-      >
-        <Sidebar
-          values={values}
-          setFieldValue={setFieldValue}
-          setValues={setValues}
-        />
-      </div>
-    </Suspense>
+    <ForceOrientation allowLandscape>
+      <Suspense fallback={<Loader />}>
+        <Helmet title="Sakura Reveries Cable Builder" />
+        <div className="sr-app-scene">
+          <KeyboardControls map={controlMap}>
+            <Scene settings={values} />
+          </KeyboardControls>
+        </div>
+        <div
+          style={{ maxWidth }}
+          className="border-4 border-primary border-start h-100 sr-app-sidebar"
+        >
+          <Sidebar
+            values={values}
+            setFieldValue={setFieldValue}
+            setValues={setValues}
+          />
+        </div>
+      </Suspense>
+    </ForceOrientation>
   );
 }
