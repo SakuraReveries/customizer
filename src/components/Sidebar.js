@@ -1,3 +1,4 @@
+import omit from 'lodash.omit';
 import PropTypes from 'prop-types';
 import { Fragment, useCallback } from 'react';
 import { Accordion, Alert, Col, Container, Form, Row } from 'react-bootstrap';
@@ -552,7 +553,11 @@ export default function Sidebar({ values, setFieldValue, setValues }) {
                         value={values.deviceConnector.housingFinish}
                       >
                         <ObjectOptions
-                          object={{ ...cncHousingFinishes, Gold: undefined }}
+                          object={
+                            values.deviceConnector.subHousingType === 'MonoRing'
+                              ? omit(cncHousingFinishes, 'Gold')
+                              : cncHousingFinishes
+                          }
                         />
                       </Form.Select>
                     </Form.Group>
