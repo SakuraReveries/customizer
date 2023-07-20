@@ -8,8 +8,13 @@ import Loader from 'components/Loader';
 import Sidebar from 'components/Sidebar';
 import Scene from 'components/Scene';
 import ForceOrientation from './ForceOrientation';
+import { environments } from 'utils';
 
 const initialValues = {
+  scene: {
+    bgColor: '#f3969a',
+    environment: environments[0].id
+  },
   cable: {
     model: 'Charger',
     innerSleeveType: 'MDPC_X',
@@ -67,12 +72,13 @@ export default function App() {
   });
 
   const maxWidth = width >= 768 ? '25%' : '40%';
+  const sceneWidth = width >= 768 ? '75%' : '60%';
 
   return (
     <ForceOrientation allowLandscape>
       <Suspense fallback={<Loader />}>
         <Helmet title="Sakura Reveries Cable Builder" />
-        <div className="sr-app-scene">
+        <div className="sr-app-scene" style={{ width: sceneWidth }}>
           <KeyboardControls map={controlMap}>
             <Scene settings={values} />
           </KeyboardControls>

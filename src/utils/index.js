@@ -1,6 +1,17 @@
 import rgbImage from 'images/rgb.png';
 import transparentImage from 'images/transparent.png';
 
+export const environments = [
+  { id: 'apartment', name: 'Apartment' },
+  { id: 'city', name: 'City' },
+  { id: 'dark', name: 'Dawn' },
+  { id: 'lobby', name: 'Lobby' },
+  { id: 'night', name: 'Night' },
+  { id: 'studio', name: 'Studio' },
+  { id: 'sunset', name: 'Sunset' },
+  { id: 'warehouse', name: 'Warehouse' }
+];
+
 export const heatshrinkColors = [
   { id: 'white', name: 'White', hex: '#ffffff' },
   { id: 'black', name: 'Black', hex: '#000000' },

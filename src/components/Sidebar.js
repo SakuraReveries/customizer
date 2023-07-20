@@ -22,8 +22,11 @@ import {
   techFlexColors,
   ledColors,
   opalColors,
-  alignmentDotColors
+  alignmentDotColors,
+  environments
 } from 'utils';
+import ArrayOptions from './ArrayOptions';
+import { ChromePicker } from 'react-color';
 
 export default function Sidebar({ values, setFieldValue, setValues }) {
   const updateField = useCallback(
@@ -91,14 +94,42 @@ export default function Sidebar({ values, setFieldValue, setValues }) {
           </h1>
           <hr className="border-white mt-0" />
           <Accordion alwaysOpen defaultActiveKey={['Cable']}>
+            <SidebarPane title="Options">
+              <Form>
+                <Form.Group className="mb-2">
+                  <Form.Label className="text-light">
+                    Background Color
+                  </Form.Label>
+                  <ChromePicker
+                    color={values.scene.bgColor}
+                    onChange={(color) =>
+                      setFieldValue('scene.bgColor', color.hex)
+                    }
+                  />
+                </Form.Group>
+                <Form.Group className="mb-2">
+                  <Form.Label className="text-light">
+                    Lighting Environment
+                  </Form.Label>
+                  <Form.Select
+                    onChange={updateField('scene.environment')}
+                    value={values.scene.environment}
+                  >
+                    <ArrayOptions
+                      array={environments}
+                      keyKey="id"
+                      valueKey="name"
+                    />
+                  </Form.Select>
+                </Form.Group>
+              </Form>
+            </SidebarPane>
             <SidebarPane title="Cable">
               <Form>
                 <Form.Group className="mb-2">
                   <Form.Label className="text-light">Type</Form.Label>
                   <Form.Select
-                    onChange={(event) =>
-                      setFieldValue('cable.model', event.target.value)
-                    }
+                    onChange={updateField('cable.model')}
                     value={values.cable.model}
                   >
                     <ObjectOptions object={cableTypes} />

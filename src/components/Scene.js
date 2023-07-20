@@ -39,12 +39,12 @@ export default function Scene({ settings }) {
       style={{ height: '100vh' }}
       dpr={degradedPerformance ? 0.75 : 1.5}
     >
-      <color attach="background" args={['#f3969a']} />
+      <color attach="background" args={[settings.scene.bgColor]} />
       <Stage
         intensity={0.1}
         adjustCamera={1.2}
         shadows={{ type: 'accumulative', frames: 20 }}
-        environment="apartment"
+        environment={settings.scene.environment}
       >
         <group position={cableOffsets[settings.cable.model]}>
           <Cable {...settings.cable} />
