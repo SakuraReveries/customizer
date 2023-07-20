@@ -4,7 +4,9 @@
 @import "~bootswatch/dist/minty/bootswatch";
 
 // Component styles
+@import "components/App";
 @import "components/ColorPicker";
+@import "components/Loader";
 @import "components/Sidebar";
 
 html,

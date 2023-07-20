@@ -1,12 +1,12 @@
 import { useFormik } from 'formik';
+import { Helmet } from 'react-helmet';
 import { Suspense, useMemo } from 'react';
-import { Container, Row, Col } from 'react-bootstrap';
+import { useWindowSize } from '@uidotdev/usehooks';
+import { KeyboardControls } from '@react-three/drei';
 
 import Loader from 'components/Loader';
 import Sidebar from 'components/Sidebar';
 import Scene from 'components/Scene';
-import { Helmet } from 'react-helmet';
-import { KeyboardControls } from '@react-three/drei';
 
 const initialValues = {
   cable: {
@@ -53,6 +53,7 @@ const initialValues = {
 };
 
 export default function App() {
+  const { width } = useWindowSize();
   const controlMap = useMemo(
     () => [
       { name: 'toggleStats', keys: ['F4'] },
@@ -64,29 +65,32 @@ export default function App() {
     initialValues
   });
 
+  let maxWidth = '50%';
+
+  if (width >= 1200) {
+    maxWidth = '25%';
+  } else if (width >= 768) {
+    maxWidth = '33%';
+  }
+
   return (
     <Suspense fallback={<Loader />}>
       <Helmet title="Sakura Reveries Cable Builder" />
-      <Container fluid className="g-0 h-100">
-        <Row className="g-0 h-100">
-          <Col xs={6} md={8} lg={9}>
-            <div
-              style={{ position: 'absolute', top: 0, left: 0, width: '100%' }}
-            >
-              <KeyboardControls map={controlMap}>
-                <Scene settings={values} />
-              </KeyboardControls>
-            </div>
-          </Col>
-          <Col xs={6} md={4} lg={3}>
-            <Sidebar
-              values={values}
-              setFieldValue={setFieldValue}
-              setValues={setValues}
-            />
-          </Col>
-        </Row>
-      </Container>
+      <div className="sr-app-scene">
+        <KeyboardControls map={controlMap}>
+          <Scene settings={values} />
+        </KeyboardControls>
+      </div>
+      <div
+        style={{ maxWidth }}
+        className="border-4 border-primary border-start h-100 sr-app-sidebar"
+      >
+        <Sidebar
+          values={values}
+          setFieldValue={setFieldValue}
+          setValues={setValues}
+        />
+      </div>
     </Suspense>
   );
 }

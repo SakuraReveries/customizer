@@ -24,10 +24,8 @@ import {
   opalColors,
   alignmentDotColors
 } from 'utils';
-import { useWindowSize } from '@uidotdev/usehooks';
 
 export default function Sidebar({ values, setFieldValue, setValues }) {
-  const { width } = useWindowSize();
   const updateField = useCallback(
     (name) => (event) => setFieldValue(name, event.target.value),
     [setFieldValue]
@@ -80,24 +78,14 @@ export default function Sidebar({ values, setFieldValue, setValues }) {
   }
 
   return (
-    <Container
-      fluid
-      className="border-4 border-primary border-start h-100"
-      style={{
-        backgroundColor: 'rgba(243, 150, 154, 0.5)',
-        position: 'absolute',
-        right: 0,
-        maxWidth: width <= 768 ? '50%' : '25%',
-        overflowY: 'auto'
-      }}
-    >
+    <Container fluid>
       <Row>
         <Col xs={12} className="d-flex flex-column">
           <h1 className="mt-2 mb-3 d-flex align-items-center h4 text-light">
             <img
               src={logo}
               alt="Sakura Reveries"
-              className="mx-4 sr-sidebar-logo"
+              className="mx-xs-1 mx-sm-2 mx-lg-4 sr-sidebar-logo"
             />
             <span className="text-end">Cable Builder</span>
           </h1>
