@@ -2,14 +2,10 @@ import rgbImage from 'images/rgb.png';
 import transparentImage from 'images/transparent.png';
 
 export const environments = [
-  { id: 'apartment', name: 'Apartment' },
-  { id: 'city', name: 'City' },
-  { id: 'dawn', name: 'Dawn' },
-  { id: 'lobby', name: 'Lobby' },
-  { id: 'night', name: 'Night' },
-  { id: 'studio', name: 'Studio' },
-  { id: 'sunset', name: 'Sunset' },
-  { id: 'warehouse', name: 'Warehouse' }
+  { id: 'photo_studio_london_hall_2k', name: 'Natural Light' },
+  { id: 'marry_hall_2k', name: 'Cool Light' },
+  { id: 'christmas_photo_studio_01_2k', name: 'Warm Light' },
+  { id: 'studio_small_04_2k', name: 'Low Light' }
 ];
 
 export const heatshrinkColors = [

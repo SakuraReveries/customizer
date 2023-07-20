@@ -6,7 +6,8 @@ import {
   PerspectiveCamera,
   Stats,
   useKeyboardControls,
-  PerformanceMonitor
+  PerformanceMonitor,
+  Environment
 } from '@react-three/drei';
 // eslint-disable-next-line import/no-unresolved
 import { EffectComposer, N8AO } from '@react-three/postprocessing';
@@ -45,7 +46,7 @@ export default function Scene() {
         intensity={0.1}
         adjustCamera={1.2}
         shadows={{ type: 'accumulative', frames: 20 }}
-        environment={settings.scene.environment}
+        environment={null}
       >
         <group position={cableOffsets[settings.cable.model]}>
           <Cable {...settings.cable} />
@@ -62,6 +63,11 @@ export default function Scene() {
           )}
         </group>
       </Stage>
+      <Environment
+        background={false}
+        files={`./environments/${settings.scene.environment}.hdr`}
+        path="/"
+      />
       <PerspectiveCamera makeDefault fov={20} position={[-12, 8, 10]} />
       <OrbitControls makeDefault maxPolarAngle={Math.PI / 2} panSpeed={0} />
       {showStats && <Stats />}
