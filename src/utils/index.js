@@ -4,7 +4,7 @@ import transparentImage from 'images/transparent.png';
 export const environments = [
   { id: 'apartment', name: 'Apartment' },
   { id: 'city', name: 'City' },
-  { id: 'dark', name: 'Dawn' },
+  { id: 'dawn', name: 'Dawn' },
   { id: 'lobby', name: 'Lobby' },
   { id: 'night', name: 'Night' },
   { id: 'studio', name: 'Studio' },

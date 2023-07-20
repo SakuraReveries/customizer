@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
 import { Canvas } from '@react-three/fiber';
 import {
@@ -16,15 +15,17 @@ import Cable from 'components/Cable';
 import USBConnector from 'components/USBConnector';
 import CableConnector from 'components/CableConnector';
 import { cableAttachments, cableOffsets } from 'utils';
+import { useFormikContext } from 'formik';
 
 const getPerformanceBounds = (refreshRate) =>
   refreshRate > 60 ? [40, refreshRate] : [40, 60];
 
-export default function Scene({ settings }) {
+export default function Scene() {
+  const { values: settings } = useFormikContext();
   const [degradedPerformance, setDegradedPerformance] = useState(false);
   const [showStats, setShowStats] = useState(false);
-  const attachments = cableAttachments[settings.cable.model];
   const toggleStats = useKeyboardControls((state) => state.toggleStats);
+  const attachments = cableAttachments[settings.cable.model];
 
   useEffect(() => {
     if (toggleStats) {
@@ -81,7 +82,3 @@ export default function Scene({ settings }) {
     </Canvas>
   );
 }
-
-Scene.propTypes = {
-  settings: PropTypes.object.isRequired
-};

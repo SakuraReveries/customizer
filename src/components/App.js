@@ -1,4 +1,4 @@
-import { useFormik } from 'formik';
+import { Formik } from 'formik';
 import { Helmet } from 'react-helmet';
 import { Suspense, useMemo } from 'react';
 import { useWindowSize } from '@uidotdev/usehooks';
@@ -68,33 +68,28 @@ export default function App() {
     ],
     []
   );
-  const { values, setFieldValue, setValues } = useFormik({
-    initialValues
-  });
 
   const maxWidth = width >= 768 ? '25%' : '40%';
   const sceneWidth = width >= 768 ? '75%' : '60%';
 
   return (
-    <ForceOrientation allowLandscape>
-      <Suspense fallback={<Loader />}>
+    <Formik initialValues={initialValues}>
+      <ForceOrientation allowLandscape>
         <Helmet title="Sakura Reveries Cable Builder" />
-        <div className="sr-app-scene" style={{ width: sceneWidth }}>
-          <KeyboardControls map={controlMap}>
-            <Scene settings={values} />
-          </KeyboardControls>
-        </div>
-        <div
-          style={{ maxWidth }}
-          className="border-4 border-primary border-start h-100 sr-app-sidebar"
-        >
-          <Sidebar
-            values={values}
-            setFieldValue={setFieldValue}
-            setValues={setValues}
-          />
-        </div>
-      </Suspense>
-    </ForceOrientation>
+        <Suspense fallback={<Loader />}>
+          <div className="sr-app-scene" style={{ width: sceneWidth }}>
+            <KeyboardControls map={controlMap}>
+              <Scene />
+            </KeyboardControls>
+          </div>
+          <div
+            style={{ maxWidth }}
+            className="border-4 border-primary border-start h-100 sr-app-sidebar"
+          >
+            <Sidebar />
+          </div>
+        </Suspense>
+      </ForceOrientation>
+    </Formik>
   );
 }
