@@ -8,7 +8,8 @@ export default function CableConnector({
   finish,
   cerakoteColor,
   innerHeatshrink,
-  innerHeatshrinkColor,
+  innerHeatshrinkHostColor,
+  innerHeatshrinkDeviceColor,
   /* eslint-disable no-unused-vars */
   collarHeatshrink,
   collarHeatshrinkColor,
@@ -28,12 +29,12 @@ export default function CableConnector({
           <meshPhysicalMaterial
             color={
               heatshrinkColors.find(
-                (color) => color.id === innerHeatshrinkColor
+                (color) => color.id === innerHeatshrinkDeviceColor
               ).hex
             }
             roughness={0.7}
-            transparent={innerHeatshrinkColor === 'clear'}
-            opacity={innerHeatshrinkColor === 'clear' ? 0.4 : 1}
+            transparent={innerHeatshrinkDeviceColor === 'clear'}
+            opacity={innerHeatshrinkDeviceColor === 'clear' ? 0.4 : 1}
           />
         </mesh>
       )}
@@ -53,12 +54,12 @@ export default function CableConnector({
           <meshPhysicalMaterial
             color={
               heatshrinkColors.find(
-                (color) => color.id === innerHeatshrinkColor
+                (color) => color.id === innerHeatshrinkHostColor
               ).hex
             }
             roughness={0.7}
-            transparent={innerHeatshrinkColor === 'clear'}
-            opacity={innerHeatshrinkColor === 'clear' ? 0.4 : 1}
+            transparent={innerHeatshrinkHostColor === 'clear'}
+            opacity={innerHeatshrinkHostColor === 'clear' ? 0.4 : 1}
           />
         </mesh>
       )}
@@ -71,7 +72,8 @@ CableConnector.propTypes = {
   finish: PropTypes.string.isRequired,
   cerakoteColor: PropTypes.string,
   innerHeatshrink: PropTypes.bool.isRequired,
-  innerHeatshrinkColor: PropTypes.string,
+  innerHeatshrinkHostColor: PropTypes.string,
+  innerHeatshrinkDeviceColor: PropTypes.string,
   collarHeatshrink: PropTypes.bool.isRequired,
   collarHeatshrinkColor: PropTypes.string,
   collarAccent: PropTypes.bool.isRequired,

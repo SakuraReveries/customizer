@@ -235,7 +235,10 @@ export default function Sidebar({ values, setFieldValue, setValues }) {
                             connector: {
                               ...values.cable.connector,
                               innerHeatshrink: event.target.checked,
-                              innerHeatshrinkColor: event.target.checked
+                              innerHeatshrinkHostColor: event.target.checked
+                                ? heatshrinkColors[0].id
+                                : null,
+                              innerHeatshrinkDeviceColor: event.target.checked
                                 ? heatshrinkColors[0].id
                                 : null
                             }
@@ -249,17 +252,24 @@ export default function Sidebar({ values, setFieldValue, setValues }) {
                       <Form.Label className="text-light">
                         Heatshrink Color
                       </Form.Label>
-                      <ColorPicker
+                      <DualColorPicker
                         colors={heatshrinkColors.filter(
                           ({ id }) => id !== 'clear'
                         )}
-                        onChange={(color) =>
+                        onChange={(type, color) =>
                           setFieldValue(
-                            'cable.connector.innerHeatshrinkColor',
+                            `cable.connector.innerHeatshrink${type[0].toUpperCase()}${type
+                              .substring(1)
+                              .toLowerCase()}Color`,
                             color
                           )
                         }
-                        value={values.cable.connector.innerHeatshrinkColor}
+                        hostValue={
+                          values.cable.connector.innerHeatshrinkHostColor
+                        }
+                        deviceValue={
+                          values.cable.connector.innerHeatshrinkDeviceColor
+                        }
                       />
                     </Form.Group>
                   )}
