@@ -1,6 +1,6 @@
 import { useFormik } from 'formik';
 import { Suspense, useMemo } from 'react';
-import { Col, Container, Row } from 'react-bootstrap';
+import { Container, Row, Col } from 'react-bootstrap';
 
 import Loader from 'components/Loader';
 import Sidebar from 'components/Sidebar';
@@ -70,9 +70,13 @@ export default function App() {
       <Container fluid className="g-0 h-100">
         <Row className="g-0 h-100">
           <Col xs={6} md={8} lg={9}>
-            <KeyboardControls map={controlMap}>
-              <Scene settings={values} />
-            </KeyboardControls>
+            <div
+              style={{ position: 'absolute', top: 0, left: 0, width: '100%' }}
+            >
+              <KeyboardControls map={controlMap}>
+                <Scene settings={values} />
+              </KeyboardControls>
+            </div>
           </Col>
           <Col xs={6} md={4} lg={3}>
             <Sidebar

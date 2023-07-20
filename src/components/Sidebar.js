@@ -24,8 +24,10 @@ import {
   opalColors,
   alignmentDotColors
 } from 'utils';
+import { useWindowSize } from '@uidotdev/usehooks';
 
 export default function Sidebar({ values, setFieldValue, setValues }) {
+  const { width } = useWindowSize();
   const updateField = useCallback(
     (name) => (event) => setFieldValue(name, event.target.value),
     [setFieldValue]
@@ -80,7 +82,14 @@ export default function Sidebar({ values, setFieldValue, setValues }) {
   return (
     <Container
       fluid
-      className="bg-secondary h-100 border-4 border-primary border-start"
+      className="border-4 border-primary border-start h-100"
+      style={{
+        backgroundColor: 'rgba(243, 150, 154, 0.5)',
+        position: 'absolute',
+        right: 0,
+        maxWidth: width <= 768 ? '50%' : '25%',
+        overflowY: 'auto'
+      }}
     >
       <Row>
         <Col xs={12} className="d-flex flex-column">

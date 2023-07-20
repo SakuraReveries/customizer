@@ -243,7 +243,7 @@ export const cncHousingFinishes = {
 
 export const cableOffsets = {
   Charger: [0, 0, 0],
-  Straight: [-50, 0, 0],
+  Straight: [-50, 4, 0],
   StraightExit: [0, 0, 0],
   LeftParallel: [125, 8, 0],
   LeftRearExit: [0, 8, 0],
