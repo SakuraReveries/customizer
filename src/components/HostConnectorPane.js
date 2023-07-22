@@ -11,8 +11,10 @@ import {
   cerakoteColors,
   cncHousingFinishes
 } from 'utils';
+import useMessages from 'hooks/useMessages';
 
 export default function HostConnectorPane() {
+  const { enableMessage } = useMessages();
   const { values, setFieldValue, setValues } = useFormikContext();
 
   return (
@@ -63,7 +65,7 @@ export default function HostConnectorPane() {
           <Form.Group>
             <Form.Label className="text-light">Housing Finish</Form.Label>
             <Form.Select
-              onChange={(event) =>
+              onChange={(event) => {
                 setValues((values) => ({
                   ...values,
                   hostConnector: {
@@ -74,8 +76,11 @@ export default function HostConnectorPane() {
                         ? cerakoteColors[0].id
                         : null
                   }
-                }))
-              }
+                }));
+                if (event.target.value === 'Cerakote') {
+                  enableMessage('cerakoteColor');
+                }
+              }}
               value={values.hostConnector.housingFinish}
             >
               <ObjectOptions object={cncHousingFinishes} />

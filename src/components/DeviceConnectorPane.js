@@ -91,17 +91,22 @@ export default function DeviceConnectorPane() {
             <Form.Group className="mb-2">
               <Form.Label className="text-light">Housing Finish</Form.Label>
               <Form.Select
-                onChange={(event) =>
+                onChange={(event) => {
                   setValues((values) => ({
                     ...values,
                     deviceConnector: {
                       ...values.deviceConnector,
                       housingFinish: event.target.value,
                       cerakoteColor:
-                        event.target.value === 'Cerakote' ? 'black' : null
+                        event.target.value === 'Cerakote'
+                          ? cerakoteColors[0].id
+                          : null
                     }
-                  }))
-                }
+                  }));
+                  if (event.target.value === 'Cerakote') {
+                    enableMessage('cerakoteColor');
+                  }
+                }}
                 value={values.deviceConnector.housingFinish}
               >
                 <ObjectOptions

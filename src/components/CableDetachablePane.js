@@ -122,7 +122,7 @@ export default function CableDetachablePane() {
         <Form.Group className="mb-2">
           <Form.Label className="text-light">Connector Finish</Form.Label>
           <Form.Select
-            onChange={(event) =>
+            onChange={(event) => {
               setValues((values) => ({
                 ...values,
                 cable: {
@@ -136,8 +136,11 @@ export default function CableDetachablePane() {
                         : null
                   }
                 }
-              }))
-            }
+              }));
+              if (event.target.value === 'Cerakote') {
+                enableMessage('cerakoteColor');
+              }
+            }}
             value={values.cable.connector.finish}
           >
             <ObjectOptions object={cncHousingFinishes} />
