@@ -1,3 +1,11 @@
+$primary: #f086a9;
+$secondary: #a95c75;
+$canvas: #8d5265;
+$white: #fff;
+$form-select-bg: $primary;
+$form-select-color: $white;
+$form-select-indicator-color: $white;
+
 // Imported styles
 @import "~bootswatch/dist/minty/variables";
 @import "~bootstrap/scss/bootstrap";
@@ -13,7 +21,7 @@ html,
 body {
   height: 100vh;
   overflow: hidden;
-  background-color: #f3969a;
+  background-color: $canvas;
 }
 
 body > div {

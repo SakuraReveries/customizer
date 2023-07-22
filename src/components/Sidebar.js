@@ -12,7 +12,7 @@ export default function Sidebar() {
   return (
     <Container fluid>
       <Row>
-        <Col xs={12} className="d-flex flex-column">
+        <Col xs={12} className="d-flex flex-column bg-secondary">
           <h1 className="mt-2 mb-3 d-flex align-items-center h4 text-light">
             <img
               src={logo}

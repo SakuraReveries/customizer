@@ -13,7 +13,7 @@ import { environments } from 'utils';
 
 const initialValues = {
   scene: {
-    bgColor: '#f3969a',
+    bgColor: '#8d5265',
     environment: environments[0].id
   },
   cable: {
