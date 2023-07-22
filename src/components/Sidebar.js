@@ -19,7 +19,7 @@ export default function Sidebar() {
               alt="Sakura Reveries"
               className="mx-xs-1 mx-sm-2 mx-lg-4 sr-sidebar-logo"
             />
-            <span className="text-end">Cable Builder</span>
+            <span className="ms-auto me-auto">Cable Builder</span>
           </h1>
           <hr className="border-white mt-0" />
           <Accordion alwaysOpen defaultActiveKey={['Cable']}>
