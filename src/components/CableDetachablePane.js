@@ -33,6 +33,7 @@ export default function CableDetachablePane() {
         <Form.Group className="mb-2">
           <Form.Label className="text-light">Heatshrink?</Form.Label>
           <Form.Switch
+            className="ms-3"
             checked={values.cable.connector.innerHeatshrink}
             onChange={(event) =>
               setValues((values) => ({
@@ -87,6 +88,7 @@ export default function CableDetachablePane() {
         <Form.Group className="mb-2">
           <Form.Label className="text-light">Heatshrink Accents?</Form.Label>
           <Form.Switch
+            className="ms-3"
             checked={values.cable.connector.collarHeatshrink}
             onChange={(event) =>
               setValues((values) => ({
@@ -161,6 +163,7 @@ export default function CableDetachablePane() {
             <Form.Group className="mb-2">
               <Form.Label className="text-light">Accent Collar?</Form.Label>
               <Form.Switch
+                className="ms-3"
                 checked={values.cable.connector.accentCollar}
                 onChange={(event) =>
                   setValues((values) => ({
