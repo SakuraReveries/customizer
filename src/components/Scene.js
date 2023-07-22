@@ -48,7 +48,8 @@ export default function Scene() {
           width: 350,
           height: '100%',
           marginTop: 8,
-          marginLeft: 8
+          marginLeft: 8,
+          opacity: 0.6
         }}
       >
         {messages.alignmentDotColor && (
