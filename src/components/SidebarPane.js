@@ -11,15 +11,14 @@ import { faCaretUp, faCaretDown } from '@fortawesome/free-solid-svg-icons';
 
 export default function SidebarPane({ children, title, onExpand }) {
   const { activeEventKey } = useContext(AccordionContext);
-  const onClick = useAccordionButton(title, () => {
-    if (onExpand) {
-      onExpand();
-    }
-  });
-
   const isOpen = Array.isArray(activeEventKey)
     ? activeEventKey.includes(title)
     : activeEventKey === title;
+  const onClick = useAccordionButton(title, () => {
+    if (onExpand && !isOpen) {
+      onExpand();
+    }
+  });
 
   return (
     <Fragment>
