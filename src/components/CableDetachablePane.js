@@ -1,6 +1,8 @@
 import { Fragment } from 'react';
 import { useFormikContext } from 'formik';
-import { Alert, Form } from 'react-bootstrap';
+import { Alert, Form, OverlayTrigger, Tooltip } from 'react-bootstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
 
 import SidebarPane from 'components/SidebarPane';
 import ColorPicker from 'components/ColorPicker';
@@ -49,7 +51,19 @@ export default function CableDetachablePane() {
         </Form.Group>
         {values.cable.connector.innerHeatshrink && (
           <Form.Group className="mb-2">
-            <Form.Label className="text-light">Heatshrink Color</Form.Label>
+            <Form.Label className="text-light">
+              Heatshrink Color{' '}
+              <OverlayTrigger
+                placement="bottom"
+                overlay={
+                  <Tooltip>
+                    Please select Host-side and Device-side colors.
+                  </Tooltip>
+                }
+              >
+                <FontAwesomeIcon icon={faQuestionCircle} fixedWidth />
+              </OverlayTrigger>
+            </Form.Label>
             <DualColorPicker
               colors={heatshrinkColors.filter(({ id }) => id !== 'clear')}
               onChange={(type, color) =>
@@ -174,7 +188,19 @@ export default function CableDetachablePane() {
           </Fragment>
         )}
         <Form.Group className="mb-2">
-          <Form.Label className="text-light">Alignment Dot Color</Form.Label>
+          <Form.Label className="text-light">
+            Alignment Dot Color{' '}
+            <OverlayTrigger
+              placement="bottom"
+              overlay={
+                <Tooltip>
+                  Please select Host-side and Device-side colors.
+                </Tooltip>
+              }
+            >
+              <FontAwesomeIcon icon={faQuestionCircle} fixedWidth />
+            </OverlayTrigger>
+          </Form.Label>
           <DualColorPicker
             colors={alignmentDotColors}
             onChange={(type, color) =>
