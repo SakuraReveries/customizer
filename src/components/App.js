@@ -7,7 +7,8 @@ import { KeyboardControls } from '@react-three/drei';
 import Loader from 'components/Loader';
 import Sidebar from 'components/Sidebar';
 import Scene from 'components/Scene';
-import ForceOrientation from './ForceOrientation';
+import MessageProvider from 'components/MessageProvider';
+import ForceOrientation from 'components/ForceOrientation';
 import { environments } from 'utils';
 
 const initialValues = {
@@ -73,23 +74,25 @@ export default function App() {
   const sceneWidth = width >= 768 ? '75%' : '60%';
 
   return (
-    <Formik initialValues={initialValues}>
-      <ForceOrientation allowLandscape>
-        <Helmet title="Sakura Reveries Cable Builder" />
-        <Suspense fallback={<Loader />}>
-          <div className="sr-app-scene" style={{ width: sceneWidth }}>
-            <KeyboardControls map={controlMap}>
-              <Scene />
-            </KeyboardControls>
-          </div>
-          <div
-            style={{ width: sidebarWidth }}
-            className="border-4 border-primary border-start h-100 sr-app-sidebar"
-          >
-            <Sidebar />
-          </div>
-        </Suspense>
-      </ForceOrientation>
-    </Formik>
+    <MessageProvider>
+      <Formik initialValues={initialValues}>
+        <ForceOrientation allowLandscape>
+          <Helmet title="Sakura Reveries Cable Builder" />
+          <Suspense fallback={<Loader />}>
+            <div className="sr-app-scene" style={{ width: sceneWidth }}>
+              <KeyboardControls map={controlMap}>
+                <Scene />
+              </KeyboardControls>
+            </div>
+            <div
+              style={{ width: sidebarWidth }}
+              className="border-4 border-primary border-start h-100 sr-app-sidebar"
+            >
+              <Sidebar />
+            </div>
+          </Suspense>
+        </ForceOrientation>
+      </Formik>
+    </MessageProvider>
   );
 }

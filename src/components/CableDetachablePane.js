@@ -1,6 +1,6 @@
 import { Fragment } from 'react';
 import { useFormikContext } from 'formik';
-import { Alert, Form, OverlayTrigger, Tooltip } from 'react-bootstrap';
+import { Form, OverlayTrigger, Tooltip } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
 
@@ -14,8 +14,10 @@ import {
   cncHousingFinishes,
   alignmentDotColors
 } from 'utils';
+import useMessages from 'hooks/useMessages';
 
 export default function CableDetachablePane() {
+  const { enableMessage } = useMessages();
   const { values, setFieldValue, setValues } = useFormikContext();
 
   if (values.cable.model == 'Charger') {
@@ -23,7 +25,10 @@ export default function CableDetachablePane() {
   }
 
   return (
-    <SidebarPane title="Cable Detachable">
+    <SidebarPane
+      title="Cable Detachable"
+      onExpand={() => enableMessage('alignmentDotColor')}
+    >
       <Form>
         <Form.Group className="mb-2">
           <Form.Label className="text-light">Heatshrink?</Form.Label>
@@ -210,12 +215,6 @@ export default function CableDetachablePane() {
             deviceValue={values.cable.connector.deviceDotColor}
           />
         </Form.Group>
-        <Alert variant="info">
-          For alignment dot colors not listed or custom color tones please
-          contact me for a one on one consultation. Please note colors are an
-          approximate representation of the real to life colors and can vary
-          based on display and lighting conditions.
-        </Alert>
       </Form>
     </SidebarPane>
   );

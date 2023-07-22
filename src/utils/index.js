@@ -229,8 +229,8 @@ export const cncHousingTypes = {
   },
   USB_C: {
     GlowRing: 'Glow',
-    MonoRing: 'Mono Ring',
-    RightAngle: 'Right-angle'
+    MonoRing: 'Mono Ring'
+    // RightAngle: 'Right-angle'
   }
 };
 

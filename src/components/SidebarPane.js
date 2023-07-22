@@ -9,9 +9,13 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCaretUp, faCaretDown } from '@fortawesome/free-solid-svg-icons';
 
-export default function SidebarPane({ children, title }) {
+export default function SidebarPane({ children, title, onExpand }) {
   const { activeEventKey } = useContext(AccordionContext);
-  const onClick = useAccordionButton(title);
+  const onClick = useAccordionButton(title, () => {
+    if (onExpand) {
+      onExpand();
+    }
+  });
 
   const isOpen = Array.isArray(activeEventKey)
     ? activeEventKey.includes(title)
@@ -41,5 +45,6 @@ export default function SidebarPane({ children, title }) {
 
 SidebarPane.propTypes = {
   children: PropTypes.node.isRequired,
-  title: PropTypes.string.isRequired
+  title: PropTypes.string.isRequired,
+  onExpand: PropTypes.func
 };

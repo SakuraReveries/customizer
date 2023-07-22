@@ -1,6 +1,6 @@
 import { Fragment } from 'react';
 import { useFormikContext } from 'formik';
-import { Alert, Form } from 'react-bootstrap';
+import { Form } from 'react-bootstrap';
 import omit from 'lodash.omit';
 
 import SidebarPane from 'components/SidebarPane';
@@ -15,8 +15,10 @@ import {
   cncHousingTypes,
   cncHousingFinishes
 } from 'utils';
+import useMessages from 'hooks/useMessages';
 
 export default function DeviceConnectorPane() {
+  const { enableMessage } = useMessages();
   const { values, setFieldValue, setValues } = useFormikContext();
 
   return (
@@ -72,12 +74,15 @@ export default function DeviceConnectorPane() {
             <Form.Group className="mb-2">
               <Form.Label className="text-light">Housing Type</Form.Label>
               <Form.Select
-                onChange={(event) =>
+                onChange={(event) => {
                   setFieldValue(
                     'deviceConnector.subHousingType',
                     event.target.value
-                  )
-                }
+                  );
+                  if (event.target.value === 'GlowRing') {
+                    enableMessage('glowCnc');
+                  }
+                }}
                 value={values.deviceConnector.subHousingType}
               >
                 <ObjectOptions object={cncHousingTypes.USB_C} />
@@ -109,27 +114,16 @@ export default function DeviceConnectorPane() {
               </Form.Select>
             </Form.Group>
             {values.deviceConnector.subHousingType === 'GlowRing' && (
-              <Fragment>
-                <Form.Group className="mb-2">
-                  <Form.Label className="text-light">LED Color</Form.Label>
-                  <ColorPicker
-                    colors={ledColors}
-                    onChange={(color) =>
-                      setFieldValue('deviceConnector.ledColor', color)
-                    }
-                    value={values.deviceConnector.ledColor}
-                  />
-                </Form.Group>
-                <Alert variant="info">
-                  Glow CNC provides options for LED colors in static or
-                  non-addressable RGB formats. The LED remains powered on when
-                  the cable is connected to a power source, and there is no
-                  software control over the RGB colors. The diffuser ring
-                  appears white when powered off but can be custom dyed. Feel
-                  free to reach out for custom dyed quotes or any
-                  connector-related inquiries before purchasing.
-                </Alert>
-              </Fragment>
+              <Form.Group className="mb-2">
+                <Form.Label className="text-light">LED Color</Form.Label>
+                <ColorPicker
+                  colors={ledColors}
+                  onChange={(color) =>
+                    setFieldValue('deviceConnector.ledColor', color)
+                  }
+                  value={values.deviceConnector.ledColor}
+                />
+              </Form.Group>
             )}
           </Fragment>
         )}
