@@ -9,7 +9,8 @@ import {
   mdpcxColors,
   techFlexColors,
   opalColors,
-  sleeveTypes
+  sleeveTypes,
+  alignmentDotColors
 } from 'utils';
 
 export default function CablePane() {
@@ -27,7 +28,24 @@ export default function CablePane() {
           <Form.Label className="text-light">Type</Form.Label>
           <Form.Select
             onChange={(event) =>
-              setFieldValue('cable.model', event.target.value)
+              setValues((values) => ({
+                ...values,
+                cable: {
+                  ...values.cable,
+                  model: event.target.value,
+                  connector: {
+                    ...values.cable.connector,
+                    hostDotColor:
+                      event.target.value !== 'Charger'
+                        ? alignmentDotColors[0].id
+                        : null,
+                    deviceDotColor:
+                      event.target.value !== 'Charger'
+                        ? alignmentDotColors[1].id
+                        : null
+                  }
+                }
+              }))
             }
             value={values.cable.model}
           >

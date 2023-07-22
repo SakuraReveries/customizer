@@ -23,7 +23,7 @@ const initialValues = {
     outerSleeveType: 'MDPC_X',
     outerSleeveColor: 'blackestBlack',
     opalSleeve: false,
-    opalSleeveColor: '',
+    opalSleeveColor: null,
     connector: {
       model: 'FEMO',
       finish: 'Silver',
@@ -35,8 +35,8 @@ const initialValues = {
       collarAccent: false,
       collarAccentColor: null,
       cerakoteColor: null,
-      hostDotColor: 'white',
-      deviceDotColor: 'white'
+      hostDotColor: null,
+      deviceDotColor: null
     }
   },
   hostConnector: {
@@ -70,8 +70,8 @@ export default function App() {
     []
   );
 
-  const sidebarWidth = width >= 768 ? '25%' : '40%';
-  const sceneWidth = width >= 768 ? '75%' : '60%';
+  const sidebarWidth = width >= 768 ? '30%' : '40%';
+  const sceneWidth = width >= 768 ? '70%' : '60%';
 
   return (
     <MessageProvider>
