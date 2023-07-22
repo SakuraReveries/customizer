@@ -69,7 +69,7 @@ export default function App() {
     []
   );
 
-  const maxWidth = width >= 768 ? '25%' : '40%';
+  const sidebarWidth = width >= 768 ? '25%' : '40%';
   const sceneWidth = width >= 768 ? '75%' : '60%';
 
   return (
@@ -83,7 +83,7 @@ export default function App() {
             </KeyboardControls>
           </div>
           <div
-            style={{ maxWidth }}
+            style={{ width: sidebarWidth }}
             className="border-4 border-primary border-start h-100 sr-app-sidebar"
           >
             <Sidebar />
