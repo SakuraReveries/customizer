@@ -1,11 +1,11 @@
 import { Fragment } from 'react';
 import { useFormikContext } from 'formik';
 import { Form } from 'react-bootstrap';
-import omit from 'lodash.omit';
 
 import SidebarPane from 'components/SidebarPane';
 import ObjectOptions from 'components/ObjectOptions';
 import ColorPicker from 'components/ColorPicker';
+import useMessages from 'hooks/useMessages';
 import {
   cerakoteColors,
   connectorFinishes,
@@ -15,7 +15,7 @@ import {
   cncHousingTypes,
   cncHousingFinishes
 } from 'utils';
-import useMessages from 'hooks/useMessages';
+import ArrayOptions from './ArrayOptions';
 
 export default function DeviceConnectorPane() {
   const { enableMessage } = useMessages();
@@ -39,7 +39,7 @@ export default function DeviceConnectorPane() {
             }
             value={values.deviceConnector.connectorFinish}
           >
-            <ObjectOptions object={connectorFinishes} />
+            <ArrayOptions array={connectorFinishes} />
           </Form.Select>
         </Form.Group>
         <Form.Group className="mb-2">
@@ -102,12 +102,12 @@ export default function DeviceConnectorPane() {
                       ...values.deviceConnector,
                       housingFinish: event.target.value,
                       cerakoteColor:
-                        event.target.value === 'Cerakote'
+                        event.target.value === 'cerakote'
                           ? cerakoteColors[0].id
                           : null
                     }
                   }));
-                  if (event.target.value === 'Cerakote') {
+                  if (event.target.value === 'cerakote') {
                     enableMessage('cerakoteColor');
                   }
                 }}
@@ -116,7 +116,9 @@ export default function DeviceConnectorPane() {
                 <ObjectOptions
                   object={
                     values.deviceConnector.subHousingType === 'MonoRing'
-                      ? omit(cncHousingFinishes, 'Gold')
+                      ? cncHousingFinishes.filter(
+                          (finish) => finish.id !== 'gold'
+                        )
                       : cncHousingFinishes
                   }
                 />
@@ -136,7 +138,7 @@ export default function DeviceConnectorPane() {
             )}
           </Fragment>
         )}
-        {values.deviceConnector.housingFinish === 'Cerakote' && (
+        {values.deviceConnector.housingFinish === 'cerakote' && (
           <Form.Group>
             <Form.Label className="text-light">Cerakote Color</Form.Label>
             <ColorPicker

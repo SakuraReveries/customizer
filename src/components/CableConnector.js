@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { cerakoteColors, cncHousingFinishes, heatshrinkColors } from 'utils';
 import useModel from 'hooks/useModel';
 import { forwardRef } from 'react';
+import Material from './Material';
 
 function CableConnector(
   {
@@ -43,14 +44,11 @@ function CableConnector(
         </mesh>
       )}
       <mesh castShadow receiveShadow geometry={nodes.Connector.geometry}>
-        <meshPhysicalMaterial
-          color={
-            finish === 'Cerakote'
-              ? cerakoteColors.find((color) => color.id === cerakoteColor).hex
-              : cncHousingFinishes[finish].hex
-          }
-          metalness={finish === 'Cerakote' ? 0.4 : 1}
-          roughness={finish === 'Cerakote' ? 0.7 : 0.5}
+        <Material
+          materials={cncHousingFinishes}
+          materialId={finish}
+          colors={cerakoteColors}
+          colorId={finish === 'cerakote' ? cerakoteColor : null}
         />
       </mesh>
       {innerHeatshrink && (

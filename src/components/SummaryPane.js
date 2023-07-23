@@ -1,3 +1,4 @@
+import { useFormikContext } from 'formik';
 import { Alert, Container, Row, Col } from 'react-bootstrap';
 
 import SidebarPane from 'components/SidebarPane';
@@ -12,9 +13,9 @@ import {
   cerakoteColors,
   cncHousingFinishes,
   cncHousingTypes,
-  housingTypes
+  housingTypes,
+  findById
 } from 'utils';
-import { useFormikContext } from 'formik';
 
 export default function SummaryPane() {
   const { values } = useFormikContext();
@@ -33,11 +34,11 @@ export default function SummaryPane() {
           (color) => color.id === values.hostConnector.heatshrinkColor
         ).name
       } ${housingTypes[values.hostConnector.housingType]}`
-    : `${cncHousingFinishes[values.hostConnector.housingFinish]} ${
-        cncHousingTypes.USB_A[values.hostConnector.subHousingType]
-      }`;
+    : `${
+        findById(cncHousingFinishes, values.hostConnector.housingFinish).name
+      } ${cncHousingTypes.USB_A[values.hostConnector.subHousingType]}`;
 
-  if (!hostHeatshrink && values.hostConnector.housingFinish === 'Cerakote') {
+  if (!hostHeatshrink && values.hostConnector.housingFinish === 'cerakote') {
     hostConnectorDesc = `${
       cerakoteColors.find(
         (color) => color.id === values.hostConnector.cerakoteColor
@@ -51,13 +52,13 @@ export default function SummaryPane() {
           (color) => color.id === values.deviceConnector.heatshrinkColor
         ).name
       } ${housingTypes[values.deviceConnector.housingType]}`
-    : `${cncHousingFinishes[values.deviceConnector.housingFinish]} ${
-        cncHousingTypes.USB_C[values.deviceConnector.subHousingType]
-      }`;
+    : `${
+        findById(cncHousingFinishes, values.deviceConnector.housingFinish).name
+      } ${cncHousingTypes.USB_C[values.deviceConnector.subHousingType]}`;
 
   if (
     !deviceHeatshrink &&
-    values.deviceConnector.housingFinish === 'Cerakote'
+    values.deviceConnector.housingFinish === 'cerakote'
   ) {
     deviceConnectorDesc = `${
       cerakoteColors.find(
@@ -103,7 +104,11 @@ export default function SummaryPane() {
           </Col>
           <Col xs={9} md={8}>
             {connectorTypes[values.hostConnector.model]} ({hostConnectorDesc})
-            w/ {connectorFinishes[values.hostConnector.connectorFinish].name}{' '}
+            w/{' '}
+            {
+              findById(connectorFinishes, values.hostConnector.connectorFinish)
+                .name
+            }{' '}
             finish
           </Col>
         </Row>
@@ -115,7 +120,12 @@ export default function SummaryPane() {
           <Col xs={9} md={8}>
             {connectorTypes[values.deviceConnector.model]} (
             {deviceConnectorDesc}) w/{' '}
-            {connectorFinishes[values.deviceConnector.connectorFinish].name}{' '}
+            {
+              findById(
+                connectorFinishes,
+                values.deviceConnector.connectorFinish
+              ).name
+            }{' '}
             finish
           </Col>
         </Row>

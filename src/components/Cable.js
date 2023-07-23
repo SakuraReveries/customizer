@@ -1,8 +1,9 @@
 import PropTypes from 'prop-types';
+import { forwardRef } from 'react';
 
+import Material from 'components/Material';
 import useModel from 'hooks/useModel';
 import { mdpcxColors, techFlexColors, cableRotations } from 'utils';
-import { forwardRef } from 'react';
 
 function Cable(
   {
@@ -18,16 +19,6 @@ function Cable(
   const nodes = useModel({
     path: `./cables/${model}.3mf`
   });
-  const innerColors =
-    innerSleeveType === 'TechFlex' ? techFlexColors : mdpcxColors;
-  const innerColor = innerColors.find(
-    (color) => color.id === innerSleeveColor
-  ).hex;
-  const outerColors =
-    outerSleeveType === 'TechFlex' ? techFlexColors : mdpcxColors;
-  const outerColor = outerColors.find(
-    (color) => color.id === outerSleeveColor
-  ).hex;
 
   return (
     <group {...props} rotation={cableRotations[model]} ref={ref}>
@@ -37,10 +28,13 @@ function Cable(
         geometry={nodes['OpenSCAD Model'].geometry}
         dispose={null}
       >
-        <meshPhysicalMaterial
-          color={innerColor}
-          transparent
-          opacity={innerSleeveColor === 'clear' ? 0.2 : 1.0}
+        <Material
+          materials={
+            innerSleeveType === 'TechFlex' ? techFlexColors : mdpcxColors
+          }
+          materialId={innerSleeveColor}
+          transparent={innerSleeveColor === 'clear'}
+          opacity={innerSleeveColor === 'clear' ? 0.2 : 1}
         />
       </mesh>
       <mesh
@@ -49,9 +43,12 @@ function Cable(
         geometry={nodes['OpenSCAD Model'].geometry}
         dispose={null}
       >
-        <meshPhysicalMaterial
-          color={outerColor}
-          transparent
+        <Material
+          materials={
+            outerSleeveType === 'TechFlex' ? techFlexColors : mdpcxColors
+          }
+          materialId={outerSleeveColor}
+          transparent={outerSleeveColor === 'clear'}
           opacity={outerSleeveColor === 'clear' ? 0.2 : 0.6}
         />
       </mesh>

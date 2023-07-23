@@ -14,7 +14,7 @@ export default function DualColorPicker({
   return (
     <Container fluid className="g-0 d-flex">
       <Row className="g-0 w-100">
-        {colors.map(({ id, name, hex, image }) => (
+        {colors.map(({ id, name, color, image }) => (
           <Col xs={2} key={id} className="g-2 d-flex justify-content-center">
             <OverlayTrigger
               placement="bottom"
@@ -25,19 +25,19 @@ export default function DualColorPicker({
                 style={
                   image
                     ? {
-                        color: contrastColor({ bgColor: hex }),
+                        color: contrastColor({ bgColor: color }),
                         backgroundImage: `url(${image})`,
                         border:
                           hostValue === id || deviceValue === id
-                            ? `2px dashed ${contrastColor({ bgColor: hex })}`
+                            ? `2px dashed ${contrastColor({ bgColor: color })}`
                             : null
                       }
                     : {
-                        color: contrastColor({ bgColor: hex }),
-                        backgroundColor: hex,
+                        color: contrastColor({ bgColor: color }),
+                        backgroundColor: color,
                         border:
                           hostValue === id || deviceValue === id
-                            ? `2px dashed ${contrastColor({ bgColor: hex })}`
+                            ? `2px dashed ${contrastColor({ bgColor: color })}`
                             : null
                       }
                 }
@@ -67,7 +67,7 @@ DualColorPicker.propTypes = {
     PropTypes.shape({
       id: PropTypes.string.isRequired,
       name: PropTypes.string.isRequired,
-      hex: PropTypes.string.isRequired
+      color: PropTypes.string.isRequired
     })
   ).isRequired,
   onChange: PropTypes.func.isRequired,

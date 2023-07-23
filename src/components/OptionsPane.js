@@ -28,7 +28,7 @@ export default function OptionsPane() {
             }
             value={values.scene.environment}
           >
-            <ArrayOptions array={environments} keyKey="id" valueKey="name" />
+            <ArrayOptions array={environments} />
           </Form.Select>
         </Form.Group>
       </Form>

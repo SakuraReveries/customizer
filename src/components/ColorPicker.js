@@ -6,7 +6,7 @@ export default function ColorPicker({ colors, onChange, value }) {
   return (
     <Container fluid className="g-0 d-flex">
       <Row className="g-0 w-100">
-        {colors.map(({ id, name, hex, image }) => (
+        {colors.map(({ id, name, color, image }) => (
           <Col xs={2} key={id} className="g-2 d-flex justify-content-center">
             <OverlayTrigger
               placement="bottom"
@@ -20,14 +20,14 @@ export default function ColorPicker({ colors, onChange, value }) {
                         backgroundImage: `url(${image})`,
                         border:
                           value === id
-                            ? `2px dashed ${contrastColor({ bgColor: hex })}`
+                            ? `2px dashed ${contrastColor({ bgColor: color })}`
                             : null
                       }
                     : {
-                        backgroundColor: hex,
+                        backgroundColor: color,
                         border:
                           value === id
-                            ? `2px dashed ${contrastColor({ bgColor: hex })}`
+                            ? `2px dashed ${contrastColor({ bgColor: color })}`
                             : null
                       }
                 }

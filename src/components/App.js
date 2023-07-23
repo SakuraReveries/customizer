@@ -9,7 +9,7 @@ import Sidebar from 'components/Sidebar';
 import Scene from 'components/Scene';
 import MessageProvider from 'components/MessageProvider';
 import ForceOrientation from 'components/ForceOrientation';
-import { environments } from 'utils';
+import { cncHousingFinishes, connectorFinishes, environments } from 'utils';
 
 const initialValues = {
   scene: {
@@ -27,7 +27,7 @@ const initialValues = {
     opalSleeveColor: null,
     connector: {
       model: 'FEMO',
-      finish: 'Silver',
+      finish: cncHousingFinishes[1].id,
       innerHeatshrink: false,
       innerHeatshrinkHostColor: null,
       innerHeatshrinkDeviceColor: null,
@@ -42,7 +42,7 @@ const initialValues = {
   },
   hostConnector: {
     model: 'USB_A',
-    connectorFinish: 'Nickel',
+    connectorFinish: connectorFinishes[0].id,
     housingType: 'Heatshrink',
     subHousingType: null,
     housingFinish: null,
@@ -51,7 +51,7 @@ const initialValues = {
   },
   deviceConnector: {
     model: 'USB_C',
-    connectorFinish: 'Nickel',
+    connectorFinish: connectorFinishes[0].id,
     housingType: 'Heatshrink',
     subHousingType: null,
     housingFinish: null,

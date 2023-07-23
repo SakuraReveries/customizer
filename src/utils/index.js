@@ -1,3 +1,5 @@
+import omit from 'lodash.omit';
+
 import rgbImage from 'images/rgb.png';
 import transparentImage from 'images/transparent.png';
 
@@ -9,179 +11,197 @@ export const environments = [
 ];
 
 export const heatshrinkColors = [
-  { id: 'white', name: 'White', hex: '#ffffff' },
-  { id: 'black', name: 'Black', hex: '#000000' },
-  { id: 'grey', name: 'Grey', hex: '#666666' },
-  { id: 'brown', name: 'Brown', hex: '#593200' },
-  { id: 'green', name: 'Green', hex: '#00974b' },
-  { id: 'purple', name: 'Purple', hex: '#7c498d' },
-  { id: 'red', name: 'Red', hex: '#b22739' },
-  { id: 'orange', name: 'Orange', hex: '#f26817' },
-  { id: 'yellow', name: 'Yellow', hex: '#ffc63d' },
-  { id: 'blue', name: 'Blue', hex: '#316bed' },
-  { id: 'clear', name: 'Clear', hex: '#ffffff', image: transparentImage }
+  { id: 'white', name: 'White', color: '#ffffff' },
+  { id: 'black', name: 'Black', color: '#000000' },
+  { id: 'grey', name: 'Grey', color: '#666666' },
+  { id: 'brown', name: 'Brown', color: '#593200' },
+  { id: 'green', name: 'Green', color: '#00974b' },
+  { id: 'purple', name: 'Purple', color: '#7c498d' },
+  { id: 'red', name: 'Red', color: '#b22739' },
+  { id: 'orange', name: 'Orange', color: '#f26817' },
+  { id: 'yellow', name: 'Yellow', color: '#ffc63d' },
+  { id: 'blue', name: 'Blue', color: '#316bed' },
+  {
+    id: 'clear',
+    name: 'Clear',
+    color: '#ffffff',
+    transparent: true,
+    opacity: 0.2,
+    image: transparentImage
+  }
 ];
 
 export const techFlexColors = [
-  { id: 'aquaBlue', name: 'Aqua Blue', hex: '#8cdeef' },
-  { id: 'blue', name: 'Blue', hex: '#083265' },
-  { id: 'neonBlue', name: 'Neon Blue', hex: '#1c6cd6' },
-  { id: 'tealBlue', name: 'Teal Blue', hex: '#049cb7' },
-  { id: 'forestGreen', name: 'Forest Green', hex: '#344c40' },
-  { id: 'green', name: 'Green', hex: '#04845f' },
-  { id: 'neonGreen', name: 'Neon Green', hex: '#04a843' },
-  { id: 'oliveDrab', name: 'Olive Drab', hex: '#3c4c33' },
-  { id: 'gray', name: 'Gray', hex: '#b6b8c0' },
+  { id: 'aquaBlue', name: 'Aqua Blue', color: '#8cdeef' },
+  { id: 'blue', name: 'Blue', color: '#083265' },
+  { id: 'neonBlue', name: 'Neon Blue', color: '#1c6cd6' },
+  { id: 'tealBlue', name: 'Teal Blue', color: '#049cb7' },
+  { id: 'forestGreen', name: 'Forest Green', color: '#344c40' },
+  { id: 'green', name: 'Green', color: '#04845f' },
+  { id: 'neonGreen', name: 'Neon Green', color: '#04a843' },
+  { id: 'oliveDrab', name: 'Olive Drab', color: '#3c4c33' },
+  { id: 'gray', name: 'Gray', color: '#b6b8c0' },
   {
     id: 'platinumGray',
     name: 'Platinum Gray',
-    hex: '#747c8d',
+    color: '#747c8d',
     sheen: 0.4,
     sheenColor: '#ffffff'
   },
-  { id: 'shimmer', name: 'Shimmer (Gray/Clear)', hex: '#b6b8c0' },
-  { id: 'darkPurple', name: 'Dark Purple', hex: '#5450b3' },
-  { id: 'purple', name: 'Purple', hex: '#c9a9fc' },
+  { id: 'shimmer', name: 'Shimmer (Gray/Clear)', color: '#b6b8c0' },
+  { id: 'darkPurple', name: 'Dark Purple', color: '#5450b3' },
+  { id: 'purple', name: 'Purple', color: '#c9a9fc' },
   {
     id: 'blackMagic',
     name: 'Black Magic (Black/Dark Purple)',
-    hex: '#000000',
+    color: '#000000',
     sheen: 0.6,
     sheenColor: '#5450b3'
   },
-  { id: 'neonRed', name: 'Neon Red', hex: '#fa745c' },
-  { id: 'red', name: 'Red', hex: '#cf4853' },
-  { id: 'neonYellow', name: 'Neon Yellow', hex: '#fcbd1d' },
-  { id: 'yellow', name: 'Yellow', hex: '#f9c14e' },
-  { id: 'neonOrange', name: 'Neon Orange', hex: '#f47930' },
-  { id: 'orange', name: 'Orange', hex: '#f99a75' },
-  { id: 'brown', name: 'Brown', hex: '#543c34' },
-  { id: 'black', name: 'Black', hex: '#000000' },
+  { id: 'neonRed', name: 'Neon Red', color: '#fa745c' },
+  { id: 'red', name: 'Red', color: '#cf4853' },
+  { id: 'neonYellow', name: 'Neon Yellow', color: '#fcbd1d' },
+  { id: 'yellow', name: 'Yellow', color: '#f9c14e' },
+  { id: 'neonOrange', name: 'Neon Orange', color: '#f47930' },
+  { id: 'orange', name: 'Orange', color: '#f99a75' },
+  { id: 'brown', name: 'Brown', color: '#543c34' },
+  { id: 'black', name: 'Black', color: '#000000' },
   {
     id: 'carbon',
     name: 'Carbon (Black/Clear)',
-    hex: '#000000',
+    color: '#000000',
     sheen: 0.5,
     sheenColor: '#ffffff'
   },
-  { id: 'beige', name: 'Beige', hex: '#8c7c74' },
-  { id: 'white', name: 'White', hex: '#FFFFFF' },
-  { id: 'clear', name: 'Clear', hex: '#ffffff', image: transparentImage }
+  { id: 'beige', name: 'Beige', color: '#8c7c74' },
+  { id: 'white', name: 'White', color: '#FFFFFF' },
+  { id: 'clear', name: 'Clear', color: '#ffffff', image: transparentImage }
 ];
 
 export const mdpcxColors = [
-  { id: 'blackestBlack', name: 'Blackest Black', hex: '#000000' },
-  { id: 'shade19', name: 'Shade 19', hex: '#303030' },
-  { id: 'titaniumGrey', name: 'Titanium Grey', hex: '#454445' },
-  { id: 'platinumX', name: 'Platinum X', hex: '#6e6e6e' },
-  { id: 'aluminumGrey', name: 'Aluminum Grey', hex: '#8C8F91' },
-  { id: 'hazeGrey', name: 'Haze Grey', hex: '#939393' },
-  { id: 'naturalWhite', name: 'Natural White', hex: '#F8F8F8' },
-  { id: 'xxxWhite', name: 'XXX White', hex: '#FFFFFF' },
-  { id: 'gold', name: 'Gold', hex: '#b4962f' },
-  { id: 'copperBrown', name: 'Copper Brown', hex: '#863200' },
-  { id: 'vanillaSands', name: 'Vanilla Sands', hex: '#b69a56' },
-  { id: 'mellowYellow', name: 'Mellow Yellow', hex: '#dcba00' },
-  { id: 'area51', name: 'Area 51', hex: '#ecff47' },
-  { id: 'lamboGreeny', name: 'Lambo Greeny', hex: '#79db43' },
-  { id: 'atomicGreen', name: 'Atomic Green', hex: '#3be31a' },
-  { id: 'commandoGreen', name: 'Commando Green', hex: '#4B5320' },
-  { id: 'vividViolet', name: 'Vivid Violet', hex: '#944cd6' },
-  { id: 'grandBleu', name: 'Grand Bleu', hex: '#000b6f' },
-  { id: 'bMagic', name: 'B-Magic', hex: '#0e20ca' },
-  { id: 'rivieraBlue', name: 'Riviera Blue', hex: '#1188d3' },
-  { id: 'gulfBlue', name: 'Gulf Blue', hex: '#9ad8ff' },
-  { id: 'theTurquoise', name: 'The Turquoise', hex: '#40E0D0' },
-  { id: 'plumPurple', name: 'Plum Purple', hex: '#940158' },
-  { id: 'perfectPink', name: 'Perfect Pink', hex: '#cf348f' },
-  { id: 'codeRed', name: 'Code Red', hex: '#da2d35' },
-  { id: 'italianRed', name: 'Italian Red', hex: '#c20009' },
-  { id: 'bloodline', name: 'Bloodline', hex: '#8d0107' },
-  { id: 'diamondRed', name: 'Diamond Red', hex: '#7d1015' },
-  { id: 'oxideOrange', name: 'Oxide Orange', hex: '#c25700' },
-  { id: 'papayaOrange', name: 'Papaya Orange', hex: '#f1852d' },
-  { id: 'lavaOrange', name: 'Lava Orange', hex: '#ff4200' }
+  { id: 'blackestBlack', name: 'Blackest Black', color: '#000000' },
+  { id: 'shade19', name: 'Shade 19', color: '#303030' },
+  { id: 'titaniumGrey', name: 'Titanium Grey', color: '#454445' },
+  { id: 'platinumX', name: 'Platinum X', color: '#6e6e6e' },
+  { id: 'aluminumGrey', name: 'Aluminum Grey', color: '#8C8F91' },
+  { id: 'hazeGrey', name: 'Haze Grey', color: '#939393' },
+  { id: 'naturalWhite', name: 'Natural White', color: '#F8F8F8' },
+  { id: 'xxxWhite', name: 'XXX White', color: '#FFFFFF' },
+  { id: 'gold', name: 'Gold', color: '#b4962f' },
+  { id: 'copperBrown', name: 'Copper Brown', color: '#863200' },
+  { id: 'vanillaSands', name: 'Vanilla Sands', color: '#b69a56' },
+  { id: 'mellowYellow', name: 'Mellow Yellow', color: '#dcba00' },
+  { id: 'area51', name: 'Area 51', color: '#ecff47' },
+  { id: 'lamboGreeny', name: 'Lambo Greeny', color: '#79db43' },
+  { id: 'atomicGreen', name: 'Atomic Green', color: '#3be31a' },
+  { id: 'commandoGreen', name: 'Commando Green', color: '#4B5320' },
+  { id: 'vividViolet', name: 'Vivid Violet', color: '#944cd6' },
+  { id: 'grandBleu', name: 'Grand Bleu', color: '#000b6f' },
+  { id: 'bMagic', name: 'B-Magic', color: '#0e20ca' },
+  { id: 'rivieraBlue', name: 'Riviera Blue', color: '#1188d3' },
+  { id: 'gulfBlue', name: 'Gulf Blue', color: '#9ad8ff' },
+  { id: 'theTurquoise', name: 'The Turquoise', color: '#40E0D0' },
+  { id: 'plumPurple', name: 'Plum Purple', color: '#940158' },
+  { id: 'perfectPink', name: 'Perfect Pink', color: '#cf348f' },
+  { id: 'codeRed', name: 'Code Red', color: '#da2d35' },
+  { id: 'italianRed', name: 'Italian Red', color: '#c20009' },
+  { id: 'bloodline', name: 'Bloodline', color: '#8d0107' },
+  { id: 'diamondRed', name: 'Diamond Red', color: '#7d1015' },
+  { id: 'oxideOrange', name: 'Oxide Orange', color: '#c25700' },
+  { id: 'papayaOrange', name: 'Papaya Orange', color: '#f1852d' },
+  { id: 'lavaOrange', name: 'Lava Orange', color: '#ff4200' }
 ];
 
 export const cerakoteColors = [
-  { id: 'robinsEggBlue', name: 'Robins Egg Blue', hex: '#7bebdf' },
-  { id: 'kalTechNavyBlue', name: 'Kal-Tech Navy Blue', hex: '#1d4b76' },
-  { id: 'itsABoy', name: 'Its a boy', hex: '#9dcff7' },
-  { id: 'nraBlue', name: 'NRA Blue', hex: '#1572ae' },
-  { id: 'righewayBlue', name: 'Ridgeway Blue', hex: '#42829f' },
-  { id: 'aztecTeal', name: 'Aztec Teal', hex: '#2495a9' },
-  { id: 'titaniumBlue', name: 'Titanium Blue', hex: '#35697a' },
-  { id: 'usmcRed', name: 'USMC Red', hex: '#ff3422' },
-  { id: 'crimson', name: 'Crimson', hex: '#ce3923' },
-  { id: 'hunterOrange', name: 'Hunter Orange', hex: '#fe8739' },
-  { id: 'copper', name: 'Copper', hex: '#d18359' },
-  { id: 'burntBronze', name: 'Brunt Bronze', hex: '#5f4f42' },
-  { id: 'chocolateBrown', name: 'Chocolate Brown', hex: '#745437' },
-  { id: 'lightSand', name: 'Light Sand', hex: '#ecddc0' },
-  { id: 'blackCherry', name: 'Black Cherry', hex: '#752638' },
-  { id: 'brightPurple', name: 'Bright Purple', hex: '#9b63a6' },
-  { id: 'crushedOrchid', name: 'Crushed orchid', hex: '#786e9f' },
-  { id: 'lavender', name: 'Lavender', hex: '#a298b5' },
-  { id: 'corvetteYellow', name: 'Corvette Yellow', hex: '#ffc934' },
-  { id: 'gold', name: 'Gold', hex: '#dca01e' },
-  { id: 'roseGold', name: 'Rose Gold', hex: '#dda899' },
-  { id: 'prisonPink', name: 'Prison Pink', hex: '#ed5481' },
-  { id: 'bazookaPink', name: 'Bazooka Pink', hex: '#f8b5be' },
-  { id: 'pinkSherbert', name: 'Pink Sherbert', hex: '#fea2a8' },
-  { id: 'parakeetGreen', name: 'Parakeet Green', hex: '#7cec67' },
-  { id: 'squatchGreen', name: 'Squatch Green', hex: '#367a46' },
-  { id: 'magpulOdGreen', name: 'Magpul OD Green', hex: '#5a633f' },
-  { id: 'islandGreen', name: 'Island Green', hex: '#85d397' },
-  { id: 'highlandGreen', name: 'Highland Green', hex: '#425a42' },
-  { id: 'graphiteBlack', name: 'Graphite Black', hex: '#36352e' },
-  { id: 'stormTrooperWhite', name: 'StromTrooper White', hex: '#f5f4ed' },
-  { id: 'titanium', name: 'Titanium', hex: '#afaba3' },
-  { id: 'tungstenGrey', name: 'Tungsten Grey', hex: '#636363' }
+  { id: 'robinsEggBlue', name: 'Robins Egg Blue', color: '#7bebdf' },
+  { id: 'kalTechNavyBlue', name: 'Kal-Tech Navy Blue', color: '#1d4b76' },
+  { id: 'itsABoy', name: 'Its a boy', color: '#9dcff7' },
+  { id: 'nraBlue', name: 'NRA Blue', color: '#1572ae' },
+  { id: 'righewayBlue', name: 'Ridgeway Blue', color: '#42829f' },
+  { id: 'aztecTeal', name: 'Aztec Teal', color: '#2495a9' },
+  { id: 'titaniumBlue', name: 'Titanium Blue', color: '#35697a' },
+  { id: 'usmcRed', name: 'USMC Red', color: '#ff3422' },
+  { id: 'crimson', name: 'Crimson', color: '#ce3923' },
+  { id: 'hunterOrange', name: 'Hunter Orange', color: '#fe8739' },
+  { id: 'copper', name: 'Copper', color: '#d18359' },
+  { id: 'burntBronze', name: 'Brunt Bronze', color: '#5f4f42' },
+  { id: 'chocolateBrown', name: 'Chocolate Brown', color: '#745437' },
+  { id: 'lightSand', name: 'Light Sand', color: '#ecddc0' },
+  { id: 'blackCherry', name: 'Black Cherry', color: '#752638' },
+  { id: 'brightPurple', name: 'Bright Purple', color: '#9b63a6' },
+  { id: 'crushedOrchid', name: 'Crushed orchid', color: '#786e9f' },
+  { id: 'lavender', name: 'Lavender', color: '#a298b5' },
+  { id: 'corvetteYellow', name: 'Corvette Yellow', color: '#ffc934' },
+  { id: 'gold', name: 'Gold', color: '#dca01e' },
+  { id: 'roseGold', name: 'Rose Gold', color: '#dda899' },
+  { id: 'prisonPink', name: 'Prison Pink', color: '#ed5481' },
+  { id: 'bazookaPink', name: 'Bazooka Pink', color: '#f8b5be' },
+  { id: 'pinkSherbert', name: 'Pink Sherbert', color: '#fea2a8' },
+  { id: 'parakeetGreen', name: 'Parakeet Green', color: '#7cec67' },
+  { id: 'squatchGreen', name: 'Squatch Green', color: '#367a46' },
+  { id: 'magpulOdGreen', name: 'Magpul OD Green', color: '#5a633f' },
+  { id: 'islandGreen', name: 'Island Green', color: '#85d397' },
+  { id: 'highlandGreen', name: 'Highland Green', color: '#425a42' },
+  { id: 'graphiteBlack', name: 'Graphite Black', color: '#36352e' },
+  { id: 'stormTrooperWhite', name: 'StromTrooper White', color: '#f5f4ed' },
+  { id: 'titanium', name: 'Titanium', color: '#afaba3' },
+  { id: 'tungstenGrey', name: 'Tungsten Grey', color: '#636363' }
 ];
 
 export const alignmentDotColors = [
-  { id: 'white', name: 'White', hex: '#FFFFFF' },
-  { id: 'gray', name: 'Gray', hex: '#808080' },
-  { id: 'black', name: 'Black', hex: '#000000' },
-  { id: 'red', name: 'Red', hex: '#c4000f' },
-  { id: 'wine', name: 'Wine', hex: '#95484e' },
-  { id: 'blue', name: 'Blue', hex: '#0000FF' },
-  { id: 'navyBlue', name: 'Navy Blue', hex: '#000080' },
-  { id: 'teal', name: 'Teal', hex: '#008080' },
-  { id: 'turquoise', name: 'Turquoise', hex: '#40E0D0' },
-  { id: 'green', name: 'Green', hex: '#008000' },
-  { id: 'yellow', name: 'Yellow', hex: '#FFFF00' },
-  { id: 'orange', name: 'Orange', hex: '#ffa311' },
-  { id: 'pastelPink', name: 'Pastel Pink', hex: '#FFD1DC' },
-  { id: 'purple', name: 'Purple', hex: '#800080' },
-  { id: 'magenta', name: 'Magenta', hex: '#c1378f' },
-  { id: 'pastelViolet', name: 'Pastel Violet', hex: '#b087d6' },
-  { id: 'brown', name: 'Brown', hex: '#805a00' },
-  { id: 'goldMetallic', name: 'Gold Metallic', hex: '#e1ac25' },
-  { id: 'copperMetallic', name: 'Copper Metallic', hex: '#9c6226' },
-  { id: 'silverMetallic', name: 'Silver Metallic', hex: '#C0C0C0' },
-  { id: 'aluminumMetallic', name: 'Aluminum Metallic', hex: '#929292' },
-  { id: 'sunsetRedMetallic', name: 'Sunset Red Metallic', hex: '#be1e5b' },
-  { id: 'greenMistMetallic', name: 'Green Mist Metallic', hex: '#0d965e' },
-  { id: 'balticBlueMetallic', name: 'Baltic Blue Metallic', hex: '#0769af' }
+  { id: 'white', name: 'White', color: '#FFFFFF' },
+  { id: 'gray', name: 'Gray', color: '#808080' },
+  { id: 'black', name: 'Black', color: '#000000' },
+  { id: 'red', name: 'Red', color: '#c4000f' },
+  { id: 'wine', name: 'Wine', color: '#95484e' },
+  { id: 'blue', name: 'Blue', color: '#0000FF' },
+  { id: 'navyBlue', name: 'Navy Blue', color: '#000080' },
+  { id: 'teal', name: 'Teal', color: '#008080' },
+  { id: 'turquoise', name: 'Turquoise', color: '#40E0D0' },
+  { id: 'green', name: 'Green', color: '#008000' },
+  { id: 'yellow', name: 'Yellow', color: '#FFFF00' },
+  { id: 'orange', name: 'Orange', color: '#ffa311' },
+  { id: 'pastelPink', name: 'Pastel Pink', color: '#FFD1DC' },
+  { id: 'purple', name: 'Purple', color: '#800080' },
+  { id: 'magenta', name: 'Magenta', color: '#c1378f' },
+  { id: 'pastelViolet', name: 'Pastel Violet', color: '#b087d6' },
+  { id: 'brown', name: 'Brown', color: '#805a00' },
+  { id: 'goldMetallic', name: 'Gold Metallic', color: '#e1ac25' },
+  { id: 'copperMetallic', name: 'Copper Metallic', color: '#9c6226' },
+  { id: 'silverMetallic', name: 'Silver Metallic', color: '#C0C0C0' },
+  { id: 'aluminumMetallic', name: 'Aluminum Metallic', color: '#929292' },
+  { id: 'sunsetRedMetallic', name: 'Sunset Red Metallic', color: '#be1e5b' },
+  { id: 'greenMistMetallic', name: 'Green Mist Metallic', color: '#0d965e' },
+  { id: 'balticBlueMetallic', name: 'Baltic Blue Metallic', color: '#0769af' }
 ];
 
 export const ledColors = [
-  { id: 'coolWhite', name: 'Cool White', hex: '#eef2ff' },
-  { id: 'warmWhite', name: 'Warm White', hex: '#ffda8c' },
-  { id: 'amberOrange', name: 'Amber Orange', hex: '#fe9c1b' },
-  { id: 'yellowGold', name: 'Yellow Gold', hex: '#edc918' },
-  { id: 'blue', name: 'Blue', hex: '#1c00ff' },
-  { id: 'uvPurple', name: 'UV Purple', hex: '#c44eff' },
-  { id: 'red', name: 'Red', hex: '#ff1700' },
-  { id: 'pink', name: 'Pink', hex: '#fe4dca' },
-  { id: 'pureGreen', name: 'Pure Green', hex: '#5ffb5f' },
-  { id: 'rgb', name: 'RGB', hex: '#ffffff', image: rgbImage }
+  { id: 'coolWhite', name: 'Cool White', color: '#eef2ff' },
+  { id: 'warmWhite', name: 'Warm White', color: '#ffda8c' },
+  { id: 'amberOrange', name: 'Amber Orange', color: '#fe9c1b' },
+  { id: 'yellowGold', name: 'Yellow Gold', color: '#edc918' },
+  { id: 'blue', name: 'Blue', color: '#1c00ff' },
+  { id: 'uvPurple', name: 'UV Purple', color: '#c44eff' },
+  { id: 'red', name: 'Red', color: '#ff1700' },
+  { id: 'pink', name: 'Pink', color: '#fe4dca' },
+  { id: 'pureGreen', name: 'Pure Green', color: '#5ffb5f' },
+  { id: 'rgb', name: 'RGB', color: '#ffffff', image: rgbImage }
 ];
 
 export const opalColors = [
-  { id: 'whiteOpal', name: 'White Opal', hex: '#fefefe' }
+  { id: 'whiteOpal', name: 'White Opal', color: '#fefefe' }
 ];
+
+export const findById = (list, id) => list.find((item) => item.id === id) ?? {};
+export const getMaterialProps = (
+  materials,
+  materialId,
+  colors = [],
+  colorId
+) => ({
+  ...omit(findById(materials, materialId), ['id', 'name']),
+  ...omit(findById(colors, colorId), ['id', 'name', 'image'])
+});
 
 export const cableTypes = {
   Charger: 'Charger',
@@ -197,16 +217,22 @@ export const cableConnectorTypes = {
   FEMO: 'FEMO'
 };
 
-export const connectorFinishes = {
-  Nickel: {
+export const connectorFinishes = [
+  {
+    id: 'nickel',
     name: 'Nickel',
-    hex: '#727472'
+    color: '#727472',
+    metalness: 1,
+    roughness: 0
   },
-  Gold: {
+  {
+    id: 'gold',
     name: 'Gold-plated',
-    hex: '#d4af37'
+    color: '#d4af37',
+    metalness: 1,
+    roughness: 0
   }
-};
+];
 
 export const housingTypes = {
   Heatshrink: 'Heatshrink',
@@ -234,19 +260,32 @@ export const cncHousingTypes = {
   }
 };
 
-export const cncHousingFinishes = {
-  Gold: {
+export const housingFinishes = [
+  { id: 'heatshrink', roughness: 0.5, clearcoat: 0.4 }
+];
+
+export const cncHousingFinishes = [
+  {
+    id: 'gold',
     name: 'Gold-plated',
-    hex: '#d4af37'
+    color: '#d4af37',
+    metalness: 1,
+    roughness: 0.4
   },
-  Silver: {
+  {
+    id: 'silver',
     name: 'Silver-plated',
-    hex: '#c0c0c0'
+    color: '#c0c0c0',
+    metalness: 1,
+    roughness: 0.4
   },
-  Cerakote: {
-    name: 'Cerakote'
+  {
+    id: 'cerakote',
+    name: 'Cerakote',
+    metalness: 0.4,
+    roughness: 0.7
   }
-};
+];
 
 export const cableOffsets = {
   Charger: [0, 0, 0],

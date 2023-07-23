@@ -2,7 +2,6 @@ import { useFormikContext } from 'formik';
 import { Form } from 'react-bootstrap';
 
 import SidebarPane from 'components/SidebarPane';
-import ObjectOptions from 'components/ObjectOptions';
 import ColorPicker from 'components/ColorPicker';
 import {
   connectorFinishes,
@@ -12,6 +11,7 @@ import {
   cncHousingFinishes
 } from 'utils';
 import useMessages from 'hooks/useMessages';
+import ArrayOptions from './ArrayOptions';
 
 export default function HostConnectorPane() {
   const { enableMessage } = useMessages();
@@ -32,7 +32,7 @@ export default function HostConnectorPane() {
             }
             value={values.hostConnector.connectorFinish}
           >
-            <ObjectOptions object={connectorFinishes} />
+            <ArrayOptions array={connectorFinishes} />
           </Form.Select>
         </Form.Group>
         <Form.Group className="mb-2">
@@ -47,7 +47,9 @@ export default function HostConnectorPane() {
                   ...values.hostConnector,
                   housingType: event.target.checked ? 'CNC' : 'Heatshrink',
                   subHousingType: event.target.checked ? 'Facet' : null,
-                  housingFinish: event.target.checked ? 'Silver' : null
+                  housingFinish: event.target.checked
+                    ? cncHousingFinishes[0].id
+                    : null
                 }
               }))
             }
@@ -76,18 +78,18 @@ export default function HostConnectorPane() {
                     ...values.hostConnector,
                     housingFinish: event.target.value,
                     cerakoteColor:
-                      event.target.value === 'Cerakote'
+                      event.target.value === 'cerakote'
                         ? cerakoteColors[0].id
                         : null
                   }
                 }));
-                if (event.target.value === 'Cerakote') {
+                if (event.target.value === 'cerakote') {
                   enableMessage('cerakoteColor');
                 }
               }}
               value={values.hostConnector.housingFinish}
             >
-              <ObjectOptions object={cncHousingFinishes} />
+              <ArrayOptions array={cncHousingFinishes} />
             </Form.Select>
           </Form.Group>
         )}

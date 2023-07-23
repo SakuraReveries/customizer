@@ -13,8 +13,10 @@ import {
   heatshrinkColors,
   ledColors,
   cncHousingFinishes,
-  connectorFinishes
+  connectorFinishes,
+  housingFinishes
 } from 'utils';
+import Material from './Material';
 
 const interpolators = {
   falling: interpolateHslLong('#ff0000', '#0000ff'),
@@ -79,11 +81,7 @@ function USBConnector(
       ref={ref}
     >
       <mesh castShadow receiveShadow geometry={nodes.Connector.geometry}>
-        <meshPhysicalMaterial
-          color={connectorFinishes[connectorFinish].hex}
-          metalness={1}
-          roughness={0}
-        />
+        <Material materials={connectorFinishes} materialId={connectorFinish} />
       </mesh>
       {Boolean(nodes.LED) && (
         <mesh castShadow receiveShadow geometry={nodes.LED.geometry}>
@@ -92,12 +90,11 @@ function USBConnector(
       )}
       {Boolean(nodes.Heatshrink) && (
         <mesh castShadow receiveShadow geometry={nodes.Heatshrink.geometry}>
-          <meshPhysicalMaterial
-            color={
-              heatshrinkColors.find((color) => color.id === heatshrinkColor).hex
-            }
-            roughness={0.5}
-            clearcoat={0.4}
+          <Material
+            materials={housingFinishes}
+            materialId={housingFinish}
+            colors={heatshrinkColors}
+            colorId={heatshrinkColor}
             opacity={heatshrinkColor === 'clear' ? 0.7 : 0}
             transparent={heatshrinkColor === 'clear'}
           />
@@ -105,14 +102,11 @@ function USBConnector(
       )}
       {Boolean(nodes.Housing) && (
         <mesh castShadow receiveShadow geometry={nodes.Housing.geometry}>
-          <meshPhysicalMaterial
-            color={
-              housingFinish === 'Cerakote'
-                ? cerakoteColors.find((color) => color.id === cerakoteColor).hex
-                : cncHousingFinishes[housingFinish].hex
-            }
-            metalness={housingFinish === 'Cerakote' ? 0.4 : 1}
-            roughness={housingFinish === 'Cerakote' ? 0.7 : 0.5}
+          <Material
+            materials={cncHousingFinishes}
+            materialId={housingFinish}
+            colors={cerakoteColors}
+            colorId={housingFinish === 'cerakote' ? cerakoteColor : null}
           />
         </mesh>
       )}

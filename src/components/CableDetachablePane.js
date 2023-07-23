@@ -7,7 +7,6 @@ import { faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
 import SidebarPane from 'components/SidebarPane';
 import ColorPicker from 'components/ColorPicker';
 import DualColorPicker from 'components/DualColorPicker';
-import ObjectOptions from 'components/ObjectOptions';
 import {
   heatshrinkColors,
   cerakoteColors,
@@ -15,6 +14,7 @@ import {
   alignmentDotColors
 } from 'utils';
 import useMessages from 'hooks/useMessages';
+import ArrayOptions from './ArrayOptions';
 
 export default function CableDetachablePane() {
   const { enableMessage } = useMessages();
@@ -135,22 +135,22 @@ export default function CableDetachablePane() {
                     ...values.cable.connector,
                     finish: event.target.value,
                     cerakoteColor:
-                      event.target.value === 'Cerakote'
+                      event.target.value === 'cerakote'
                         ? cerakoteColors[0].id
                         : null
                   }
                 }
               }));
-              if (event.target.value === 'Cerakote') {
+              if (event.target.value === 'cerakote') {
                 enableMessage('cerakoteColor');
               }
             }}
             value={values.cable.connector.finish}
           >
-            <ObjectOptions object={cncHousingFinishes} />
+            <ArrayOptions array={cncHousingFinishes} />
           </Form.Select>
         </Form.Group>
-        {values.cable.connector.finish === 'Cerakote' && (
+        {values.cable.connector.finish === 'cerakote' && (
           <Fragment>
             <Form.Group className="mb-2">
               <Form.Label className="text-light">Cerakote Color</Form.Label>
