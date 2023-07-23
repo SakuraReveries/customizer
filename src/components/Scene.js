@@ -52,8 +52,6 @@ export default function Scene() {
     }
   }, [toggleStats]);
 
-  useEffect(() => {}, [cableRef]);
-
   return (
     <Fragment>
       <div
