@@ -33,7 +33,7 @@ export default function SummaryPane() {
         heatshrinkColors.find(
           (color) => color.id === values.hostConnector.heatshrinkColor
         ).name
-      } ${housingTypes[values.hostConnector.housingType]}`
+      } ${findById(housingTypes, values.hostConnector.housingType).name}`
     : `${
         findById(cncHousingFinishes, values.hostConnector.housingFinish).name
       } ${cncHousingTypes.USB_A[values.hostConnector.subHousingType]}`;
@@ -51,7 +51,7 @@ export default function SummaryPane() {
         heatshrinkColors.find(
           (color) => color.id === values.deviceConnector.heatshrinkColor
         ).name
-      } ${housingTypes[values.deviceConnector.housingType]}`
+      } ${findById(housingTypes, values.deviceConnector.housingType).name}`
     : `${
         findById(cncHousingFinishes, values.deviceConnector.housingFinish).name
       } ${cncHousingTypes.USB_C[values.deviceConnector.subHousingType]}`;

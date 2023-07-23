@@ -234,10 +234,10 @@ export const connectorFinishes = [
   }
 ];
 
-export const housingTypes = {
-  Heatshrink: 'Heatshrink',
-  CNC: 'CNC Housing'
-};
+export const housingTypes = [
+  { id: 'heatshrink', name: 'Heatshrink', roughness: 0.6, clearcoat: 2 },
+  { id: 'cnc', name: 'CNC Housing' }
+];
 
 export const sleeveTypes = {
   MDPC_X: 'MDPC-X',
@@ -259,10 +259,6 @@ export const cncHousingTypes = {
     // RightAngle: 'Right-angle'
   }
 };
-
-export const housingFinishes = [
-  { id: 'heatshrink', roughness: 0.5, clearcoat: 0.4 }
-];
 
 export const cncHousingFinishes = [
   {
@@ -309,9 +305,6 @@ export const cableRotations = {
 
 export const cableAttachments = {
   Charger: {
-    center: {
-      position: [0, 0, 0]
-    },
     hostConnector: {
       position: [20, 20, -20],
       rotation: [Math.PI / 2, 0, -Math.PI / 2]
@@ -322,9 +315,6 @@ export const cableAttachments = {
     }
   },
   Straight: {
-    center: {
-      position: [0, 0, 0]
-    },
     hostConnector: {
       position: [20, 20, -20],
       rotation: [Math.PI / 2, 0, -Math.PI / 2]
@@ -338,17 +328,11 @@ export const cableAttachments = {
     }
   },
   StraightExit: {
-    center: {
-      position: [0, 0, 0]
-    },
     hostConnector: {},
     deviceConnector: {},
     cableConnector: {}
   },
   LeftParallel: {
-    center: {
-      position: [0, 0, 0]
-    },
     hostConnector: {
       position: [-220, 8, -0.25],
       rotation: [Math.PI / 2, 0, -Math.PI / 2]
@@ -362,9 +346,6 @@ export const cableAttachments = {
     }
   },
   LeftRearExit: {
-    center: {
-      position: [0, 0, 0]
-    },
     hostConnector: {
       position: [0, 8, -150],
       rotation: [Math.PI / 2, 0, 0]
@@ -379,17 +360,11 @@ export const cableAttachments = {
     }
   },
   RightParallel: {
-    center: {
-      position: [0, 0, 0]
-    },
     hostConnector: {},
     deviceConnector: {},
     cableConnector: {}
   },
   RightRearExit: {
-    center: {
-      position: [0, 0, 0]
-    },
     hostConnector: {},
     deviceConnector: {},
     cableConnector: {}
@@ -398,11 +373,11 @@ export const cableAttachments = {
 
 export const connectorOffsets = {
   USB_A: {
-    Heatshrink: [0, -20, 3.25],
+    heatshrink: [0, -20, 3.25],
     Facet: [0, -20, -3.25]
   },
   USB_C: {
-    Heatshrink: [0, -20, -3.25],
+    heatshrink: [0, -20, -3.25],
     GlowRing: [0, -10, -6],
     MonoRing: [0, -10, 6],
     RightAngle: [0, 0, 0]
@@ -411,11 +386,11 @@ export const connectorOffsets = {
 
 export const connectorRotations = {
   USB_A: {
-    Heatshrink: [0, Math.PI, 0],
+    heatshrink: [0, Math.PI, 0],
     Facet: [0, 0, 0]
   },
   USB_C: {
-    Heatshrink: [0, 0, 0],
+    heatshrink: [0, 0, 0],
     GlowRing: [0, 0, 0],
     MonoRing: [0, Math.PI, 0],
     RightAngle: [0, 0, 0]

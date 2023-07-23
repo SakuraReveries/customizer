@@ -1,17 +1,18 @@
 import { useFormikContext } from 'formik';
 import { Form } from 'react-bootstrap';
 
+import ArrayOptions from 'components/ArrayOptions';
 import SidebarPane from 'components/SidebarPane';
 import ColorPicker from 'components/ColorPicker';
+import useMessages from 'hooks/useMessages';
 import {
   connectorFinishes,
   housingTypes,
   heatshrinkColors,
   cerakoteColors,
-  cncHousingFinishes
+  cncHousingFinishes,
+  findById
 } from 'utils';
-import useMessages from 'hooks/useMessages';
-import ArrayOptions from './ArrayOptions';
 
 export default function HostConnectorPane() {
   const { enableMessage } = useMessages();
@@ -39,13 +40,15 @@ export default function HostConnectorPane() {
           <Form.Label className="text-light">Housing Type</Form.Label>
           <Form.Switch
             className="text-light ms-3"
-            label={housingTypes[values.hostConnector.housingType]}
+            label={
+              findById(housingTypes, values.hostConnector.housingType).name
+            }
             onChange={(event) =>
               setValues((values) => ({
                 ...values,
                 hostConnector: {
                   ...values.hostConnector,
-                  housingType: event.target.checked ? 'CNC' : 'Heatshrink',
+                  housingType: event.target.checked ? 'cnc' : 'heatshrink',
                   subHousingType: event.target.checked ? 'Facet' : null,
                   housingFinish: event.target.checked
                     ? cncHousingFinishes[0].id
@@ -53,7 +56,7 @@ export default function HostConnectorPane() {
                 }
               }))
             }
-            checked={values.hostConnector.housingType === 'CNC'}
+            checked={values.hostConnector.housingType === 'cnc'}
           />
         </Form.Group>
         {values.hostConnector.housingType === 'Heatshrink' ? (
@@ -93,7 +96,7 @@ export default function HostConnectorPane() {
             </Form.Select>
           </Form.Group>
         )}
-        {values.hostConnector.housingFinish === 'Cerakote' && (
+        {values.hostConnector.housingFinish === 'cerakote' && (
           <Form.Group>
             <Form.Label className="text-light">Cerakote Color</Form.Label>
             <ColorPicker

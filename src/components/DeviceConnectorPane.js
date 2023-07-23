@@ -3,6 +3,7 @@ import { useFormikContext } from 'formik';
 import { Form } from 'react-bootstrap';
 
 import SidebarPane from 'components/SidebarPane';
+import ArrayOptions from 'components/ArrayOptions';
 import ObjectOptions from 'components/ObjectOptions';
 import ColorPicker from 'components/ColorPicker';
 import useMessages from 'hooks/useMessages';
@@ -13,9 +14,9 @@ import {
   housingTypes,
   heatshrinkColors,
   cncHousingTypes,
-  cncHousingFinishes
+  cncHousingFinishes,
+  findById
 } from 'utils';
-import ArrayOptions from './ArrayOptions';
 
 export default function DeviceConnectorPane() {
   const { enableMessage } = useMessages();
@@ -46,20 +47,22 @@ export default function DeviceConnectorPane() {
           <Form.Label className="text-light">Housing Type</Form.Label>
           <Form.Switch
             className="text-light ms-3"
-            label={housingTypes[values.deviceConnector.housingType]}
+            label={
+              findById(housingTypes, values.deviceConnector.housingType).name
+            }
             onChange={({ target: { checked } }) =>
               setValues((values) => ({
                 ...values,
                 deviceConnector: {
                   ...values.deviceConnector,
-                  housingType: checked ? 'CNC' : 'Heatshrink',
+                  housingType: checked ? 'cnc' : 'heatshrink',
                   subHousingType: checked ? 'MonoRing' : null,
-                  housingFinish: checked ? 'Silver' : null,
+                  housingFinish: checked ? cncHousingFinishes[1].id : null,
                   ledColor: checked ? ledColors[0].id : null
                 }
               }))
             }
-            checked={values.deviceConnector.housingType === 'CNC'}
+            checked={values.deviceConnector.housingType === 'cnc'}
           />
         </Form.Group>
         {values.deviceConnector.housingType === 'Heatshrink' ? (

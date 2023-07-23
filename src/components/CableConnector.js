@@ -1,9 +1,14 @@
 import PropTypes from 'prop-types';
-
-import { cerakoteColors, cncHousingFinishes, heatshrinkColors } from 'utils';
-import useModel from 'hooks/useModel';
 import { forwardRef } from 'react';
-import Material from './Material';
+
+import Material from 'components/Material';
+import {
+  cerakoteColors,
+  cncHousingFinishes,
+  heatshrinkColors,
+  housingTypes
+} from 'utils';
+import useModel from 'hooks/useModel';
 
 function CableConnector(
   {
@@ -29,15 +34,13 @@ function CableConnector(
 
   return (
     <group {...props} ref={ref}>
-      {innerHeatshrink && (
+      {innerHeatshrink && finish === 'heatshrink' && (
         <mesh castShadow receiveShadow geometry={nodes.Heatshrink_R.geometry}>
-          <meshPhysicalMaterial
-            color={
-              heatshrinkColors.find(
-                (color) => color.id === innerHeatshrinkDeviceColor
-              ).hex
-            }
-            roughness={0.7}
+          <Material
+            materials={housingTypes}
+            materialId={finish}
+            colors={heatshrinkColors}
+            colorId={innerHeatshrinkDeviceColor}
             transparent={innerHeatshrinkDeviceColor === 'clear'}
             opacity={innerHeatshrinkDeviceColor === 'clear' ? 0.4 : 1}
           />
@@ -51,15 +54,13 @@ function CableConnector(
           colorId={finish === 'cerakote' ? cerakoteColor : null}
         />
       </mesh>
-      {innerHeatshrink && (
+      {innerHeatshrink && finish === 'heatshrink' && (
         <mesh castShadow receiveShadow geometry={nodes.Heatshrink_L.geometry}>
-          <meshPhysicalMaterial
-            color={
-              heatshrinkColors.find(
-                (color) => color.id === innerHeatshrinkHostColor
-              ).hex
-            }
-            roughness={0.7}
+          <Material
+            materials={housingTypes}
+            materialId={finish}
+            colors={heatshrinkColors}
+            colorId={innerHeatshrinkHostColor}
             transparent={innerHeatshrinkHostColor === 'clear'}
             opacity={innerHeatshrinkHostColor === 'clear' ? 0.4 : 1}
           />

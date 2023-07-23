@@ -9,7 +9,13 @@ import Sidebar from 'components/Sidebar';
 import Scene from 'components/Scene';
 import MessageProvider from 'components/MessageProvider';
 import ForceOrientation from 'components/ForceOrientation';
-import { cncHousingFinishes, connectorFinishes, environments } from 'utils';
+import {
+  cncHousingFinishes,
+  connectorFinishes,
+  environments,
+  heatshrinkColors,
+  housingTypes
+} from 'utils';
 
 const initialValues = {
   scene: {
@@ -43,19 +49,19 @@ const initialValues = {
   hostConnector: {
     model: 'USB_A',
     connectorFinish: connectorFinishes[0].id,
-    housingType: 'Heatshrink',
+    housingType: housingTypes[0].id,
     subHousingType: null,
     housingFinish: null,
-    heatshrinkColor: 'black',
+    heatshrinkColor: heatshrinkColors[1].id,
     cerakoteColor: null
   },
   deviceConnector: {
     model: 'USB_C',
     connectorFinish: connectorFinishes[0].id,
-    housingType: 'Heatshrink',
+    housingType: housingTypes[0].id,
     subHousingType: null,
     housingFinish: null,
-    heatshrinkColor: 'black',
+    heatshrinkColor: heatshrinkColors[1].id,
     cerakoteColor: null,
     ledColor: null
   }

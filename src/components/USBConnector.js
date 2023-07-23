@@ -5,6 +5,7 @@ import { useFrame } from '@react-three/fiber';
 // eslint-disable-next-line import/no-unresolved
 import { Color } from 'three';
 
+import Material from 'components/Material';
 import useModel from 'hooks/useModel';
 import {
   connectorOffsets,
@@ -14,9 +15,8 @@ import {
   ledColors,
   cncHousingFinishes,
   connectorFinishes,
-  housingFinishes
+  housingTypes
 } from 'utils';
-import Material from './Material';
 
 const interpolators = {
   falling: interpolateHslLong('#ff0000', '#0000ff'),
@@ -91,11 +91,11 @@ function USBConnector(
       {Boolean(nodes.Heatshrink) && (
         <mesh castShadow receiveShadow geometry={nodes.Heatshrink.geometry}>
           <Material
-            materials={housingFinishes}
-            materialId={housingFinish}
+            materials={housingTypes}
+            materialId={housingType}
             colors={heatshrinkColors}
             colorId={heatshrinkColor}
-            opacity={heatshrinkColor === 'clear' ? 0.7 : 0}
+            opacity={heatshrinkColor === 'clear' ? 0.4 : 1}
             transparent={heatshrinkColor === 'clear'}
           />
         </mesh>
