@@ -59,7 +59,7 @@ export default function HostConnectorPane() {
             checked={values.hostConnector.housingType === 'cnc'}
           />
         </Form.Group>
-        {values.hostConnector.housingType === 'Heatshrink' ? (
+        {values.hostConnector.housingType === 'heatshrink' ? (
           <Form.Group>
             <Form.Label className="text-light">Heatshrink Color</Form.Label>
             <ColorPicker

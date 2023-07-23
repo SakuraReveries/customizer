@@ -65,7 +65,7 @@ export default function DeviceConnectorPane() {
             checked={values.deviceConnector.housingType === 'cnc'}
           />
         </Form.Group>
-        {values.deviceConnector.housingType === 'Heatshrink' ? (
+        {values.deviceConnector.housingType === 'heatshrink' ? (
           <Form.Group className="mb-2">
             <Form.Label className="text-light">Heatshrink Color</Form.Label>
             <ColorPicker
@@ -79,7 +79,7 @@ export default function DeviceConnectorPane() {
         ) : (
           <Fragment>
             <Form.Group className="mb-2">
-              <Form.Label className="text-light">Housing Type</Form.Label>
+              <Form.Label className="text-light">CNC Housing Type</Form.Label>
               <Form.Select
                 onChange={(event) => {
                   setFieldValue(
