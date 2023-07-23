@@ -1,6 +1,10 @@
 import PropTypes from 'prop-types';
 
-export default function ArrayOptions({ array, keyKey, valueKey }) {
+export default function ArrayOptions({
+  array,
+  keyKey = 'id',
+  valueKey = 'name'
+}) {
   return array.map(({ [keyKey]: key, [valueKey]: val }) => (
     <option key={key} value={key}>
       {val}
@@ -10,6 +14,6 @@ export default function ArrayOptions({ array, keyKey, valueKey }) {
 
 ArrayOptions.propTypes = {
   array: PropTypes.array.isRequired,
-  keyKey: PropTypes.string.isRequired,
-  valueKey: PropTypes.string.isRequired
+  keyKey: PropTypes.string,
+  valueKey: PropTypes.string
 };
