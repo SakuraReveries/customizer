@@ -20,6 +20,7 @@ import USBConnector from 'components/USBConnector';
 import CableConnector from 'components/CableConnector';
 import CameraController from 'components/CameraController';
 import useMessages from 'hooks/useMessages';
+import useAdminMode from 'hooks/useAdminMode';
 import { cableAttachments, cableOffsets } from 'utils';
 
 const getPerformanceBounds = (refreshRate) =>
@@ -44,6 +45,8 @@ export default function Scene() {
   const [degradedPerformance, setDegradedPerformance] = useState(false);
   const [showStats, setShowStats] = useState(false);
   const toggleStats = useKeyboardControls((state) => state.toggleStats);
+  const { toggleAdminMode } = useAdminMode();
+  const toggleAdmin = useKeyboardControls((state) => state.toggleAdmin);
   const attachments = cableAttachments[settings.cable.model];
 
   useEffect(() => {
@@ -51,6 +54,12 @@ export default function Scene() {
       setShowStats((prevStats) => !prevStats);
     }
   }, [toggleStats]);
+
+  useEffect(() => {
+    if (toggleAdmin && toggleAdminMode) {
+      toggleAdminMode();
+    }
+  }, [toggleAdmin, toggleAdminMode]);
 
   return (
     <Fragment>
@@ -60,7 +69,7 @@ export default function Scene() {
           top: 8,
           left: 8,
           zIndex: 1000,
-          width: 350,
+          width: 250,
           height: '100%',
           opacity: 0.6
         }}

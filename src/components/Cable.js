@@ -4,6 +4,7 @@ import { forwardRef } from 'react';
 import Material from 'components/Material';
 import useModel from 'hooks/useModel';
 import { mdpcxColors, techFlexColors, cableRotations } from 'utils';
+import useAdminMode from 'hooks/useAdminMode';
 
 function Cable(
   {
@@ -16,6 +17,12 @@ function Cable(
   },
   ref
 ) {
+  const {
+    adminMode,
+    outerSleeveOpacity: customOuterSleeveOpacity,
+    innerSleeveColor: customInnerSleeveColor,
+    outerSleeveColor: customOuterSleeveColor
+  } = useAdminMode();
   const nodes = useModel({
     path: `./cables/${model}.3mf`
   });
@@ -28,14 +35,18 @@ function Cable(
         geometry={nodes['OpenSCAD Model'].geometry}
         dispose={null}
       >
-        <Material
-          materials={
-            innerSleeveType === 'TechFlex' ? techFlexColors : mdpcxColors
-          }
-          materialId={innerSleeveColor}
-          transparent={innerSleeveColor === 'clear'}
-          opacity={innerSleeveColor === 'clear' ? 0.2 : 1}
-        />
+        {adminMode ? (
+          <meshPhysicalMaterial color={customInnerSleeveColor} />
+        ) : (
+          <Material
+            materials={
+              innerSleeveType === 'TechFlex' ? techFlexColors : mdpcxColors
+            }
+            materialId={innerSleeveColor}
+            transparent={innerSleeveColor === 'clear'}
+            opacity={innerSleeveColor === 'clear' ? 0.2 : 1}
+          />
+        )}
       </mesh>
       <mesh
         castShadow
@@ -43,14 +54,22 @@ function Cable(
         geometry={nodes['OpenSCAD Model'].geometry}
         dispose={null}
       >
-        <Material
-          materials={
-            outerSleeveType === 'TechFlex' ? techFlexColors : mdpcxColors
-          }
-          materialId={outerSleeveColor}
-          transparent={outerSleeveColor === 'clear'}
-          opacity={outerSleeveColor === 'clear' ? 0.2 : 0.6}
-        />
+        {adminMode ? (
+          <meshPhysicalMaterial
+            color={customOuterSleeveColor}
+            transparent
+            opacity={customOuterSleeveOpacity}
+          />
+        ) : (
+          <Material
+            materials={
+              outerSleeveType === 'TechFlex' ? techFlexColors : mdpcxColors
+            }
+            materialId={outerSleeveColor}
+            transparent={outerSleeveColor === 'clear'}
+            opacity={outerSleeveColor === 'clear' ? 0.2 : 0.6}
+          />
+        )}
       </mesh>
     </group>
   );

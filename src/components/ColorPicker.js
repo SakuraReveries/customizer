@@ -13,7 +13,7 @@ export default function ColorPicker({ colors, onChange, value }) {
               overlay={<Tooltip>{name}</Tooltip>}
             >
               <button
-                className="btn btn-sm sr-color-picker-swatch"
+                className="btn btn-sm sr-color-picker-swatch p-0"
                 style={
                   image
                     ? {
@@ -21,14 +21,14 @@ export default function ColorPicker({ colors, onChange, value }) {
                         border:
                           value === id
                             ? `2px dashed ${contrastColor({ bgColor: color })}`
-                            : null
+                            : '0'
                       }
                     : {
                         backgroundColor: color,
                         border:
                           value === id
                             ? `2px dashed ${contrastColor({ bgColor: color })}`
-                            : null
+                            : '0'
                       }
                 }
                 onClick={(event) => {

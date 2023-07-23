@@ -21,7 +21,7 @@ export default function DualColorPicker({
               overlay={<Tooltip>{name}</Tooltip>}
             >
               <button
-                className="btn btn-sm sr-color-picker-swatch d-flex p-0 justify-content-center align-items-center"
+                className="btn btn-sm sr-color-picker-swatch border-0 d-flex p-0 justify-content-center align-items-center"
                 style={
                   image
                     ? {
@@ -30,7 +30,7 @@ export default function DualColorPicker({
                         border:
                           hostValue === id || deviceValue === id
                             ? `2px dashed ${contrastColor({ bgColor: color })}`
-                            : null
+                            : '0'
                       }
                     : {
                         color: contrastColor({ bgColor: color }),
@@ -38,7 +38,7 @@ export default function DualColorPicker({
                         border:
                           hostValue === id || deviceValue === id
                             ? `2px dashed ${contrastColor({ bgColor: color })}`
-                            : null
+                            : '0'
                       }
                 }
                 onClick={(event) => {

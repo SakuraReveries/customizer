@@ -7,6 +7,7 @@ import CableDetachablePane from 'components/CableDetachablePane';
 import HostConnectorPane from 'components/HostConnectorPane';
 import DeviceConnectorPane from 'components/DeviceConnectorPane';
 import SummaryPane from 'components/SummaryPane';
+import AdminPane from './AdminPane';
 
 export default function Sidebar() {
   return (
@@ -23,6 +24,7 @@ export default function Sidebar() {
           </h1>
           <hr className="border-white mt-0" />
           <Accordion alwaysOpen defaultActiveKey={['Cable']}>
+            <AdminPane />
             <OptionsPane />
             <CablePane />
             <CableDetachablePane />

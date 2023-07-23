@@ -4,6 +4,7 @@ import { Suspense, useMemo } from 'react';
 import { useWindowSize } from '@uidotdev/usehooks';
 import { KeyboardControls } from '@react-three/drei';
 
+import AdminModeProvider from 'components/AdminModeProvider';
 import Loader from 'components/Loader';
 import Sidebar from 'components/Sidebar';
 import Scene from 'components/Scene';
@@ -72,7 +73,7 @@ export default function App() {
   const controlMap = useMemo(
     () => [
       { name: 'toggleStats', keys: ['F4'] },
-      { name: 'toggleGrid', keys: ['F8'] }
+      { name: 'toggleAdmin', keys: ['F8'] }
     ],
     []
   );
@@ -82,24 +83,26 @@ export default function App() {
 
   return (
     <MessageProvider>
-      <Formik initialValues={initialValues}>
-        <ForceOrientation allowLandscape>
-          <Helmet title="Sakura Reveries Cable Builder" />
-          <Suspense fallback={<Loader />}>
-            <div className="sr-app-scene" style={{ width: sceneWidth }}>
-              <KeyboardControls map={controlMap}>
-                <Scene />
-              </KeyboardControls>
-            </div>
-            <div
-              style={{ width: sidebarWidth }}
-              className="border-4 border-primary border-start h-100 sr-app-sidebar"
-            >
-              <Sidebar />
-            </div>
-          </Suspense>
-        </ForceOrientation>
-      </Formik>
+      <AdminModeProvider>
+        <Formik initialValues={initialValues}>
+          <ForceOrientation allowLandscape>
+            <Helmet title="Sakura Reveries Cable Builder" />
+            <Suspense fallback={<Loader />}>
+              <div className="sr-app-scene" style={{ width: sceneWidth }}>
+                <KeyboardControls map={controlMap}>
+                  <Scene />
+                </KeyboardControls>
+              </div>
+              <div
+                style={{ width: sidebarWidth }}
+                className="border-4 border-primary border-start sr-app-sidebar"
+              >
+                <Sidebar />
+              </div>
+            </Suspense>
+          </ForceOrientation>
+        </Formik>
+      </AdminModeProvider>
     </MessageProvider>
   );
 }
