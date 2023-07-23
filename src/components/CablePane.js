@@ -22,7 +22,11 @@ export default function CablePane() {
     values.cable.outerSleeveType === 'TechFlex' ? techFlexColors : mdpcxColors;
 
   return (
-    <SidebarPane title="Cable">
+    <SidebarPane
+      title="Cable"
+      showFocus
+      onFocus={() => setFieldValue('scene.focusOn', 'center')}
+    >
       <Form>
         <Form.Group className="mb-2">
           <Form.Label className="text-light">Type</Form.Label>

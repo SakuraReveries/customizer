@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { Fragment, useContext } from 'react';
+import { Fragment, useContext, useCallback } from 'react';
 import {
   Button,
   Accordion,
@@ -7,30 +7,58 @@ import {
   useAccordionButton
 } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCaretUp, faCaretDown } from '@fortawesome/free-solid-svg-icons';
+import {
+  faCaretUp,
+  faCaretDown,
+  faMagnifyingGlassArrowRight
+} from '@fortawesome/free-solid-svg-icons';
 
-export default function SidebarPane({ children, title, onExpand }) {
+export default function SidebarPane({
+  children,
+  title,
+  onExpand,
+  showFocus = false,
+  onFocus
+}) {
   const { activeEventKey } = useContext(AccordionContext);
   const isOpen = Array.isArray(activeEventKey)
     ? activeEventKey.includes(title)
     : activeEventKey === title;
-  const onClick = useAccordionButton(title, () => {
+  const onAccordionClick = useAccordionButton(title, () => {
     if (onExpand && !isOpen) {
       onExpand();
     }
   });
+  const onFocusClick = useCallback(
+    (event) => {
+      event.stopPropagation();
+      if (onFocus) {
+        onFocus(title);
+      }
+    },
+    [onFocus, title]
+  );
 
   return (
     <Fragment>
       <Button
-        className="h6 text-light w-100 d-flex align-items-center"
-        onClick={onClick}
+        as="span"
+        className="h6 text-light w-100 d-flex align-items-center justify-content-end"
+        onClick={onAccordionClick}
       >
-        <span>{title}</span>
-        <FontAwesomeIcon
-          className="ms-auto"
-          icon={isOpen ? faCaretUp : faCaretDown}
-        />
+        <span className="me-auto">{title}</span>
+        {showFocus && (
+          <Button
+            size="sm"
+            className="mx-2"
+            style={{ backgroundColor: '#c46d89' }}
+            onClick={onFocusClick}
+            title={`Focus ${title}`}
+          >
+            <FontAwesomeIcon icon={faMagnifyingGlassArrowRight} fixedWidth />
+          </Button>
+        )}
+        <FontAwesomeIcon icon={isOpen ? faCaretUp : faCaretDown} />
       </Button>
       <Accordion.Collapse eventKey={title}>
         <Fragment>
@@ -45,5 +73,8 @@ export default function SidebarPane({ children, title, onExpand }) {
 SidebarPane.propTypes = {
   children: PropTypes.node.isRequired,
   title: PropTypes.string.isRequired,
-  onExpand: PropTypes.func
+  onExpand: PropTypes.func,
+  showFocus: PropTypes.bool,
+  onFocus: PropTypes.func,
+  icon: PropTypes.object
 };

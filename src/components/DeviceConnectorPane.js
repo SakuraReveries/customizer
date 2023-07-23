@@ -22,7 +22,11 @@ export default function DeviceConnectorPane() {
   const { values, setFieldValue, setValues } = useFormikContext();
 
   return (
-    <SidebarPane title="Device Connector">
+    <SidebarPane
+      title="Device Connector"
+      showFocus
+      onFocus={() => setFieldValue('scene.focusOn', 'deviceConnector')}
+    >
       <Form>
         <Form.Group className="mb-2">
           <Form.Label className="text-light">Connector Finish</Form.Label>

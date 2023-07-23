@@ -270,6 +270,9 @@ export const cableRotations = {
 
 export const cableAttachments = {
   Charger: {
+    center: {
+      position: [0, 0, 0]
+    },
     hostConnector: {
       position: [20, 20, -20],
       rotation: [Math.PI / 2, 0, -Math.PI / 2]
@@ -280,6 +283,9 @@ export const cableAttachments = {
     }
   },
   Straight: {
+    center: {
+      position: [0, 0, 0]
+    },
     hostConnector: {
       position: [20, 20, -20],
       rotation: [Math.PI / 2, 0, -Math.PI / 2]
@@ -293,11 +299,17 @@ export const cableAttachments = {
     }
   },
   StraightExit: {
+    center: {
+      position: [0, 0, 0]
+    },
     hostConnector: {},
     deviceConnector: {},
     cableConnector: {}
   },
   LeftParallel: {
+    center: {
+      position: [0, 0, 0]
+    },
     hostConnector: {
       position: [-220, 8, -0.25],
       rotation: [Math.PI / 2, 0, -Math.PI / 2]
@@ -311,6 +323,9 @@ export const cableAttachments = {
     }
   },
   LeftRearExit: {
+    center: {
+      position: [0, 0, 0]
+    },
     hostConnector: {
       position: [0, 8, -150],
       rotation: [Math.PI / 2, 0, 0]
@@ -325,11 +340,17 @@ export const cableAttachments = {
     }
   },
   RightParallel: {
+    center: {
+      position: [0, 0, 0]
+    },
     hostConnector: {},
     deviceConnector: {},
     cableConnector: {}
   },
   RightRearExit: {
+    center: {
+      position: [0, 0, 0]
+    },
     hostConnector: {},
     deviceConnector: {},
     cableConnector: {}

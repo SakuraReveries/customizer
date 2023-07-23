@@ -1,6 +1,7 @@
-import { Fragment, useEffect, useState } from 'react';
+import { Fragment, useEffect, useState, useRef, useMemo } from 'react';
 import { Alert } from 'react-bootstrap';
 import { Canvas } from '@react-three/fiber';
+import { useFormikContext } from 'formik';
 import {
   Stage,
   OrbitControls,
@@ -8,7 +9,8 @@ import {
   Stats,
   useKeyboardControls,
   PerformanceMonitor,
-  Environment
+  Environment,
+  Bounds
 } from '@react-three/drei';
 // eslint-disable-next-line import/no-unresolved
 import { EffectComposer, N8AO } from '@react-three/postprocessing';
@@ -16,14 +18,27 @@ import { EffectComposer, N8AO } from '@react-three/postprocessing';
 import Cable from 'components/Cable';
 import USBConnector from 'components/USBConnector';
 import CableConnector from 'components/CableConnector';
-import { cableAttachments, cableOffsets } from 'utils';
-import { useFormikContext } from 'formik';
+import CameraController from 'components/CameraController';
 import useMessages from 'hooks/useMessages';
+import { cableAttachments, cableOffsets } from 'utils';
 
 const getPerformanceBounds = (refreshRate) =>
   refreshRate > 60 ? [40, refreshRate] : [40, 60];
 
 export default function Scene() {
+  const cableRef = useRef();
+  const hostConnectorRef = useRef();
+  const cableConnectorRef = useRef();
+  const deviceConnectorRef = useRef();
+  const refs = useMemo(
+    () => ({
+      center: cableRef,
+      hostConnector: hostConnectorRef,
+      deviceConnector: deviceConnectorRef,
+      cableConnector: cableConnectorRef
+    }),
+    [cableRef, hostConnectorRef, deviceConnectorRef, cableConnectorRef]
+  );
   const { messages, disableMessage } = useMessages();
   const { values: settings } = useFormikContext();
   const [degradedPerformance, setDegradedPerformance] = useState(false);
@@ -37,18 +52,18 @@ export default function Scene() {
     }
   }, [toggleStats]);
 
+  useEffect(() => {}, [cableRef]);
+
   return (
     <Fragment>
       <div
         style={{
           position: 'fixed',
-          top: 0,
-          left: 0,
+          top: 8,
+          left: 8,
           zIndex: 1000,
           width: 350,
           height: '100%',
-          marginTop: 8,
-          marginLeft: 8,
           opacity: 0.6
         }}
       >
@@ -98,33 +113,48 @@ export default function Scene() {
       >
         <color attach="background" args={[settings.scene.bgColor]} />
         <Stage
-          intensity={0.1}
-          adjustCamera={1.2}
+          adjustCamera={false}
           shadows={{ type: 'accumulative', frames: 20 }}
           environment={null}
         >
-          <group position={cableOffsets[settings.cable.model]}>
-            <Cable {...settings.cable} />
-            <group {...attachments?.deviceConnector}>
-              <USBConnector {...settings.deviceConnector} />
-            </group>
-            <group {...attachments?.hostConnector}>
-              <USBConnector {...settings.hostConnector} />
-            </group>
-            {settings.cable.model !== 'Charger' && (
-              <group {...attachments?.cableConnector}>
-                <CableConnector {...settings.cable.connector} />
+          <Bounds fit clip observe damping={4} margin={1.2}>
+            <CameraController refs={refs} focusOn={settings.scene.focusOn} />
+            <group position={cableOffsets[settings.cable.model]}>
+              <Cable {...settings.cable} ref={cableRef} />
+              <group {...attachments?.deviceConnector}>
+                <USBConnector
+                  {...settings.deviceConnector}
+                  ref={deviceConnectorRef}
+                />
               </group>
-            )}
-          </group>
+              <group {...attachments?.hostConnector}>
+                <USBConnector
+                  {...settings.hostConnector}
+                  ref={hostConnectorRef}
+                />
+              </group>
+              {settings.cable.model !== 'Charger' && (
+                <group {...attachments?.cableConnector}>
+                  <CableConnector
+                    {...settings.cable.connector}
+                    ref={cableConnectorRef}
+                  />
+                </group>
+              )}
+            </group>
+          </Bounds>
         </Stage>
         <Environment
           background={false}
           files={`./environments/${settings.scene.environment}.hdr`}
           path="/"
         />
-        <PerspectiveCamera makeDefault fov={20} position={[-12, 8, 10]} />
-        <OrbitControls makeDefault maxPolarAngle={Math.PI / 2} panSpeed={0} />
+        <PerspectiveCamera makeDefault fov={20} position={[-12, 8, 15]} />
+        <OrbitControls
+          makeDefault
+          maxPolarAngle={Math.PI / 2}
+          enablePan={false}
+        />
         {showStats && <Stats />}
         {!degradedPerformance && (
           <EffectComposer disableNormalPass>

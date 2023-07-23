@@ -18,7 +18,11 @@ export default function HostConnectorPane() {
   const { values, setFieldValue, setValues } = useFormikContext();
 
   return (
-    <SidebarPane title="Host Connector">
+    <SidebarPane
+      title="Host Connector"
+      showFocus
+      onFocus={() => setFieldValue('scene.focusOn', 'hostConnector')}
+    >
       <Form>
         <Form.Group className="mb-2">
           <Form.Label className="text-light">Connector Finish</Form.Label>

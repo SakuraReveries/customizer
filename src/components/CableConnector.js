@@ -2,28 +2,32 @@ import PropTypes from 'prop-types';
 
 import { cerakoteColors, cncHousingFinishes, heatshrinkColors } from 'utils';
 import useModel from 'hooks/useModel';
+import { forwardRef } from 'react';
 
-export default function CableConnector({
-  model,
-  finish,
-  cerakoteColor,
-  innerHeatshrink,
-  innerHeatshrinkHostColor,
-  innerHeatshrinkDeviceColor,
-  /* eslint-disable no-unused-vars */
-  collarHeatshrink,
-  collarHeatshrinkColor,
-  collarAccent,
-  collarAccentColor,
-  /* eslint-enable no-unused-vars */
-  ...props
-}) {
+function CableConnector(
+  {
+    model,
+    finish,
+    cerakoteColor,
+    innerHeatshrink,
+    innerHeatshrinkHostColor,
+    innerHeatshrinkDeviceColor,
+    /* eslint-disable no-unused-vars */
+    collarHeatshrink,
+    collarHeatshrinkColor,
+    collarAccent,
+    collarAccentColor,
+    /* eslint-enable no-unused-vars */
+    ...props
+  },
+  ref
+) {
   const nodes = useModel({
     path: `./connectors/${model}.3mf`
   });
 
   return (
-    <group {...props}>
+    <group {...props} ref={ref}>
       {innerHeatshrink && (
         <mesh castShadow receiveShadow geometry={nodes.Heatshrink_R.geometry}>
           <meshPhysicalMaterial
@@ -66,6 +70,8 @@ export default function CableConnector({
     </group>
   );
 }
+
+export default forwardRef(CableConnector);
 
 CableConnector.propTypes = {
   model: PropTypes.string.isRequired,

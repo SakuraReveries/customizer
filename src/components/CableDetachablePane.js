@@ -28,6 +28,8 @@ export default function CableDetachablePane() {
     <SidebarPane
       title="Cable Detachable"
       onExpand={() => enableMessage('alignmentDotColor')}
+      showFocus
+      onFocus={() => setFieldValue('scene.focusOn', 'cableConnector')}
     >
       <Form>
         <Form.Group className="mb-2">

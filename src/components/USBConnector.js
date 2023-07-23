@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import { interpolateHslLong } from 'd3-interpolate';
-import { useRef } from 'react';
+import { useRef, forwardRef } from 'react';
 import { useFrame } from '@react-three/fiber';
 // eslint-disable-next-line import/no-unresolved
 import { Color } from 'three';
@@ -21,17 +21,20 @@ const interpolators = {
   rising: interpolateHslLong('#0000ff', '#ff0000')
 };
 
-export default function USBConnector({
-  connectorFinish,
-  heatshrinkColor,
-  subHousingType,
-  cerakoteColor,
-  housingFinish,
-  housingType,
-  ledColor,
-  model,
-  ...props
-}) {
+function USBConnector(
+  {
+    connectorFinish,
+    heatshrinkColor,
+    subHousingType,
+    cerakoteColor,
+    housingFinish,
+    housingType,
+    ledColor,
+    model,
+    ...props
+  },
+  ref
+) {
   const ledMatRef = useRef(null);
   const nodes = useModel({
     path: `./connectors/${model}_${housingType}${
@@ -73,6 +76,7 @@ export default function USBConnector({
       rotation={
         connectorRotations[model][subHousingType || housingType] ?? [0, 0, 0]
       }
+      ref={ref}
     >
       <mesh castShadow receiveShadow geometry={nodes.Connector.geometry}>
         <meshPhysicalMaterial
@@ -115,6 +119,8 @@ export default function USBConnector({
     </group>
   );
 }
+
+export default forwardRef(USBConnector);
 
 USBConnector.propTypes = {
   connectorFinish: PropTypes.string.isRequired,

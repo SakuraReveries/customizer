@@ -2,15 +2,19 @@ import PropTypes from 'prop-types';
 
 import useModel from 'hooks/useModel';
 import { mdpcxColors, techFlexColors, cableRotations } from 'utils';
+import { forwardRef } from 'react';
 
-export default function Cable({
-  innerSleeveType,
-  innerSleeveColor,
-  outerSleeveType,
-  outerSleeveColor,
-  model,
-  ...props
-}) {
+function Cable(
+  {
+    innerSleeveType,
+    innerSleeveColor,
+    outerSleeveType,
+    outerSleeveColor,
+    model,
+    ...props
+  },
+  ref
+) {
   const nodes = useModel({
     path: `./cables/${model}.3mf`
   });
@@ -26,7 +30,7 @@ export default function Cable({
   ).hex;
 
   return (
-    <group {...props} rotation={cableRotations[model]}>
+    <group {...props} rotation={cableRotations[model]} ref={ref}>
       <mesh
         castShadow
         receiveShadow
@@ -54,6 +58,8 @@ export default function Cable({
     </group>
   );
 }
+
+export default forwardRef(Cable);
 
 Cable.propTypes = {
   model: PropTypes.string.isRequired,

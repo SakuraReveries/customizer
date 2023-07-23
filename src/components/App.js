@@ -14,7 +14,8 @@ import { environments } from 'utils';
 const initialValues = {
   scene: {
     bgColor: '#8d5265',
-    environment: environments[0].id
+    environment: environments[0].id,
+    focusOn: 'center'
   },
   cable: {
     model: 'Charger',
