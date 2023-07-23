@@ -23,7 +23,7 @@ import useMessages from 'hooks/useMessages';
 import { cableAttachments, cableOffsets } from 'utils';
 
 const getPerformanceBounds = (refreshRate) =>
-  refreshRate > 60 ? [40, refreshRate] : [40, 60];
+  refreshRate > 60 ? [30, refreshRate] : [25, 60];
 
 export default function Scene() {
   const cableRef = useRef();
