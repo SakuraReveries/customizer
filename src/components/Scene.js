@@ -20,7 +20,7 @@ import Cable from 'components/Cable';
 import USBConnector from 'components/USBConnector';
 import CableConnector from 'components/CableConnector';
 import CameraController from 'components/CameraController';
-import Backdrop from 'components/Backdrop';
+import Desk from 'components/Desk';
 import useMessages from 'hooks/useMessages';
 import useAdminMode from 'hooks/useAdminMode';
 import { cableAttachments } from 'utils';
@@ -127,7 +127,7 @@ export default function Scene() {
           shadows={{ type: 'accumulative', frames: 40 }}
           environment={null}
         >
-          <Backdrop />
+          <Desk />
           <Bounds fit clip observe damping={4} margin={1.5}>
             <CameraController refs={refs} focusOn={settings.scene.focusOn} />
             <Center top>
