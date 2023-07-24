@@ -10,6 +10,8 @@ export const environments = [
   { id: 'studio_small_04_2k', name: 'Low Light' }
 ];
 
+export const sceneBackgroundColor = '#a95c75';
+
 export const backdropDims = [792, 25, 500];
 
 export const backdropMaterials = [

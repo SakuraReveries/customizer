@@ -21,7 +21,6 @@ import {
 
 const initialValues = {
   scene: {
-    bgColor: '#8d5265',
     backdropMaterial: backdropMaterials[0].id,
     environment: environments[0].id,
     focusOn: 'center'

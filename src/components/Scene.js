@@ -23,7 +23,7 @@ import CameraController from 'components/CameraController';
 import Desk from 'components/Desk';
 import useMessages from 'hooks/useMessages';
 import useAdminMode from 'hooks/useAdminMode';
-import { cableAttachments } from 'utils';
+import { cableAttachments, sceneBackgroundColor } from 'utils';
 
 const getPerformanceBounds = (refreshRate) =>
   refreshRate > 60 ? [30, refreshRate] : [25, 60];
@@ -47,7 +47,7 @@ export default function Scene() {
   const [degradedPerformance, setDegradedPerformance] = useState(false);
   const [showStats, setShowStats] = useState(false);
   const toggleStats = useKeyboardControls((state) => state.toggleStats);
-  const { toggleAdminMode } = useAdminMode();
+  const { adminMode, bgColor, toggleAdminMode } = useAdminMode();
   const toggleAdmin = useKeyboardControls((state) => state.toggleAdmin);
   const attachments = cableAttachments[settings.cable.model];
 
@@ -120,7 +120,10 @@ export default function Scene() {
         style={{ height: '100vh' }}
         dpr={degradedPerformance ? 0.75 : 1.5}
       >
-        <color attach="background" args={[settings.scene.bgColor]} />
+        <color
+          attach="background"
+          args={[adminMode ? bgColor : sceneBackgroundColor]}
+        />
         <Stage
           intensity={0.1}
           adjustCamera={false}

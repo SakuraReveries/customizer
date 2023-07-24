@@ -7,9 +7,11 @@ import useAdminMode from 'hooks/useAdminMode';
 export default function AdminPane() {
   const {
     adminMode,
+    bgColor,
     innerSleeveColor,
     outerSleeveColor,
     outerSleeveOpacity,
+    setBgColor,
     setInnerSleeveColor,
     setOuterSleeveColor,
     setOuterSleeveOpacity
@@ -20,11 +22,22 @@ export default function AdminPane() {
   }
 
   return (
-    <SidebarPane title="Admin">
+    <SidebarPane title="Debug">
       <Form>
+        <Form.Group className="mb-2">
+          <Form.Label className="text-light">Background Color</Form.Label>
+          <SketchPicker
+            className="ms-3"
+            disableAlpha
+            presetColors={[]}
+            color={bgColor}
+            onChange={(color) => setBgColor(color.hex)}
+          />
+        </Form.Group>
         <Form.Group className="mb-2">
           <Form.Label className="text-light">Inner Sleeve Color</Form.Label>
           <SketchPicker
+            className="ms-3"
             disableAlpha
             presetColors={[]}
             color={innerSleeveColor}
@@ -34,6 +47,7 @@ export default function AdminPane() {
         <Form.Group className="mb-2">
           <Form.Label className="text-light ">Outer Sleeve Color</Form.Label>
           <SketchPicker
+            className="ms-3"
             disableAlpha
             presetColors={[]}
             color={outerSleeveColor}

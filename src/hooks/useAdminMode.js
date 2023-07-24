@@ -4,7 +4,8 @@ export const AdminModeContext = createContext({
   adminMode: false,
   innerSleeveColor: null,
   outerSleeveColor: null,
-  outerSleeveOpacity: null
+  outerSleeveOpacity: null,
+  bgColor: null
 });
 
 export default function useAdminMode() {

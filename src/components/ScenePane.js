@@ -1,5 +1,4 @@
 import { Form } from 'react-bootstrap';
-import { ChromePicker } from 'react-color';
 
 import SidebarPane from 'components/SidebarPane';
 import ArrayOptions from 'components/ArrayOptions';
@@ -13,13 +12,6 @@ export default function ScenePane() {
   return (
     <SidebarPane title="Scene">
       <Form>
-        <Form.Group className="mb-2">
-          <Form.Label className="text-light">Background Color</Form.Label>
-          <ChromePicker
-            color={values.scene.bgColor}
-            onChange={(color) => setFieldValue('scene.bgColor', color.hex)}
-          />
-        </Form.Group>
         <Form.Group className="mb-2">
           <Form.Label className="text-light">Lighting</Form.Label>
           <Form.Select

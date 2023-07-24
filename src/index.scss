@@ -1,6 +1,5 @@
 $primary: #f086a9;
 $secondary: #a95c75;
-$canvas: #8d5265;
 $white: #fff;
 $form-select-bg: $primary;
 $form-select-color: $white;
@@ -21,7 +20,7 @@ html,
 body {
   height: 100vh;
   overflow: hidden;
-  background-color: $canvas;
+  background-color: $secondary;
 }
 
 body > div {
