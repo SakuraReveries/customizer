@@ -15,7 +15,8 @@ import {
   ledColors,
   cncHousingFinishes,
   connectorFinishes,
-  housingTypes
+  housingTypes,
+  findById
 } from 'utils';
 
 const interpolators = {
@@ -59,9 +60,7 @@ function USBConnector(
 
       newColor = new Color(interpolator(lerpAlpha));
     } else {
-      const { hex } = ledColors.find((color) => color.id === ledColor);
-
-      newColor = new Color(hex);
+      newColor = new Color(findById(ledColors, ledColor).color);
     }
 
     ledMatRef.current.color.set(newColor);

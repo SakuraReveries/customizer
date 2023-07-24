@@ -49,7 +49,7 @@ ColorPicker.propTypes = {
     PropTypes.shape({
       id: PropTypes.string.isRequired,
       name: PropTypes.string.isRequired,
-      hex: PropTypes.string.isRequired
+      color: PropTypes.string.isRequired
     })
   ).isRequired,
   onChange: PropTypes.func.isRequired,
