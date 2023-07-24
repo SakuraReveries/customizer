@@ -29,7 +29,7 @@ const initialValues = {
     model: 'Charger',
     innerSleeveType: 'MDPC_X',
     innerSleeveColor: 'grandBleu',
-    outerSleeveType: 'MDPC_X',
+    outerSleeveType: null,
     outerSleeveColor: 'blackestBlack',
     opalSleeve: false,
     opalSleeveColor: null,

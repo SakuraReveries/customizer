@@ -191,7 +191,7 @@ export const techFlexColors = [
     sheenColor: '#ffffff'
   },
   { id: 'beige', name: 'Beige', color: '#8c7c74' },
-  { id: 'white', name: 'White', color: '#FFFFFF' },
+  { id: 'white', name: 'White', color: '#ffffff' },
   { id: 'clear', name: 'Clear', color: '#ffffff', image: transparentImage }
 ];
 
@@ -200,10 +200,10 @@ export const mdpcxColors = [
   { id: 'shade19', name: 'Shade 19', color: '#303030' },
   { id: 'titaniumGrey', name: 'Titanium Grey', color: '#454445' },
   { id: 'platinumX', name: 'Platinum X', color: '#6e6e6e' },
-  { id: 'aluminumGrey', name: 'Aluminum Grey', color: '#8C8F91' },
+  { id: 'aluminumGrey', name: 'Aluminum Grey', color: '#8c8f91' },
   { id: 'hazeGrey', name: 'Haze Grey', color: '#939393' },
-  { id: 'naturalWhite', name: 'Natural White', color: '#F8F8F8' },
-  { id: 'xxxWhite', name: 'XXX White', color: '#FFFFFF' },
+  { id: 'naturalWhite', name: 'Natural White', color: '#f8f8f8' },
+  { id: 'xxxWhite', name: 'XXX White', color: '#ffffff' },
   { id: 'gold', name: 'Gold', color: '#b4962f' },
   { id: 'copperBrown', name: 'Copper Brown', color: '#863200' },
   { id: 'vanillaSands', name: 'Vanilla Sands', color: '#b69a56' },
@@ -217,7 +217,7 @@ export const mdpcxColors = [
   { id: 'bMagic', name: 'B-Magic', color: '#0e20ca' },
   { id: 'rivieraBlue', name: 'Riviera Blue', color: '#1188d3' },
   { id: 'gulfBlue', name: 'Gulf Blue', color: '#9ad8ff' },
-  { id: 'theTurquoise', name: 'The Turquoise', color: '#40E0D0' },
+  { id: 'theTurquoise', name: 'The Turquoise', color: '#40e0d0' },
   { id: 'plumPurple', name: 'Plum Purple', color: '#940158' },
   { id: 'perfectPink', name: 'Perfect Pink', color: '#cf348f' },
   { id: 'codeRed', name: 'Code Red', color: '#da2d35' },
@@ -226,7 +226,14 @@ export const mdpcxColors = [
   { id: 'diamondRed', name: 'Diamond Red', color: '#7d1015' },
   { id: 'oxideOrange', name: 'Oxide Orange', color: '#c25700' },
   { id: 'papayaOrange', name: 'Papaya Orange', color: '#f1852d' },
-  { id: 'lavaOrange', name: 'Lava Orange', color: '#ff4200' }
+  { id: 'lavaOrange', name: 'Lava Orange', color: '#ff4200' },
+  {
+    id: 'transparent',
+    name: 'Transparent',
+    color: '#ffffff',
+    transparent: true,
+    opacity: 0.6
+  }
 ];
 
 export const cerakoteColors = [
@@ -276,20 +283,62 @@ export const alignmentDotColors = [
   { id: 'teal', name: 'Teal', color: '#008080' },
   { id: 'turquoise', name: 'Turquoise', color: '#40E0D0' },
   { id: 'green', name: 'Green', color: '#008000' },
-  { id: 'yellow', name: 'Yellow', color: '#FFFF00' },
+  { id: 'yellow', name: 'Yellow', color: '#ffff00' },
   { id: 'orange', name: 'Orange', color: '#ffa311' },
-  { id: 'pastelPink', name: 'Pastel Pink', color: '#FFD1DC' },
+  { id: 'pastelPink', name: 'Pastel Pink', color: '#ffd1dc' },
   { id: 'purple', name: 'Purple', color: '#800080' },
   { id: 'magenta', name: 'Magenta', color: '#c1378f' },
   { id: 'pastelViolet', name: 'Pastel Violet', color: '#b087d6' },
   { id: 'brown', name: 'Brown', color: '#805a00' },
-  { id: 'goldMetallic', name: 'Gold Metallic', color: '#e1ac25' },
-  { id: 'copperMetallic', name: 'Copper Metallic', color: '#9c6226' },
-  { id: 'silverMetallic', name: 'Silver Metallic', color: '#C0C0C0' },
-  { id: 'aluminumMetallic', name: 'Aluminum Metallic', color: '#929292' },
-  { id: 'sunsetRedMetallic', name: 'Sunset Red Metallic', color: '#be1e5b' },
-  { id: 'greenMistMetallic', name: 'Green Mist Metallic', color: '#0d965e' },
-  { id: 'balticBlueMetallic', name: 'Baltic Blue Metallic', color: '#0769af' }
+  {
+    id: 'goldMetallic',
+    name: 'Gold Metallic',
+    color: '#e1ac25',
+    metalness: 0.7,
+    roughness: 0.2
+  },
+  {
+    id: 'copperMetallic',
+    name: 'Copper Metallic',
+    color: '#9c6226',
+    metalness: 0.7,
+    roughness: 0.2
+  },
+  {
+    id: 'silverMetallic',
+    name: 'Silver Metallic',
+    color: '#c0c0c0',
+    metalness: 0.7,
+    roughness: 0.2
+  },
+  {
+    id: 'aluminumMetallic',
+    name: 'Aluminum Metallic',
+    color: '#929292',
+    metalness: 0.7,
+    roughness: 0.2
+  },
+  {
+    id: 'sunsetRedMetallic',
+    name: 'Sunset Red Metallic',
+    color: '#be1e5b',
+    metalness: 0.7,
+    roughness: 0.2
+  },
+  {
+    id: 'greenMistMetallic',
+    name: 'Green Mist Metallic',
+    color: '#0d965e',
+    metalness: 0.7,
+    roughness: 0.2
+  },
+  {
+    id: 'balticBlueMetallic',
+    name: 'Baltic Blue Metallic',
+    color: '#0769af',
+    metalness: 0.7,
+    roughness: 0.2
+  }
 ];
 
 export const ledColors = [
@@ -303,6 +352,119 @@ export const ledColors = [
   { id: 'pink', name: 'Pink', color: '#fe4dca' },
   { id: 'pureGreen', name: 'Pure Green', color: '#5ffb5f' },
   { id: 'rgb', name: 'RGB', color: '#ffffff', image: rgbImage }
+];
+
+export const mdpcxCarbonColors = [
+  { id: 'pipu', name: 'PIPU', colors: ['perfectPink', 'plumPurple'] },
+  {
+    id: 'shadeViolet',
+    name: 'Shade Violet',
+    colors: ['blackestBlack', 'vividViolet']
+  },
+  {
+    id: 'carbonPXB',
+    name: 'Carbon PXB',
+    colors: ['blackestBlack', 'platinumX'],
+    reflectivity: 0.3
+  },
+  {
+    id: 'carbonBTI',
+    name: 'Carbon BTI',
+    colors: ['blackestBlack', 'titaniumGrey']
+  },
+  { id: 'carbonGold', name: 'Carbon Gold', colors: ['gold', 'blackestBlack'] },
+  {
+    id: 'brownCarbon',
+    name: 'Brown Carbon',
+    colors: ['copperBrown', 'blackestBlack']
+  },
+  { id: 'carbon51', name: 'Carbon 51', colors: ['area51', 'blackestBlack'] },
+  { id: 'nvCarbon', name: 'NV Carbon', colors: ['atomicGreen', 'shade19'] },
+  {
+    id: 'blueCarbon',
+    name: 'Blue Carbon',
+    colors: ['bMagic', 'blackestBlack']
+  },
+  {
+    id: 'carbonTurquoise',
+    name: 'Carbon Turquoise',
+    colors: ['theTurquoise', 'blackestBlack']
+  },
+  {
+    id: 'redCarbon',
+    name: 'Red Carbon',
+    colors: ['italianRed', 'blackestBlack']
+  },
+  {
+    id: 'orangeCarbon',
+    name: 'Orange Carbon',
+    colors: ['oxideOrange', 'blackestBlack']
+  },
+  {
+    id: 'rustyRust',
+    name: 'Rusty Rust',
+    colors: ['oxideOrange', 'copperBrown']
+  },
+  {
+    id: 'carbonOJuice',
+    name: 'Carbon O-Juice',
+    colors: ['lavaOrange', 'papayaOrange']
+  },
+  {
+    id: 'carbonCappuccino',
+    name: 'Carbon Cappuccino',
+    colors: ['copperBrown', 'vanillaSands']
+  },
+  {
+    id: 'ironMxxMkI',
+    name: 'Iron-MXX MKI',
+    colors: ['diamondRed', 'vanillaSands']
+  },
+  { id: 'weedDreams', name: 'Weed Dreams', colors: ['lamboGreeny', 'gold'] },
+  {
+    id: 'carbonCommando',
+    name: 'Carbon Commando',
+    colors: ['commandoGreen', 'blackestBlack']
+  },
+  { id: 'babyBlues', name: 'Baby Blues', colors: ['gulfBlue', 'rivieraBlue'] },
+  {
+    id: 'grandAtomic',
+    name: 'Grand Atomic',
+    colors: ['grandBleu', 'atomicGreen']
+  }
+];
+
+export const mdpcxLiquidColors = [
+  {
+    id: 'transparency',
+    name: 'Transparency',
+    colors: ['transparent', 'transparent']
+  },
+  {
+    id: 'liquidCarbon',
+    name: 'Liquid Carbon',
+    colors: ['blackestBlack', 'transparent']
+  },
+  {
+    id: 'liquidGold',
+    name: 'Liquid Gold',
+    colors: ['gold', 'transparent']
+  },
+  {
+    id: 'liquidLambo',
+    name: 'Liquid Lambo',
+    colors: ['lamboGreeny', 'transparent']
+  },
+  {
+    id: 'liquidIR',
+    name: 'Liquid Carbon',
+    colors: ['italianRed', 'transparent']
+  },
+  {
+    id: 'liquidDiamond',
+    name: 'Liquid Diamond',
+    colors: ['diamondRed', 'transparent']
+  }
 ];
 
 export const opalColors = [
@@ -358,6 +520,8 @@ export const housingTypes = [
 
 export const sleeveTypes = {
   MDPC_X: 'MDPC-X',
+  MDPC_X_Carbon: 'MDPC-X Carbon',
+  MDPC_X_Liquid: 'MDPC-X Liquid',
   TechFlex: 'TechFlex'
 };
 
