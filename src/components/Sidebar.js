@@ -1,13 +1,13 @@
 import { Accordion, Col, Container, Row } from 'react-bootstrap';
 
 import logo from 'images/logo.png';
-import OptionsPane from 'components/OptionsPane';
+import AdminPane from 'components/AdminPane';
 import CablePane from 'components/CablePane';
-import CableDetachablePane from 'components/CableDetachablePane';
-import HostConnectorPane from 'components/HostConnectorPane';
-import DeviceConnectorPane from 'components/DeviceConnectorPane';
+import ScenePane from 'components/ScenePane';
 import SummaryPane from 'components/SummaryPane';
-import AdminPane from './AdminPane';
+import HostConnectorPane from 'components/HostConnectorPane';
+import CableDetachablePane from 'components/CableDetachablePane';
+import DeviceConnectorPane from 'components/DeviceConnectorPane';
 
 export default function Sidebar() {
   return (
@@ -25,7 +25,7 @@ export default function Sidebar() {
           <hr className="border-white mt-0" />
           <Accordion alwaysOpen defaultActiveKey={['Cable']}>
             <AdminPane />
-            <OptionsPane />
+            <ScenePane />
             <CablePane />
             <CableDetachablePane />
             <HostConnectorPane />

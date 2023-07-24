@@ -10,7 +10,8 @@ import {
   useKeyboardControls,
   PerformanceMonitor,
   Environment,
-  Bounds
+  Bounds,
+  Center
 } from '@react-three/drei';
 // eslint-disable-next-line import/no-unresolved
 import { EffectComposer, N8AO } from '@react-three/postprocessing';
@@ -19,9 +20,10 @@ import Cable from 'components/Cable';
 import USBConnector from 'components/USBConnector';
 import CableConnector from 'components/CableConnector';
 import CameraController from 'components/CameraController';
+import Backdrop from 'components/Backdrop';
 import useMessages from 'hooks/useMessages';
 import useAdminMode from 'hooks/useAdminMode';
-import { cableAttachments, cableOffsets } from 'utils';
+import { cableAttachments } from 'utils';
 
 const getPerformanceBounds = (refreshRate) =>
   refreshRate > 60 ? [30, refreshRate] : [25, 60];
@@ -120,35 +122,39 @@ export default function Scene() {
       >
         <color attach="background" args={[settings.scene.bgColor]} />
         <Stage
+          intensity={0.1}
           adjustCamera={false}
-          shadows={{ type: 'accumulative', frames: 20 }}
+          shadows={{ type: 'accumulative', frames: 40 }}
           environment={null}
         >
-          <Bounds fit clip observe damping={4} margin={1.2}>
+          <Backdrop />
+          <Bounds fit clip observe damping={4} margin={1.5}>
             <CameraController refs={refs} focusOn={settings.scene.focusOn} />
-            <group position={cableOffsets[settings.cable.model]}>
-              <Cable {...settings.cable} ref={cableRef} />
-              <group {...attachments?.deviceConnector}>
-                <USBConnector
-                  {...settings.deviceConnector}
-                  ref={deviceConnectorRef}
-                />
-              </group>
-              <group {...attachments?.hostConnector}>
-                <USBConnector
-                  {...settings.hostConnector}
-                  ref={hostConnectorRef}
-                />
-              </group>
-              {settings.cable.model !== 'Charger' && (
-                <group {...attachments?.cableConnector}>
-                  <CableConnector
-                    {...settings.cable.connector}
-                    ref={cableConnectorRef}
+            <Center top>
+              <group>
+                <Cable {...settings.cable} ref={cableRef} />
+                <group {...attachments?.deviceConnector}>
+                  <USBConnector
+                    {...settings.deviceConnector}
+                    ref={deviceConnectorRef}
                   />
                 </group>
-              )}
-            </group>
+                <group {...attachments?.hostConnector}>
+                  <USBConnector
+                    {...settings.hostConnector}
+                    ref={hostConnectorRef}
+                  />
+                </group>
+                {settings.cable.model !== 'Charger' && (
+                  <group {...attachments?.cableConnector}>
+                    <CableConnector
+                      {...settings.cable.connector}
+                      ref={cableConnectorRef}
+                    />
+                  </group>
+                )}
+              </group>
+            </Center>
           </Bounds>
         </Stage>
         <Environment
@@ -156,7 +162,7 @@ export default function Scene() {
           files={`./environments/${settings.scene.environment}.hdr`}
           path="/"
         />
-        <PerspectiveCamera makeDefault fov={20} position={[-12, 8, 15]} />
+        <PerspectiveCamera makeDefault fov={20} position={[-12, 20, 15]} />
         <OrbitControls
           makeDefault
           maxPolarAngle={Math.PI / 2}

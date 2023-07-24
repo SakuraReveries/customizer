@@ -11,6 +11,7 @@ import Scene from 'components/Scene';
 import MessageProvider from 'components/MessageProvider';
 import ForceOrientation from 'components/ForceOrientation';
 import {
+  backdropMaterials,
   cncHousingFinishes,
   connectorFinishes,
   environments,
@@ -21,6 +22,7 @@ import {
 const initialValues = {
   scene: {
     bgColor: '#8d5265',
+    backdropMaterial: backdropMaterials[0].id,
     environment: environments[0].id,
     focusOn: 'center'
   },

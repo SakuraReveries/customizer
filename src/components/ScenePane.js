@@ -4,14 +4,14 @@ import { ChromePicker } from 'react-color';
 import SidebarPane from 'components/SidebarPane';
 import ArrayOptions from 'components/ArrayOptions';
 
-import { environments } from 'utils';
+import { backdropMaterials, environments } from 'utils';
 import { useFormikContext } from 'formik';
 
-export default function OptionsPane() {
+export default function ScenePane() {
   const { values, setFieldValue } = useFormikContext();
 
   return (
-    <SidebarPane title="Options">
+    <SidebarPane title="Scene">
       <Form>
         <Form.Group className="mb-2">
           <Form.Label className="text-light">Background Color</Form.Label>
@@ -21,7 +21,7 @@ export default function OptionsPane() {
           />
         </Form.Group>
         <Form.Group className="mb-2">
-          <Form.Label className="text-light">Lighting Environment</Form.Label>
+          <Form.Label className="text-light">Lighting</Form.Label>
           <Form.Select
             onChange={(event) =>
               setFieldValue('scene.environment', event.target.value)
@@ -29,6 +29,17 @@ export default function OptionsPane() {
             value={values.scene.environment}
           >
             <ArrayOptions array={environments} />
+          </Form.Select>
+        </Form.Group>
+        <Form.Group className="mb-2">
+          <Form.Label className="text-light">Desk Material</Form.Label>
+          <Form.Select
+            onChange={(event) =>
+              setFieldValue('scene.backdropMaterial', event.target.value)
+            }
+            value={values.scene.backdropMaterial}
+          >
+            <ArrayOptions array={backdropMaterials} />
           </Form.Select>
         </Form.Group>
       </Form>

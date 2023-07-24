@@ -10,6 +10,119 @@ export const environments = [
   { id: 'studio_small_04_2k', name: 'Low Light' }
 ];
 
+export const backdropMaterials = [
+  {
+    id: 'Wood084A',
+    name: 'Wood - Strip Floor',
+    textures: {
+      map: 'Color',
+      normalMap: 'NormalGL',
+      roughnessMap: 'Roughness'
+    },
+    repeat: 2
+  },
+  {
+    id: 'WoodFloor052',
+    name: 'Wood - Chevron Floor',
+    textures: {
+      aoMap: 'AmbientOcclusion',
+      map: 'Color',
+      normalMap: 'NormalGL',
+      roughnessMap: 'Roughness'
+    },
+    repeat: 5
+  },
+  {
+    id: 'Wood049',
+    name: 'Wood - Board',
+    textures: {
+      map: 'Color',
+      normalMap: 'NormalGL',
+      roughnessMap: 'Roughness'
+    },
+    repeat: 2
+  },
+  {
+    id: 'Tiles118',
+    name: 'Tiles - Blue',
+    textures: {
+      aoMap: 'AmbientOcclusion',
+      map: 'Color',
+      normalMap: 'NormalGL',
+      roughnessMap: 'Roughness'
+    },
+    repeat: 4
+  },
+  {
+    id: 'Tiles125',
+    name: 'Tiles - Orange',
+    textures: {
+      aoMap: 'AmbientOcclusion',
+      map: 'Color',
+      normalMap: 'NormalGL',
+      roughnessMap: 'Roughness'
+    },
+    repeat: 4
+  },
+  {
+    id: 'Marble012',
+    name: 'Marble',
+    textures: {
+      map: 'Color',
+      normalMap: 'NormalGL',
+      roughnessMap: 'Roughness'
+    },
+    repeat: 4
+  },
+  {
+    id: 'Metal009',
+    name: 'Metal - Brushed',
+    textures: {
+      map: 'Color',
+      normalMap: 'NormalGL',
+      roughnessMap: 'Roughness',
+      metalnessMap: 'Metalness'
+    },
+    repeat: 2
+  },
+  {
+    id: 'Metal038',
+    name: 'Metal - Galvanized',
+    textures: {
+      map: 'Color',
+      normalMap: 'NormalGL',
+      roughnessMap: 'Roughness',
+      metalnessMap: 'Metalness'
+    },
+    repeat: 3
+  },
+  {
+    id: 'Fabric010',
+    name: 'Woven Fabric',
+    textures: {
+      map: 'Color',
+      normalMap: 'NormalGL',
+      roughnessMap: 'Roughness',
+      alphaMap: 'Opacity'
+    },
+    repeat: 3
+  },
+  {
+    id: 'Fabric066',
+    name: 'Burlap',
+    textures: {
+      map: 'Color',
+      normalMap: 'NormalGL',
+      roughnessMap: 'Roughness',
+      aoMap: 'AmbientOcclusion'
+    },
+    repeat: 4
+  }
+];
+
+export const getMaterialUrl = (id, type, resolution = '1K', format = 'jpg') =>
+  `./textures/${id}_${resolution}_${type}.${format}`;
+
 export const heatshrinkColors = [
   { id: 'white', name: 'White', color: '#ffffff' },
   { id: 'black', name: 'Black', color: '#000000' },
@@ -282,16 +395,6 @@ export const cncHousingFinishes = [
     roughness: 0.7
   }
 ];
-
-export const cableOffsets = {
-  Charger: [0, 0, 0],
-  Straight: [-50, 4, 0],
-  StraightExit: [0, 0, 0],
-  LeftParallel: [125, 8, 0],
-  LeftRearExit: [0, 8, 0],
-  RightParallel: [0, 0, 0],
-  RightRearExit: [0, 0, 0]
-};
 
 export const cableRotations = {
   Charger: [-Math.PI / 2, 0, 0],
