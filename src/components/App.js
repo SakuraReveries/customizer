@@ -87,7 +87,13 @@ export default function App() {
       <AdminModeProvider>
         <Formik initialValues={initialValues}>
           <ForceOrientation allowLandscape>
-            <Helmet title="Sakura Reveries Cable Builder" />
+            <Helmet title="Sakura Reveries Cable Builder">
+              <link
+                rel="icon"
+                type="image/png"
+                href="//www.sakurareveries.com/cdn/shop/files/sakurapetal.png"
+              />
+            </Helmet>
             <Suspense fallback={<Loader />}>
               <div className="sr-app-scene" style={{ width: sceneWidth }}>
                 <KeyboardControls map={controlMap}>
