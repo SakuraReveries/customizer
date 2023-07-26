@@ -18,8 +18,11 @@ export default function CablePane() {
   const { values, setFieldValue, setValues } = useFormikContext();
 
   const innerSleeveColors = useMemo(
-    () => [...mdpcxColors, ...mdpcxCarbonColors],
-    []
+    () =>
+      values.cable.outerSleeveType !== null
+        ? mdpcxColors
+        : [...mdpcxColors, ...mdpcxCarbonColors],
+    [values.cable.outerSleeveType]
   );
   const outerSleeveColors = useMemo(
     () => [...techFlexColors, ...mdpcxLiquidColors],
