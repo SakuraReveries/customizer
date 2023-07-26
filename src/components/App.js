@@ -11,7 +11,7 @@ import Scene from 'components/Scene';
 import MessageProvider from 'components/MessageProvider';
 import ForceOrientation from 'components/ForceOrientation';
 import {
-  backdropMaterials,
+  deskMaterials,
   cncHousingFinishes,
   connectorFinishes,
   environments,
@@ -21,7 +21,7 @@ import {
 
 const initialValues = {
   scene: {
-    backdropMaterial: backdropMaterials[0].id,
+    deskMaterial: deskMaterials[0].id,
     environment: environments[0].id,
     focusOn: 'center'
   },
@@ -30,9 +30,8 @@ const initialValues = {
     innerSleeveType: 'MDPC_X',
     innerSleeveColor: 'grandBleu',
     outerSleeveType: null,
-    outerSleeveColor: 'blackestBlack',
+    outerSleeveColor: null,
     opalSleeve: false,
-    opalSleeveColor: null,
     connector: {
       model: 'FEMO',
       finish: cncHousingFinishes[1].id,

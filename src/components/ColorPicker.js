@@ -22,10 +22,9 @@ export default function ColorPicker({ colors, onChange, value }) {
             ];
 
             style.backgroundColor = firstColor;
-            style.backgroundImage = `-webkit-linear-gradient(30deg, ${firstColor} 50%, ${secondColor} 50%)`;
-
-            console.dir(style);
+            style.backgroundImage = `linear-gradient(45deg, ${firstColor} 50%, ${secondColor} 50%)`;
           }
+
           return (
             <Col xs={2} key={id} className="g-2 d-flex justify-content-center">
               <OverlayTrigger

@@ -3,7 +3,7 @@ import { Form } from 'react-bootstrap';
 import SidebarPane from 'components/SidebarPane';
 import ArrayOptions from 'components/ArrayOptions';
 
-import { backdropMaterials, environments } from 'utils';
+import { deskMaterials, environments } from 'utils';
 import { useFormikContext } from 'formik';
 
 export default function ScenePane() {
@@ -27,11 +27,11 @@ export default function ScenePane() {
           <Form.Label className="text-light">Desk Material</Form.Label>
           <Form.Select
             onChange={(event) =>
-              setFieldValue('scene.backdropMaterial', event.target.value)
+              setFieldValue('scene.deskMaterial', event.target.value)
             }
-            value={values.scene.backdropMaterial}
+            value={values.scene.deskMaterial}
           >
-            <ArrayOptions array={backdropMaterials} />
+            <ArrayOptions array={deskMaterials} />
           </Form.Select>
         </Form.Group>
       </Form>

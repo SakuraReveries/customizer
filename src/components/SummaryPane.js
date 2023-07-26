@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import { useFormikContext } from 'formik';
 import { Alert, Container, Row, Col } from 'react-bootstrap';
 
@@ -9,6 +10,8 @@ import {
   connectorFinishes,
   techFlexColors,
   mdpcxColors,
+  mdpcxCarbonColors,
+  mdpcxLiquidColors,
   heatshrinkColors,
   cerakoteColors,
   cncHousingFinishes,
@@ -20,19 +23,21 @@ import {
 export default function SummaryPane() {
   const { values } = useFormikContext();
 
-  const innerSleeveColors =
-    values.cable.innerSleeveType === 'TechFlex' ? techFlexColors : mdpcxColors;
-  const outerSleeveColors =
-    values.cable.outerSleeveType === 'TechFlex' ? techFlexColors : mdpcxColors;
+  const innerSleeveColors = useMemo(
+    () => [...mdpcxColors, ...mdpcxCarbonColors],
+    []
+  );
+  const outerSleeveColors = useMemo(
+    () => [...techFlexColors, ...mdpcxLiquidColors],
+    []
+  );
 
   const hostHeatshrink = !values.hostConnector.subHousingType;
   const deviceHeatshrink = !values.deviceConnector.subHousingType;
 
   let hostConnectorDesc = hostHeatshrink
     ? `${
-        heatshrinkColors.find(
-          (color) => color.id === values.hostConnector.heatshrinkColor
-        ).name
+        findById(heatshrinkColors, values.hostConnector.heatshrinkColor).name
       } ${findById(housingTypes, values.hostConnector.housingType).name}`
     : `${
         findById(cncHousingFinishes, values.hostConnector.housingFinish).name
@@ -48,9 +53,7 @@ export default function SummaryPane() {
 
   let deviceConnectorDesc = deviceHeatshrink
     ? `${
-        heatshrinkColors.find(
-          (color) => color.id === values.deviceConnector.heatshrinkColor
-        ).name
+        findById(heatshrinkColors, values.deviceConnector.heatshrinkColor).name
       } ${findById(housingTypes, values.deviceConnector.housingType).name}`
     : `${
         findById(cncHousingFinishes, values.deviceConnector.housingFinish).name
@@ -83,17 +86,11 @@ export default function SummaryPane() {
             Sleeve
           </Col>
           <Col xs={9} md={8}>
-            {
-              innerSleeveColors.find(
-                (color) => color.id === values.cable.innerSleeveColor
-              ).name
-            }{' '}
+            {findById(innerSleeveColors, values.cable.innerSleeveColors)
+              ?.name ?? 'Unknown'}{' '}
             {sleeveTypes[values.cable.innerSleeveType]} under{' '}
-            {
-              outerSleeveColors.find(
-                (color) => color.id === values.cable.outerSleeveColor
-              ).name
-            }{' '}
+            {findById(outerSleeveColors, values.cable.outerSleeveColor)?.name ??
+              'Unknown'}{' '}
             {sleeveTypes[values.cable.outerSleeveType]}
           </Col>
         </Row>

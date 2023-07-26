@@ -12,9 +12,9 @@ export const environments = [
 
 export const sceneBackgroundColor = '#a95c75';
 
-export const backdropDims = [792, 25, 500];
+export const deskDims = [792, 25, 500];
 
-export const backdropMaterials = [
+export const deskMaterials = [
   {
     id: 'Wood084A',
     name: 'Wood - Strip Floor',
@@ -226,14 +226,7 @@ export const mdpcxColors = [
   { id: 'diamondRed', name: 'Diamond Red', color: '#7d1015' },
   { id: 'oxideOrange', name: 'Oxide Orange', color: '#c25700' },
   { id: 'papayaOrange', name: 'Papaya Orange', color: '#f1852d' },
-  { id: 'lavaOrange', name: 'Lava Orange', color: '#ff4200' },
-  {
-    id: 'transparent',
-    name: 'Transparent',
-    color: '#ffffff',
-    transparent: true,
-    opacity: 0.6
-  }
+  { id: 'lavaOrange', name: 'Lava Orange', color: '#ff4200' }
 ];
 
 export const cerakoteColors = [
@@ -436,6 +429,13 @@ export const mdpcxCarbonColors = [
 
 export const mdpcxLiquidColors = [
   {
+    id: 'transparent',
+    name: 'Transparent',
+    color: '#ffffff',
+    transparent: true,
+    opacity: 0.6
+  },
+  {
     id: 'transparency',
     name: 'Transparency',
     colors: ['transparent', 'transparent']
@@ -443,7 +443,7 @@ export const mdpcxLiquidColors = [
   {
     id: 'liquidCarbon',
     name: 'Liquid Carbon',
-    colors: ['blackestBlack', 'transparent']
+    colors: ['blackestBlack', 'grandBleu']
   },
   {
     id: 'liquidGold',
@@ -465,10 +465,6 @@ export const mdpcxLiquidColors = [
     name: 'Liquid Diamond',
     colors: ['diamondRed', 'transparent']
   }
-];
-
-export const opalColors = [
-  { id: 'whiteOpal', name: 'White Opal', color: '#fefefe' }
 ];
 
 export const findById = (list, id) => list.find((item) => item.id === id) ?? {};

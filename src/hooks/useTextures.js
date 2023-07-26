@@ -3,35 +3,30 @@ import { useMemo, useLayoutEffect } from 'react';
 // eslint-disable-next-line import/no-unresolved
 import { RepeatWrapping } from 'three';
 
-import {
-  backdropMaterials,
-  getMaterialUrl,
-  findById,
-  backdropDims
-} from 'utils';
+import { deskMaterials, getMaterialUrl, findById, deskDims } from 'utils';
 
 export default function useTextures(materialId) {
-  const backdropMaterial = useMemo(
-    () => findById(backdropMaterials, materialId),
+  const deskMaterial = useMemo(
+    () => findById(deskMaterials, materialId),
     [materialId]
   );
   const props = useTexture(
     Object.fromEntries(
-      Object.entries(backdropMaterial.textures).map(([key, val]) => [
+      Object.entries(deskMaterial.textures).map(([key, val]) => [
         key,
-        getMaterialUrl(backdropMaterial.id, val)
+        getMaterialUrl(deskMaterial.id, val)
       ])
     )
   );
 
   useLayoutEffect(() => {
-    const aspectRatio = backdropDims[2] / backdropDims[0];
+    const aspectRatio = deskDims[2] / deskDims[0];
 
-    Object.keys(backdropMaterial.textures).forEach((key) => {
+    Object.keys(deskMaterial.textures).forEach((key) => {
       props[key].wrapS = props[key].wrapT = RepeatWrapping;
       props[key].repeat.set(
-        backdropMaterial.repeat,
-        backdropMaterial.repeat * aspectRatio
+        deskMaterial.repeat,
+        deskMaterial.repeat * aspectRatio
       );
     });
   });

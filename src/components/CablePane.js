@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import { useFormikContext } from 'formik';
 import { Form } from 'react-bootstrap';
 
@@ -8,12 +9,10 @@ import {
   cableTypes,
   mdpcxColors,
   techFlexColors,
-  opalColors,
-  sleeveTypes,
   alignmentDotColors,
-  mdpcxCarbonColors
+  mdpcxCarbonColors,
+  mdpcxLiquidColors
 } from 'utils';
-import { useMemo } from 'react';
 
 export default function CablePane() {
   const { values, setFieldValue, setValues } = useFormikContext();
@@ -22,8 +21,10 @@ export default function CablePane() {
     () => [...mdpcxColors, ...mdpcxCarbonColors],
     []
   );
-  const outerSleeveColors =
-    values.cable.outerSleeveType === 'TechFlex' ? techFlexColors : mdpcxColors;
+  const outerSleeveColors = useMemo(
+    () => [...techFlexColors, ...mdpcxLiquidColors],
+    []
+  );
 
   return (
     <SidebarPane
@@ -61,55 +62,33 @@ export default function CablePane() {
           </Form.Select>
         </Form.Group>
         <Form.Group>
-          <Form.Label className="text-light">Outer Sleeve</Form.Label>
+          <Form.Label className="text-light">Outer Sleeve?</Form.Label>
           <Form.Switch
             className="text-light ms-3"
-            label={sleeveTypes[values.cable.outerSleeveType]}
             onChange={(event) =>
               setValues((values) => ({
                 ...values,
                 cable: {
                   ...values.cable,
-                  outerSleeveType: event.target.checked ? null : 'TechFlex',
+                  outerSleeveType: event.target.checked ? 'TechFlex' : null,
                   outerSleeveColor: event.target.checked
-                    ? null
-                    : techFlexColors[0].id
+                    ? techFlexColors[0].id
+                    : null
                 }
               }))
             }
-            checked={values.cable.outerSleeveType === 'TechFlex'}
+            checked={Boolean(values.cable.outerSleeveType)}
           />
         </Form.Group>
         {values.cable.outerSleeveType === 'TechFlex' && (
           <Form.Group className="mb-2">
+            <Form.Label className="text-light">Opal Sleeve?</Form.Label>
             <Form.Switch
               className="text-light ms-3"
-              label="Opal Sleeve?"
               onChange={(event) =>
-                setValues((values) => ({
-                  ...values,
-                  cable: {
-                    ...values.cable,
-                    opalSleeve: event.target.checked,
-                    opalSleeveColor: event.target.checked
-                      ? opalColors[0].id
-                      : null
-                  }
-                }))
+                setFieldValue('cable.opalSleeve', event.target.checked)
               }
               checked={values.cable.opalSleeve}
-            />
-          </Form.Group>
-        )}
-        {values.cable.opalSleeve && (
-          <Form.Group className="mb-2">
-            <Form.Label className="text-light">Opal Sleeve Color</Form.Label>
-            <ColorPicker
-              colors={opalColors}
-              onChange={(color) =>
-                setFieldValue('cable.opalSleeveColor', color)
-              }
-              value={values.cable.opalSleeveColor}
             />
           </Form.Group>
         )}
@@ -121,14 +100,18 @@ export default function CablePane() {
             value={values.cable.innerSleeveColor}
           />
         </Form.Group>
-        <Form.Group>
-          <Form.Label className="text-light">Outer Sleeve Color</Form.Label>
-          <ColorPicker
-            colors={outerSleeveColors}
-            onChange={(color) => setFieldValue('cable.outerSleeveColor', color)}
-            value={values.cable.outerSleeveColor}
-          />
-        </Form.Group>
+        {values.cable.outerSleeveType !== null && (
+          <Form.Group>
+            <Form.Label className="text-light">Outer Sleeve Color</Form.Label>
+            <ColorPicker
+              colors={outerSleeveColors}
+              onChange={(color) =>
+                setFieldValue('cable.outerSleeveColor', color)
+              }
+              value={values.cable.outerSleeveColor}
+            />
+          </Form.Group>
+        )}
       </Form>
     </SidebarPane>
   );
