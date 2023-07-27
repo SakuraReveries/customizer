@@ -1,5 +1,5 @@
 import { Fragment, useEffect, useState, useRef, useMemo } from 'react';
-import { Alert } from 'react-bootstrap';
+import { Alert, Button } from 'react-bootstrap';
 import { Canvas } from '@react-three/fiber';
 import { useFormikContext } from 'formik';
 import {
@@ -43,7 +43,7 @@ export default function Scene() {
     [cableRef, hostConnectorRef, deviceConnectorRef, cableConnectorRef]
   );
   const { messages, disableMessage } = useMessages();
-  const { values: settings } = useFormikContext();
+  const { values: settings, setFieldValue } = useFormikContext();
   const [degradedPerformance, setDegradedPerformance] = useState(false);
   const [showStats, setShowStats] = useState(false);
   const toggleStats = useKeyboardControls((state) => state.toggleStats);
@@ -76,6 +76,15 @@ export default function Scene() {
           opacity: 0.6
         }}
       >
+        {settings.scene.focusOn !== 'center' && (
+          <Button
+            onClick={() => setFieldValue('scene.focusOn', 'center')}
+            size="sm"
+            className="mb-2"
+          >
+            Reset Camera
+          </Button>
+        )}
         {messages.alignmentDotColor && (
           <Alert
             variant="info"

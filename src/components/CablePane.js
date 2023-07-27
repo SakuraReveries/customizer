@@ -30,11 +30,7 @@ export default function CablePane() {
   );
 
   return (
-    <SidebarPane
-      title="Cable"
-      showFocus
-      onFocus={() => setFieldValue('scene.focusOn', 'center')}
-    >
+    <SidebarPane title="Cable">
       <Form>
         <Form.Group className="mb-2">
           <Form.Label className="text-light">Type</Form.Label>
