@@ -1,6 +1,12 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrash } from '@fortawesome/free-solid-svg-icons';
-import { Button, Form, InputGroup } from 'react-bootstrap';
+import { faTrash, faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
+import {
+  Button,
+  Form,
+  InputGroup,
+  OverlayTrigger,
+  Tooltip
+} from 'react-bootstrap';
 import { useFormikContext } from 'formik';
 import { Fragment, useCallback, useRef } from 'react';
 
@@ -84,7 +90,15 @@ export default function ScenePane() {
         {values.scene.deskMat && (
           <Fragment>
             <Form.Group className="mb-2">
-              <Form.Label className="text-light">Desk Mat Size</Form.Label>
+              <Form.Label className="text-light">
+                Desk Mat Size
+                <OverlayTrigger
+                  placement="bottom"
+                  overlay={<Tooltip>Measurements in inches.</Tooltip>}
+                >
+                  <FontAwesomeIcon icon={faQuestionCircle} fixedWidth />
+                </OverlayTrigger>
+              </Form.Label>
               <InputGroup>
                 <InputGroup.Text>Width</InputGroup.Text>
                 <Form.Control
@@ -119,7 +133,17 @@ export default function ScenePane() {
               </InputGroup>
             </Form.Group>
             <Form.Group className="mb-2">
-              <Form.Label className="text-light">Desk Mat Image</Form.Label>
+              <Form.Label className="text-light">
+                Desk Mat Image{' '}
+                <OverlayTrigger
+                  placement="bottom"
+                  overlay={
+                    <Tooltip>Your images will not be sent anywhere.</Tooltip>
+                  }
+                >
+                  <FontAwesomeIcon icon={faQuestionCircle} fixedWidth />
+                </OverlayTrigger>
+              </Form.Label>
               <InputGroup>
                 <Form.Control
                   ref={inputRef}
