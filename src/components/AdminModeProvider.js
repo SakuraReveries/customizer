@@ -5,6 +5,7 @@ import { AdminModeContext } from 'hooks/useAdminMode';
 import { sceneBackgroundColor } from 'utils';
 
 export default function AdminModeProvider({ children }) {
+  const [showStats, setShowStats] = useState(false);
   const [adminMode, setAdminMode] = useState(false);
   const [outerSleeveOpacity, setOuterSleeveOpacity] = useState(0.6);
   const [innerSleeveColor, setInnerSleeveColor] = useState('#ff0000');
@@ -15,12 +16,18 @@ export default function AdminModeProvider({ children }) {
     () => setAdminMode((prevVal) => !prevVal),
     []
   );
+  const toggleShowStats = useCallback(
+    () => setShowStats((prevVal) => !prevVal),
+    []
+  );
 
   return (
     <AdminModeContext.Provider
       value={{
         adminMode,
         toggleAdminMode,
+        showStats,
+        toggleShowStats,
         bgColor,
         innerSleeveColor,
         outerSleeveColor,

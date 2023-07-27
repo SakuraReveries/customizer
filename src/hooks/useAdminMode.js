@@ -1,6 +1,7 @@
 import { createContext, useContext } from 'react';
 
 export const AdminModeContext = createContext({
+  showStats: false,
   adminMode: false,
   innerSleeveColor: null,
   outerSleeveColor: null,

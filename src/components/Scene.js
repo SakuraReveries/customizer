@@ -1,5 +1,4 @@
-import { Fragment, useEffect, useState, useRef, useMemo } from 'react';
-import { Alert, Button } from 'react-bootstrap';
+import { Fragment, useEffect, useState } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { useFormikContext } from 'formik';
 import {
@@ -16,46 +15,35 @@ import {
 // eslint-disable-next-line import/no-unresolved
 import { EffectComposer, N8AO } from '@react-three/postprocessing';
 
+import Desk from 'components/Desk';
 import Cable from 'components/Cable';
+import Messages from 'components/Messages';
+import ResetCamera from 'components/ResetCamera';
 import USBConnector from 'components/USBConnector';
 import CableConnector from 'components/CableConnector';
 import CameraController from 'components/CameraController';
-import Desk from 'components/Desk';
-import useMessages from 'hooks/useMessages';
 import useAdminMode from 'hooks/useAdminMode';
+import useCameraRefs from 'hooks/useCameraRefs';
 import { cableAttachments, sceneBackgroundColor } from 'utils';
 
 const getPerformanceBounds = (refreshRate) =>
   refreshRate > 60 ? [30, refreshRate] : [25, 60];
 
 export default function Scene() {
-  const cableRef = useRef();
-  const hostConnectorRef = useRef();
-  const cableConnectorRef = useRef();
-  const deviceConnectorRef = useRef();
-  const refs = useMemo(
-    () => ({
-      center: cableRef,
-      hostConnector: hostConnectorRef,
-      deviceConnector: deviceConnectorRef,
-      cableConnector: cableConnectorRef
-    }),
-    [cableRef, hostConnectorRef, deviceConnectorRef, cableConnectorRef]
-  );
-  const { messages, disableMessage } = useMessages();
-  const { values: settings, setFieldValue } = useFormikContext();
+  const refs = useCameraRefs();
+  const { values: settings } = useFormikContext();
   const [degradedPerformance, setDegradedPerformance] = useState(false);
-  const [showStats, setShowStats] = useState(false);
+  const { showStats, adminMode, bgColor, toggleAdminMode, toggleShowStats } =
+    useAdminMode();
   const toggleStats = useKeyboardControls((state) => state.toggleStats);
-  const { adminMode, bgColor, toggleAdminMode } = useAdminMode();
   const toggleAdmin = useKeyboardControls((state) => state.toggleAdmin);
   const attachments = cableAttachments[settings.cable.model];
 
   useEffect(() => {
-    if (toggleStats) {
-      setShowStats((prevStats) => !prevStats);
+    if (toggleStats && toggleShowStats) {
+      toggleShowStats();
     }
-  }, [toggleStats]);
+  }, [toggleStats, toggleShowStats]);
 
   useEffect(() => {
     if (toggleAdmin && toggleAdminMode) {
@@ -65,73 +53,8 @@ export default function Scene() {
 
   return (
     <Fragment>
-      {settings.scene.focusOn !== 'center' && (
-        <div
-          style={{
-            position: 'fixed',
-            zIndex: 1001,
-            bottom: 8,
-            left: 8
-          }}
-        >
-          <Button
-            onClick={() => setFieldValue('scene.focusOn', 'center')}
-            size="sm"
-            className="mb-2"
-          >
-            Reset Camera
-          </Button>
-        </div>
-      )}
-      <div
-        style={{
-          position: 'fixed',
-          top: 8,
-          left: 8,
-          zIndex: 1000,
-          width: 250,
-          height: '100%',
-          opacity: 0.6
-        }}
-      >
-        {messages.alignmentDotColor && (
-          <Alert
-            variant="info"
-            dismissible
-            onClose={() => disableMessage('alignmentDotColor')}
-          >
-            For alignment dot colors not listed or custom color tones please
-            contact me for a one on one consultation. Please note colors are an
-            approximate representation of the real to life colors and can vary
-            based on display and lighting conditions.
-          </Alert>
-        )}
-        {messages.cerakoteColor && (
-          <Alert
-            variant="info"
-            dismissible
-            onClose={() => disableMessage('cerakoteColor')}
-          >
-            Please note colors are an approximate representation of the real to
-            life colors and can vary based on display and lighting conditions.
-          </Alert>
-        )}
-        {messages.glowCnc && (
-          <Alert
-            variant="info"
-            dismissible
-            onClose={() => disableMessage('glowCnc')}
-          >
-            Glow CNC provides options for LED colors in static or
-            non-addressable RGB formats. The LED remains powered on when the
-            cable is connected to a power source, and there is no software
-            control over the RGB colors. The diffuser ring appears white when
-            powered off but can be custom dyed. Feel free to reach out for
-            custom dyed quotes or any connector-related inquiries before
-            purchasing.
-          </Alert>
-        )}
-      </div>
+      <ResetCamera />
+      <Messages />
       <Canvas
         shadows={!degradedPerformance}
         gl={{ antialias: false }}
@@ -153,29 +76,27 @@ export default function Scene() {
           <Bounds fit clip damping={4} margin={1.5}>
             <CameraController refs={refs} focusOn={settings.scene.focusOn} />
             <Center top>
-              <group>
-                <Cable {...settings.cable} ref={cableRef} />
-                <group {...attachments?.deviceConnector}>
-                  <USBConnector
-                    {...settings.deviceConnector}
-                    ref={deviceConnectorRef}
-                  />
-                </group>
-                <group {...attachments?.hostConnector}>
-                  <USBConnector
-                    {...settings.hostConnector}
-                    ref={hostConnectorRef}
-                  />
-                </group>
-                {settings.cable.model !== 'Charger' && (
-                  <group {...attachments?.cableConnector}>
-                    <CableConnector
-                      {...settings.cable.connector}
-                      ref={cableConnectorRef}
-                    />
-                  </group>
-                )}
+              <Cable {...settings.cable} ref={refs.center} />
+              <group {...attachments?.deviceConnector}>
+                <USBConnector
+                  {...settings.deviceConnector}
+                  ref={refs.deviceConnector}
+                />
               </group>
+              <group {...attachments?.hostConnector}>
+                <USBConnector
+                  {...settings.hostConnector}
+                  ref={refs.hostConnector}
+                />
+              </group>
+              {settings.cable.model !== 'Charger' && (
+                <group {...attachments?.cableConnector}>
+                  <CableConnector
+                    {...settings.cable.connector}
+                    ref={refs.cableConnector}
+                  />
+                </group>
+              )}
             </Center>
           </Bounds>
         </Stage>
