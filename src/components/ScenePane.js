@@ -86,7 +86,7 @@ export default function ScenePane() {
             <Form.Group className="mb-2">
               <Form.Label className="text-light">Desk Mat Size</Form.Label>
               <InputGroup>
-                <InputGroup.Text>Width (in)</InputGroup.Text>
+                <InputGroup.Text>Width</InputGroup.Text>
                 <Form.Control
                   type="number"
                   min={12}
@@ -101,7 +101,7 @@ export default function ScenePane() {
                     );
                   }}
                 />
-                <InputGroup.Text>Height (in)</InputGroup.Text>
+                <InputGroup.Text>Height</InputGroup.Text>
                 <Form.Control
                   type="number"
                   min={12}
