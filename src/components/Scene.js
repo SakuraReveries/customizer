@@ -65,6 +65,24 @@ export default function Scene() {
 
   return (
     <Fragment>
+      {settings.scene.focusOn !== 'center' && (
+        <div
+          style={{
+            position: 'fixed',
+            zIndex: 1001,
+            bottom: 8,
+            left: 8
+          }}
+        >
+          <Button
+            onClick={() => setFieldValue('scene.focusOn', 'center')}
+            size="sm"
+            className="mb-2"
+          >
+            Reset Camera
+          </Button>
+        </div>
+      )}
       <div
         style={{
           position: 'fixed',
@@ -76,15 +94,6 @@ export default function Scene() {
           opacity: 0.6
         }}
       >
-        {settings.scene.focusOn !== 'center' && (
-          <Button
-            onClick={() => setFieldValue('scene.focusOn', 'center')}
-            size="sm"
-            className="mb-2"
-          >
-            Reset Camera
-          </Button>
-        )}
         {messages.alignmentDotColor && (
           <Alert
             variant="info"
