@@ -106,12 +106,18 @@ export default function ScenePane() {
                   min={12}
                   max={64}
                   value={values.scene.deskMatWidth}
-                  onChange={(event) => {
+                  onChange={(event) =>
+                    setFieldValue(
+                      'scene.deskMatWidth',
+                      parseInt(event.target.value, 10)
+                    )
+                  }
+                  onBlur={(event) => {
                     const value = parseInt(event.target.value, 10);
 
                     setFieldValue(
                       'scene.deskMatWidth',
-                      isNaN(value) ? 0 : Math.min(48, Math.max(12, value))
+                      isNaN(value) ? 12 : Math.min(48, Math.max(12, value))
                     );
                   }}
                 />
@@ -121,12 +127,18 @@ export default function ScenePane() {
                   min={12}
                   max={48}
                   value={values.scene.deskMatHeight}
-                  onChange={(event) => {
+                  onChange={(event) =>
+                    setFieldValue(
+                      'scene.deskMatHeight',
+                      parseInt(event.target.value, 10)
+                    )
+                  }
+                  onBlur={(event) => {
                     const value = parseInt(event.target.value, 10);
 
                     setFieldValue(
                       'scene.deskMatHeight',
-                      isNaN(value) ? 0 : Math.min(48, Math.max(12, value))
+                      isNaN(value) ? 12 : Math.min(48, Math.max(12, value))
                     );
                   }}
                 />
