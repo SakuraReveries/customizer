@@ -25,18 +25,18 @@ export default function ForceAcceleration({ children }) {
             <Col xs={12} className="text-center">
               {(isChrome || isChromium || isEdge) && (
                 <p className="text-light">
-                  Go to Settings &gt; System and check &quot;Use hardware
-                  acceleration when available.&quot;
+                  In your browser, go to Settings &gt; System and check
+                  &quot;Use hardware acceleration when available.&quot;
                 </p>
               )}
               {isFirefox && (
                 <Row>
                   <Col xs={12} className="text-center">
                     <p className="text-light">
-                      Go to Settings &gt; General &gt; Performance and uncheck
-                      &quot;Use Recommended Performance settings.&quot; Then
-                      uncheck the &quot;Use hardware acceleration when
-                      available&quot; checkbox.
+                      In your browser, go to Settings &gt; General &gt;
+                      Performance and uncheck &quot;Use Recommended Performance
+                      settings.&quot; Then uncheck the &quot;Use hardware
+                      acceleration when available&quot; checkbox.
                     </p>
                   </Col>
                 </Row>
@@ -48,8 +48,16 @@ export default function ForceAcceleration({ children }) {
               <p>
                 <Button variant="danger" onClick={() => setBypassed(true)}>
                   <FontAwesomeIcon icon={faExclamationTriangle} fixedWidth />{' '}
-                  Load Anyway (Here Be Dragons)
+                  Load Anyway
                 </Button>
+              </p>
+            </Col>
+          </Row>
+          <Row>
+            <Col xs={12} className="text-center">
+              <p>
+                Performance may be slow or unstable with hardware acceleration
+                disabled.
               </p>
             </Col>
           </Row>
