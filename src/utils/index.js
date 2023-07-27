@@ -12,8 +12,8 @@ export const environments = [
 
 export const sceneBackgroundColor = '#a95c75';
 
-export const deskDims = [1020, 25, 580];
-export const matDims = [609.6, 0.1, 457.2];
+export const deskDims = [1220, 25, 610];
+export const matDims = [609.6, 4, 457.2];
 
 export const deskMaterials = [
   {
