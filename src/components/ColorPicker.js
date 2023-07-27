@@ -59,7 +59,9 @@ ColorPicker.propTypes = {
     PropTypes.shape({
       id: PropTypes.string.isRequired,
       name: PropTypes.string.isRequired,
-      color: PropTypes.string.isRequired
+      color: PropTypes.string,
+      image: PropTypes.string,
+      colors: PropTypes.arrayOf(PropTypes.string)
     })
   ).isRequired,
   onChange: PropTypes.func.isRequired,

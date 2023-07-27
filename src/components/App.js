@@ -23,6 +23,10 @@ import {
 const initialValues = {
   scene: {
     deskMaterial: deskMaterials[0].id,
+    deskMat: false,
+    deskMatTexture: null,
+    deskMatWidth: null,
+    deskMatHeight: null,
     environment: environments[0].id,
     focusOn: 'center'
   },

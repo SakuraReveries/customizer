@@ -147,6 +147,7 @@ export default function Scene() {
           adjustCamera={false}
           shadows={{ type: 'accumulative', frames: 40 }}
           environment={null}
+          center={{ disable: true }}
         >
           <Desk />
           <Bounds fit clip damping={4} margin={1.5}>
