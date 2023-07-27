@@ -9,6 +9,7 @@ import Loader from 'components/Loader';
 import Sidebar from 'components/Sidebar';
 import Scene from 'components/Scene';
 import MessageProvider from 'components/MessageProvider';
+import ForceAcceleration from 'components/ForceAcceleration';
 import ForceOrientation from 'components/ForceOrientation';
 import {
   deskMaterials,
@@ -86,26 +87,28 @@ export default function App() {
       <AdminModeProvider>
         <Formik initialValues={initialValues}>
           <ForceOrientation allowLandscape>
-            <Helmet title="Sakura Reveries Cable Builder">
-              <link
-                rel="icon"
-                type="image/png"
-                href="//www.sakurareveries.com/cdn/shop/files/sakurapetal.png"
-              />
-            </Helmet>
-            <Suspense fallback={<Loader />}>
-              <div className="sr-app-scene" style={{ width: sceneWidth }}>
-                <KeyboardControls map={controlMap}>
-                  <Scene />
-                </KeyboardControls>
-              </div>
-              <div
-                style={{ width: sidebarWidth }}
-                className="border-4 border-primary border-start sr-app-sidebar"
-              >
-                <Sidebar />
-              </div>
-            </Suspense>
+            <ForceAcceleration>
+              <Helmet title="Sakura Reveries Cable Builder">
+                <link
+                  rel="icon"
+                  type="image/png"
+                  href="//www.sakurareveries.com/cdn/shop/files/sakurapetal.png"
+                />
+              </Helmet>
+              <Suspense fallback={<Loader />}>
+                <div className="sr-app-scene" style={{ width: sceneWidth }}>
+                  <KeyboardControls map={controlMap}>
+                    <Scene />
+                  </KeyboardControls>
+                </div>
+                <div
+                  style={{ width: sidebarWidth }}
+                  className="border-4 border-primary border-start sr-app-sidebar"
+                >
+                  <Sidebar />
+                </div>
+              </Suspense>
+            </ForceAcceleration>
           </ForceOrientation>
         </Formik>
       </AdminModeProvider>
