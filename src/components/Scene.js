@@ -149,7 +149,7 @@ export default function Scene() {
           environment={null}
         >
           <Desk />
-          <Bounds fit clip observe damping={4} margin={1.5}>
+          <Bounds fit clip damping={4} margin={1.5}>
             <CameraController refs={refs} focusOn={settings.scene.focusOn} />
             <Center top>
               <group>
