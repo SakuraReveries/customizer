@@ -68,6 +68,7 @@ export default function ScenePane() {
         <Form.Group className="mb-2">
           <Form.Label className="text-light">Desk Mat?</Form.Label>
           <Form.Switch
+            className="ms-3"
             onChange={(event) =>
               setValues((values) => ({
                 ...values,
