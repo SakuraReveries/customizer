@@ -73,7 +73,7 @@ export default function Scene() {
           center={{ disable: true }}
         >
           <Desk />
-          <Bounds fit clip damping={4} margin={1.5}>
+          <Bounds fit clip damping={4} margin={2}>
             <CameraController refs={refs} focusOn={settings.scene.focusOn} />
             <Center top>
               <Cable {...settings.cable} ref={refs.center} />
