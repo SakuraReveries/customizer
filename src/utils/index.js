@@ -664,3 +664,56 @@ export const connectorRotations = {
     RightAngle: [0, 0, 0]
   }
 };
+
+export const initialFormValues = {
+  scene: {
+    deskMaterial: deskMaterials[0].id,
+    deskMat: false,
+    deskMatTexture: null,
+    deskMatWidth: null,
+    deskMatHeight: null,
+    environment: environments[0].id,
+    focusOn: 'center'
+  },
+  cable: {
+    model: 'Charger',
+    innerSleeveType: 'MDPC_X',
+    innerSleeveColor: 'grandBleu',
+    outerSleeveType: null,
+    outerSleeveColor: null,
+    opalSleeve: false,
+    connector: {
+      model: 'FEMO',
+      finish: cncHousingFinishes[1].id,
+      innerHeatshrink: false,
+      innerHeatshrinkHostColor: null,
+      innerHeatshrinkDeviceColor: null,
+      collarHeatshrink: false,
+      collarHeatshrinkColor: null,
+      collarAccent: false,
+      collarAccentColor: null,
+      cerakoteColor: null,
+      hostDotColor: null,
+      deviceDotColor: null
+    }
+  },
+  hostConnector: {
+    model: 'USB_A',
+    connectorFinish: connectorFinishes[0].id,
+    housingType: housingTypes[0].id,
+    subHousingType: null,
+    housingFinish: null,
+    heatshrinkColor: heatshrinkColors[1].id,
+    cerakoteColor: null
+  },
+  deviceConnector: {
+    model: 'USB_C',
+    connectorFinish: connectorFinishes[0].id,
+    housingType: housingTypes[0].id,
+    subHousingType: null,
+    housingFinish: null,
+    heatshrinkColor: heatshrinkColors[1].id,
+    cerakoteColor: null,
+    ledColor: null
+  }
+};

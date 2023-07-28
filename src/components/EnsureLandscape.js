@@ -1,18 +1,10 @@
 import PropTypes from 'prop-types';
 import { useOrientation } from '@uidotdev/usehooks';
 
-export default function ForceOrientation({
-  children,
-  allowPortrait = false,
-  allowLandscape = false
-}) {
+export default function EnsureLandscape({ children }) {
   const { type } = useOrientation();
 
-  if (
-    type === 'UNKNOWN' ||
-    (type.startsWith('portrait') && allowPortrait) ||
-    (type.startsWith('landscape') && allowLandscape)
-  ) {
+  if (type === 'UNKNOWN' || type.startsWith('landscape')) {
     return children;
   } else {
     return (
@@ -25,8 +17,6 @@ export default function ForceOrientation({
   }
 }
 
-ForceOrientation.propTypes = {
-  children: PropTypes.node.isRequired,
-  allowPortrait: PropTypes.bool,
-  allowLandscape: PropTypes.bool
+EnsureLandscape.propTypes = {
+  children: PropTypes.node.isRequired
 };

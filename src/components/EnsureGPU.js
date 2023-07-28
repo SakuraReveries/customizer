@@ -1,12 +1,12 @@
 import PropTypes from 'prop-types';
 import { useDetectGPU } from '@react-three/drei';
 import { isChrome, isChromium, isEdge, isFirefox } from 'react-device-detect';
-import { Button, Container, Row, Col } from 'react-bootstrap';
+import { Button, Container, Row, Col, Alert } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
 import { useState } from 'react';
 
-export default function ForceAcceleration({ children }) {
+export default function EnsureGPU({ children }) {
   const [bypassed, setBypassed] = useState(false);
   const gpu = useDetectGPU({
     failIfMajorPerformanceCaveat: true
@@ -38,6 +38,10 @@ export default function ForceAcceleration({ children }) {
                       settings.&quot; Then uncheck the &quot;Use hardware
                       acceleration when available&quot; checkbox.
                     </p>
+                    <Alert variant="warning">
+                      The application may be slow or unstable with hardware
+                      acceleration disabled.
+                    </Alert>
                   </Col>
                 </Row>
               )}
@@ -54,12 +58,7 @@ export default function ForceAcceleration({ children }) {
             </Col>
           </Row>
           <Row>
-            <Col xs={12} className="text-center">
-              <p>
-                Performance may be slow or unstable with hardware acceleration
-                disabled.
-              </p>
-            </Col>
+            <Col xs={12} className="text-center"></Col>
           </Row>
         </Container>
       </div>
@@ -67,6 +66,6 @@ export default function ForceAcceleration({ children }) {
   }
 }
 
-ForceAcceleration.propTypes = {
+EnsureGPU.propTypes = {
   children: PropTypes.node.isRequired
 };
