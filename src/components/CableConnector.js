@@ -34,7 +34,7 @@ function CableConnector(
 
   return (
     <group {...props} ref={ref}>
-      {innerHeatshrink && finish === 'heatshrink' && (
+      {innerHeatshrink && (
         <mesh castShadow receiveShadow geometry={nodes.Heatshrink_R.geometry}>
           <Material
             materials={housingTypes}
@@ -54,7 +54,7 @@ function CableConnector(
           colorId={finish === 'cerakote' ? cerakoteColor : null}
         />
       </mesh>
-      {innerHeatshrink && finish === 'heatshrink' && (
+      {innerHeatshrink && (
         <mesh castShadow receiveShadow geometry={nodes.Heatshrink_L.geometry}>
           <Material
             materials={housingTypes}
