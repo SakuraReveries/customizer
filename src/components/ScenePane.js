@@ -1,17 +1,12 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrash, faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
-import {
-  Button,
-  Form,
-  InputGroup,
-  OverlayTrigger,
-  Tooltip
-} from 'react-bootstrap';
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import { Button, Form, InputGroup } from 'react-bootstrap';
 import { useFormikContext } from 'formik';
 import { Fragment, useCallback, useRef } from 'react';
 
-import SidebarPane from 'components/SidebarPane';
 import ArrayOptions from 'components/ArrayOptions';
+import HelpTooltip from 'components/HelpTooltip';
+import SidebarPane from 'components/SidebarPane';
 import { deskMaterials, environments } from 'utils';
 
 export default function ScenePane() {
@@ -92,12 +87,7 @@ export default function ScenePane() {
             <Form.Group className="mb-2">
               <Form.Label className="text-light">
                 Desk Mat Size
-                <OverlayTrigger
-                  placement="bottom"
-                  overlay={<Tooltip>Measurements in inches.</Tooltip>}
-                >
-                  <FontAwesomeIcon icon={faQuestionCircle} fixedWidth />
-                </OverlayTrigger>
+                <HelpTooltip text="Measurements are in inches." />
               </Form.Label>
               <InputGroup>
                 <InputGroup.Text>Width</InputGroup.Text>
@@ -117,7 +107,7 @@ export default function ScenePane() {
 
                     setFieldValue(
                       'scene.deskMatWidth',
-                      isNaN(value) ? 12 : Math.min(48, Math.max(12, value))
+                      isNaN(value) ? 12 : Math.min(64, Math.max(12, value))
                     );
                   }}
                 />
@@ -147,14 +137,7 @@ export default function ScenePane() {
             <Form.Group className="mb-2">
               <Form.Label className="text-light">
                 Desk Mat Image{' '}
-                <OverlayTrigger
-                  placement="bottom"
-                  overlay={
-                    <Tooltip>Your images will not be sent anywhere.</Tooltip>
-                  }
-                >
-                  <FontAwesomeIcon icon={faQuestionCircle} fixedWidth />
-                </OverlayTrigger>
+                <HelpTooltip text="Your images remain on your device. Crop a high-resolution photo for best results." />
               </Form.Label>
               <InputGroup>
                 <Form.Control

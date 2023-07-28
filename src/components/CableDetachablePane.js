@@ -1,20 +1,19 @@
 import { Fragment } from 'react';
 import { useFormikContext } from 'formik';
-import { Form, OverlayTrigger, Tooltip } from 'react-bootstrap';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
+import { Form } from 'react-bootstrap';
 
-import SidebarPane from 'components/SidebarPane';
+import ArrayOptions from 'components/ArrayOptions';
 import ColorPicker from 'components/ColorPicker';
 import DualColorPicker from 'components/DualColorPicker';
+import HelpTooltip from 'components/HelpTooltip';
+import SidebarPane from 'components/SidebarPane';
+import useMessages from 'hooks/useMessages';
 import {
   heatshrinkColors,
   cerakoteColors,
   cncHousingFinishes,
   alignmentDotColors
 } from 'utils';
-import useMessages from 'hooks/useMessages';
-import ArrayOptions from './ArrayOptions';
 
 export default function CableDetachablePane() {
   const { enableMessage } = useMessages();
@@ -61,16 +60,7 @@ export default function CableDetachablePane() {
           <Form.Group className="mb-2">
             <Form.Label className="text-light">
               Heatshrink Color{' '}
-              <OverlayTrigger
-                placement="bottom"
-                overlay={
-                  <Tooltip>
-                    Please select Host-side and Device-side colors.
-                  </Tooltip>
-                }
-              >
-                <FontAwesomeIcon icon={faQuestionCircle} fixedWidth />
-              </OverlayTrigger>
+              <HelpTooltip text="Please select Host-side and Device-side colors." />
             </Form.Label>
             <DualColorPicker
               colors={heatshrinkColors.filter(({ id }) => id !== 'clear')}
@@ -203,16 +193,7 @@ export default function CableDetachablePane() {
         <Form.Group className="mb-2">
           <Form.Label className="text-light">
             Alignment Dot Color{' '}
-            <OverlayTrigger
-              placement="bottom"
-              overlay={
-                <Tooltip>
-                  Please select Host-side and Device-side colors.
-                </Tooltip>
-              }
-            >
-              <FontAwesomeIcon icon={faQuestionCircle} fixedWidth />
-            </OverlayTrigger>
+            <HelpTooltip text="Please select Host-side and Device-side colors." />
           </Form.Label>
           <DualColorPicker
             colors={alignmentDotColors}
