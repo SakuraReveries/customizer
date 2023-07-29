@@ -4,6 +4,7 @@ import { useRef, forwardRef } from 'react';
 import { useFrame } from '@react-three/fiber';
 // eslint-disable-next-line import/no-unresolved
 import { Color } from 'three';
+import { useFormikContext } from 'formik';
 
 import Material from 'components/Material';
 import useModel from 'hooks/useModel';
@@ -24,8 +25,9 @@ const interpolators = {
   rising: interpolateHslLong('#0000ff', '#ff0000')
 };
 
-function USBConnector(
-  {
+function USBConnector({ type, ...props }, ref) {
+  const { values } = useFormikContext();
+  const {
     connectorFinish,
     heatshrinkColor,
     subHousingType,
@@ -33,11 +35,8 @@ function USBConnector(
     housingFinish,
     housingType,
     ledColor,
-    model,
-    ...props
-  },
-  ref
-) {
+    model
+  } = values[`${type}Connector`];
   const ledMatRef = useRef(null);
   const nodes = useModel({
     path: `./connectors/${model}_${housingType}${
@@ -116,12 +115,5 @@ function USBConnector(
 export default forwardRef(USBConnector);
 
 USBConnector.propTypes = {
-  connectorFinish: PropTypes.string.isRequired,
-  housingType: PropTypes.string.isRequired,
-  model: PropTypes.string.isRequired,
-  heatshrinkColor: PropTypes.string,
-  subHousingType: PropTypes.string,
-  cerakoteColor: PropTypes.string,
-  housingFinish: PropTypes.string,
-  ledColor: PropTypes.string
+  type: PropTypes.string.isRequired
 };

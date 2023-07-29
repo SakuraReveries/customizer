@@ -35,19 +35,22 @@ export default function CableDetachablePane() {
           <Form.Label className="text-light">Heatshrink?</Form.Label>
           <Form.Switch
             className="ms-3"
-            checked={values.cable.connector.innerHeatshrink}
+            checked={values.cableConnector.innerHeatshrink}
             onChange={(event) =>
               setValues((values) => ({
                 ...values,
-                cable: {
-                  ...values.cable,
-                  connector: {
-                    ...values.cable.connector,
-                    innerHeatshrink: event.target.checked,
-                    innerHeatshrinkHostColor: event.target.checked
+                cableConnector: {
+                  ...values.cableConnector,
+                  innerHeatshrink: event.target.checked,
+                  hostSide: {
+                    ...values.cableConnector.hostSide,
+                    innerHeatshrinkColor: event.target.checked
                       ? heatshrinkColors[0].id
-                      : null,
-                    innerHeatshrinkDeviceColor: event.target.checked
+                      : null
+                  },
+                  deviceSide: {
+                    ...values.cableConnector.deviceSide,
+                    innerHeatshrinkColor: event.target.checked
                       ? heatshrinkColors[0].id
                       : null
                   }
@@ -56,7 +59,7 @@ export default function CableDetachablePane() {
             }
           />
         </Form.Group>
-        {values.cable.connector.innerHeatshrink && (
+        {values.cableConnector.innerHeatshrink && (
           <Form.Group className="mb-2">
             <Form.Label className="text-light">
               Heatshrink Color{' '}
@@ -66,14 +69,14 @@ export default function CableDetachablePane() {
               colors={heatshrinkColors.filter(({ id }) => id !== 'clear')}
               onChange={(type, color) =>
                 setFieldValue(
-                  `cable.connector.innerHeatshrink${type[0].toUpperCase()}${type
-                    .substring(1)
-                    .toLowerCase()}Color`,
+                  `cableConnector.${type}Side.innerHeatshrinkColor`,
                   color
                 )
               }
-              hostValue={values.cable.connector.innerHeatshrinkHostColor}
-              deviceValue={values.cable.connector.innerHeatshrinkDeviceColor}
+              hostValue={values.cableConnector.hostSide.innerHeatshrinkColor}
+              deviceValue={
+                values.cableConnector.deviceSide.innerHeatshrinkColor
+              }
             />
           </Form.Group>
         )}
@@ -81,15 +84,21 @@ export default function CableDetachablePane() {
           <Form.Label className="text-light">Heatshrink Accents?</Form.Label>
           <Form.Switch
             className="ms-3"
-            checked={values.cable.connector.collarHeatshrink}
+            checked={values.cableConnector.collarHeatshrink}
             onChange={(event) =>
               setValues((values) => ({
                 ...values,
-                cable: {
-                  ...values.cable,
-                  connector: {
-                    ...values.cable.connector,
-                    collarHeatshrink: event.target.checked,
+                cableConnector: {
+                  ...values.cableConnector,
+                  collarHeatshrink: event.target.checked,
+                  hostSide: {
+                    ...values.cableConnector.hostSide,
+                    collarHeatshrinkColor: event.target.checked
+                      ? heatshrinkColors[0].id
+                      : null
+                  },
+                  deviceSide: {
+                    ...values.cableConnector.deviceSide,
                     collarHeatshrinkColor: event.target.checked
                       ? heatshrinkColors[0].id
                       : null
@@ -99,17 +108,24 @@ export default function CableDetachablePane() {
             }
           />
         </Form.Group>
-        {values.cable.connector.collarHeatshrink && (
+        {values.cableConnector.collarHeatshrink && (
           <Form.Group className="mb-2">
             <Form.Label className="text-light">
-              Heatshrink Accents Color
+              Heatshrink Accents Color{' '}
+              <HelpTooltip text="Please select Host-side and Device-side colors." />
             </Form.Label>
-            <ColorPicker
+            <DualColorPicker
               colors={heatshrinkColors.filter(({ id }) => id !== 'clear')}
-              onChange={(color) =>
-                setFieldValue('cable.connector.collarHeatshrinkColor', color)
+              onChange={(type, color) =>
+                setFieldValue(
+                  `cableConnector.${type}Side.collarHeatshrinkColor`,
+                  color
+                )
               }
-              value={values.cable.connector.collarHeatshrinkColor}
+              hostValue={values.cableConnector.hostSide.collarHeatshrinkColor}
+              deviceValue={
+                values.cableConnector.deviceSide.collarHeatshrinkColor
+              }
             />
           </Form.Group>
         )}
@@ -119,53 +135,50 @@ export default function CableDetachablePane() {
             onChange={(event) => {
               setValues((values) => ({
                 ...values,
-                cable: {
-                  ...values.cable,
-                  connector: {
-                    ...values.cable.connector,
-                    finish: event.target.value,
-                    cerakoteColor:
-                      event.target.value === 'cerakote'
-                        ? cerakoteColors[0].id
-                        : null
-                  }
+                cableConnector: {
+                  ...values.cableConnector,
+                  finish: event.target.value,
+                  cerakoteColor:
+                    event.target.value === 'cerakote'
+                      ? cerakoteColors[0].id
+                      : null
                 }
               }));
               if (event.target.value === 'cerakote') {
                 enableMessage('cerakoteColor');
               }
             }}
-            value={values.cable.connector.finish}
+            value={values.cableConnector.finish}
           >
             <ArrayOptions array={cncHousingFinishes} />
           </Form.Select>
         </Form.Group>
-        {values.cable.connector.finish === 'cerakote' && (
+        {values.cableConnector.finish === 'cerakote' && (
           <Fragment>
             <Form.Group className="mb-2">
               <Form.Label className="text-light">Cerakote Color</Form.Label>
               <ColorPicker
                 colors={cerakoteColors}
                 onChange={(color) =>
-                  setFieldValue('cable.connector.cerakoteColor', color)
+                  setFieldValue('cableConnector.cerakoteColor', color)
                 }
-                value={values.cable.connector.cerakoteColor}
+                value={values.cableConnector.cerakoteColor}
               />
             </Form.Group>
             <Form.Group className="mb-2">
-              <Form.Label className="text-light">Accent Collar?</Form.Label>
+              <Form.Label className="text-light">Collar Accent?</Form.Label>
               <Form.Switch
                 className="ms-3"
-                checked={values.cable.connector.accentCollar}
+                checked={values.cableConnector.hostSide.collarAccent}
                 onChange={(event) =>
                   setValues((values) => ({
                     ...values,
-                    cable: {
-                      ...values.cable,
-                      connector: {
-                        ...values.cable.connector,
-                        accentCollar: event.target.checked,
-                        accentCollarColor: event.target.checked
+                    cableConnector: {
+                      ...values.cableConnector,
+                      hostSide: {
+                        ...values.cableConnector.hostSide,
+                        collarAccent: event.target.checked,
+                        collarAccentColor: event.target.checked
                           ? cerakoteColors[0].id
                           : null
                       }
@@ -174,17 +187,20 @@ export default function CableDetachablePane() {
                 }
               />
             </Form.Group>
-            {values.cable.connector.accentCollar && (
+            {values.cableConnector.hostSide.collarAccent && (
               <Form.Group className="mb-2">
                 <Form.Label className="text-light">
-                  Accent Collar Color
+                  Collar Accent Color
                 </Form.Label>
                 <ColorPicker
                   colors={cerakoteColors}
                   onChange={(color) =>
-                    setFieldValue('cable.connector.accentCollarColor', color)
+                    setFieldValue(
+                      'cableConnector.hostSide.collarAccentColor',
+                      color
+                    )
                   }
-                  value={values.cable.connector.accentCollarColor}
+                  value={values.cableConnector.hostSide.collarAccentColor}
                 />
               </Form.Group>
             )}
@@ -198,10 +214,13 @@ export default function CableDetachablePane() {
           <DualColorPicker
             colors={alignmentDotColors}
             onChange={(type, color) =>
-              setFieldValue(`cable.connector.${type}DotColor`, color)
+              setFieldValue(
+                `cableConnector.${type}Side.alignmentDotColor`,
+                color
+              )
             }
-            hostValue={values.cable.connector.hostDotColor}
-            deviceValue={values.cable.connector.deviceDotColor}
+            hostValue={values.cableConnector.hostSide.alignmentDotColor}
+            deviceValue={values.cableConnector.deviceSide.alignmentDotColor}
           />
         </Form.Group>
       </Form>

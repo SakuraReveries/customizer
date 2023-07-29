@@ -1,5 +1,5 @@
-import PropTypes from 'prop-types';
 import { forwardRef } from 'react';
+import { useFormikContext } from 'formik';
 
 import Material from 'components/Material';
 import {
@@ -10,24 +10,28 @@ import {
 } from 'utils';
 import useModel from 'hooks/useModel';
 
-function CableConnector(
-  {
+function CableConnector(props, ref) {
+  const { values } = useFormikContext();
+  const {
     model,
     finish,
-    cerakoteColor,
     innerHeatshrink,
-    innerHeatshrinkHostColor,
-    innerHeatshrinkDeviceColor,
     /* eslint-disable no-unused-vars */
     collarHeatshrink,
-    collarHeatshrinkColor,
-    collarAccent,
-    collarAccentColor,
-    /* eslint-enable no-unused-vars */
-    ...props
-  },
-  ref
-) {
+    cerakoteColor,
+    hostSide: {
+      alignmentDotColor: alignmentDotHostColor,
+      innerHeatshrinkColor: innerHeatshrinkHostColor,
+      collarHeatshrinkColor: collarHeatshrinkHostColor,
+      collarAccent,
+      collarAccentColor
+    },
+    deviceSide: {
+      alignmentDotColor: alignmentDotDeviceColor,
+      innerHeatshrinkColor: innerHeatshrinkDeviceColor,
+      collarHeatshrinkColor: collarHeatshrinkDeviceColor
+    }
+  } = values.cableConnector;
   const nodes = useModel({
     path: `./connectors/${model}.3mf`
   });
@@ -71,16 +75,3 @@ function CableConnector(
 }
 
 export default forwardRef(CableConnector);
-
-CableConnector.propTypes = {
-  model: PropTypes.string.isRequired,
-  finish: PropTypes.string.isRequired,
-  cerakoteColor: PropTypes.string,
-  innerHeatshrink: PropTypes.bool.isRequired,
-  innerHeatshrinkHostColor: PropTypes.string,
-  innerHeatshrinkDeviceColor: PropTypes.string,
-  collarHeatshrink: PropTypes.bool.isRequired,
-  collarHeatshrinkColor: PropTypes.string,
-  collarAccent: PropTypes.bool.isRequired,
-  collarAccentColor: PropTypes.string
-};

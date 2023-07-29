@@ -76,25 +76,16 @@ export default function Scene() {
           <Bounds fit clip damping={4} margin={2}>
             <CameraController refs={refs} focusOn={settings.scene.focusOn} />
             <Center top>
-              <Cable {...settings.cable} ref={refs.center} />
+              <Cable ref={refs.center} />
               <group {...attachments?.deviceConnector}>
-                <USBConnector
-                  {...settings.deviceConnector}
-                  ref={refs.deviceConnector}
-                />
+                <USBConnector type="device" ref={refs.deviceConnector} />
               </group>
               <group {...attachments?.hostConnector}>
-                <USBConnector
-                  {...settings.hostConnector}
-                  ref={refs.hostConnector}
-                />
+                <USBConnector type="host" ref={refs.hostConnector} />
               </group>
               {settings.cable.model !== 'Charger' && (
                 <group {...attachments?.cableConnector}>
-                  <CableConnector
-                    {...settings.cable.connector}
-                    ref={refs.cableConnector}
-                  />
+                  <CableConnector ref={refs.cableConnector} />
                 </group>
               )}
             </Center>

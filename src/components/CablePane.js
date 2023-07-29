@@ -40,14 +40,20 @@ export default function CablePane() {
                 ...values,
                 cable: {
                   ...values.cable,
-                  model: event.target.value,
-                  connector: {
-                    ...values.cable.connector,
-                    hostDotColor:
+                  model: event.target.value
+                },
+                cableConnector: {
+                  ...values.cableConnector,
+                  hostSide: {
+                    ...values.cableConnector.hostSide,
+                    alignmentDotColor:
                       event.target.value !== 'Charger'
                         ? alignmentDotColors[0].id
-                        : null,
-                    deviceDotColor:
+                        : null
+                  },
+                  deviceSide: {
+                    ...values.cableConnector.deviceSide,
+                    alignmentDotColor:
                       event.target.value !== 'Charger'
                         ? alignmentDotColors[1].id
                         : null

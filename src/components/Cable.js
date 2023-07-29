@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import { forwardRef, useMemo } from 'react';
 
 import Material from 'components/Material';
@@ -11,8 +10,11 @@ import {
   cableRotations
 } from 'utils';
 import useAdminMode from 'hooks/useAdminMode';
+import { useFormikContext } from 'formik';
 
-function Cable({ innerSleeveColor, outerSleeveColor, model, ...props }, ref) {
+function Cable(props, ref) {
+  const { values } = useFormikContext();
+  const { innerSleeveColor, outerSleeveColor, model } = values.cable;
   const {
     adminMode,
     outerSleeveOpacity: customOuterSleeveOpacity,
@@ -78,11 +80,3 @@ function Cable({ innerSleeveColor, outerSleeveColor, model, ...props }, ref) {
 }
 
 export default forwardRef(Cable);
-
-Cable.propTypes = {
-  model: PropTypes.string.isRequired,
-  innerSleeveType: PropTypes.string.isRequired,
-  innerSleeveColor: PropTypes.string.isRequired,
-  outerSleeveType: PropTypes.string.isRequired,
-  outerSleeveColor: PropTypes.string.isRequired
-};

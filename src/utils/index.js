@@ -678,23 +678,28 @@ export const initialFormValues = {
   cable: {
     model: 'Charger',
     innerSleeveType: 'MDPC_X',
-    innerSleeveColor: 'grandBleu',
+    innerSleeveColor: mdpcxColors[0].id,
     outerSleeveType: null,
     outerSleeveColor: null,
-    opalSleeve: false,
-    connector: {
-      model: 'FEMO',
-      finish: cncHousingFinishes[1].id,
-      innerHeatshrink: false,
-      innerHeatshrinkHostColor: null,
-      innerHeatshrinkDeviceColor: null,
-      collarHeatshrink: false,
+    opalSleeve: false
+  },
+  cableConnector: {
+    model: 'FEMO',
+    finish: cncHousingFinishes[1].id,
+    innerHeatshrink: false,
+    collarHeatshrink: false,
+    cerakoteColor: null,
+    hostSide: {
+      alignmentDotColor: null,
+      innerHeatshrinkColor: null,
       collarHeatshrinkColor: null,
       collarAccent: false,
-      collarAccentColor: null,
-      cerakoteColor: null,
-      hostDotColor: null,
-      deviceDotColor: null
+      collarAccentColor: null
+    },
+    deviceSide: {
+      alignmentDotColor: null,
+      innerHeatshrinkColor: null,
+      collarHeatshrinkColor: null
     }
   },
   hostConnector: {
