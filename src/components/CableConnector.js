@@ -36,6 +36,10 @@ function CableConnector(props, ref) {
     path: `./connectors/${model}.3mf`
   });
 
+  if (values.cable.model === 'Charger') {
+    return null;
+  }
+
   return (
     <group {...props} ref={ref}>
       {innerHeatshrink && (

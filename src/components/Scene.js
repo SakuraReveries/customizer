@@ -2,7 +2,6 @@ import { Fragment, useEffect, useState } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { useFormikContext } from 'formik';
 import {
-  Stage,
   OrbitControls,
   PerspectiveCamera,
   Stats,
@@ -10,7 +9,9 @@ import {
   PerformanceMonitor,
   Environment,
   Bounds,
-  Center
+  Center,
+  AccumulativeShadows,
+  RandomizedLight
 } from '@react-three/drei';
 // eslint-disable-next-line import/no-unresolved
 import { EffectComposer, N8AO } from '@react-three/postprocessing';
@@ -59,38 +60,28 @@ export default function Scene() {
         shadows={!degradedPerformance}
         gl={{ antialias: false }}
         style={{ height: '100vh' }}
-        dpr={degradedPerformance ? 0.75 : 1.5}
+        dpr={degradedPerformance ? 0.6 : 1.5}
       >
         <color
           attach="background"
           args={[adminMode ? bgColor : sceneBackgroundColor]}
         />
-        <Stage
-          intensity={0.1}
-          adjustCamera={false}
-          shadows={{ type: 'accumulative', frames: 40 }}
-          environment={null}
-          center={{ disable: true }}
-        >
-          <Desk />
-          <Bounds fit clip damping={4} margin={2}>
-            <CameraController refs={refs} focusOn={settings.scene.focusOn} />
-            <Center top>
-              <Cable ref={refs.center} />
-              <group {...attachments?.deviceConnector}>
-                <USBConnector type="device" ref={refs.deviceConnector} />
-              </group>
-              <group {...attachments?.hostConnector}>
-                <USBConnector type="host" ref={refs.hostConnector} />
-              </group>
-              {settings.cable.model !== 'Charger' && (
-                <group {...attachments?.cableConnector}>
-                  <CableConnector ref={refs.cableConnector} />
-                </group>
-              )}
-            </Center>
-          </Bounds>
-        </Stage>
+        <Desk />
+        <Bounds fit clip damping={4} margin={2}>
+          <CameraController refs={refs} focusOn={settings.scene.focusOn} />
+          <Center top>
+            <Cable ref={refs.center} />
+            <group {...attachments?.deviceConnector}>
+              <USBConnector type="device" ref={refs.deviceConnector} />
+            </group>
+            <group {...attachments?.hostConnector}>
+              <USBConnector type="host" ref={refs.hostConnector} />
+            </group>
+            <group {...attachments?.cableConnector}>
+              <CableConnector ref={refs.cableConnector} />
+            </group>
+          </Center>
+        </Bounds>
         <Environment
           background={false}
           files={`./environments/${settings.scene.environment}.hdr`}
@@ -105,7 +96,7 @@ export default function Scene() {
         {showStats && <Stats />}
         {!degradedPerformance && (
           <EffectComposer disableNormalPass>
-            <N8AO aoRadius={4} intensity={10} distanceFalloff={1} />
+            <N8AO aoRadius={8} intensity={10} distanceFalloff={1} />
           </EffectComposer>
         )}
         <PerformanceMonitor
@@ -117,6 +108,27 @@ export default function Scene() {
           onIncline={() => setDegradedPerformance(false)}
           onDecline={() => setDegradedPerformance(true)}
         />
+        {!degradedPerformance && (
+          <group position={[0, -2, 0]}>
+            <AccumulativeShadows
+              temporal
+              frames={100}
+              scale={1000}
+              alphaTest={0.9}
+              toneMapped
+            >
+              <RandomizedLight
+                amount={4}
+                radius={100}
+                ambient={0.8}
+                intensity={1}
+                position={[-100, 50, -100]}
+                size={1000}
+                bias={0.0001}
+              />
+            </AccumulativeShadows>
+          </group>
+        )}
       </Canvas>
     </Fragment>
   );
