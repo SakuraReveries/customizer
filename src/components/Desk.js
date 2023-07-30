@@ -7,7 +7,7 @@ import { DoubleSide } from 'three';
 
 import useModel from 'hooks/useModel';
 import useTextures from 'hooks/useTextures';
-import { deskDims, matDims } from 'utils';
+import { deskDims, deskMatColors, findById, matDims } from 'utils';
 
 export default function Desk() {
   const { values } = useFormikContext();
@@ -31,7 +31,10 @@ export default function Desk() {
               rotation={[-Math.PI / 2, 0, Math.PI / 2]}
               scale={[matHeightScale, matWidthScale, 1]}
             >
-              <meshPhysicalMaterial color="#262323" roughness={0.7} />
+              <meshPhysicalMaterial
+                color={findById(deskMatColors, values.scene.deskMatColor).color}
+                roughness={0.7}
+              />
             </mesh>
           </Center>
           {Boolean(values.scene.deskMatTexture) && (

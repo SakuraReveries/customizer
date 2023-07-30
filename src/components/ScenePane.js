@@ -7,7 +7,8 @@ import { Fragment, useCallback, useRef } from 'react';
 import ArrayOptions from 'components/ArrayOptions';
 import HelpTooltip from 'components/HelpTooltip';
 import SidebarPane from 'components/SidebarPane';
-import { deskMaterials, environments } from 'utils';
+import { deskMatColors, deskMaterials, environments } from 'utils';
+import ColorPicker from './ColorPicker';
 
 export default function ScenePane() {
   const canvasRef = useRef();
@@ -75,6 +76,7 @@ export default function ScenePane() {
                 scene: {
                   ...values.scene,
                   deskMat: event.target.checked,
+                  deskMatColor: event.target.checked ? 'black' : null,
                   deskMatWidth: event.target.checked ? 24 : null,
                   deskMatHeight: event.target.checked ? 18 : null
                 }
@@ -156,6 +158,14 @@ export default function ScenePane() {
                   <FontAwesomeIcon icon={faTrash} />
                 </Button>
               </InputGroup>
+            </Form.Group>
+            <Form.Group className="mb-2">
+              <Form.Label className="text-light">Desk Mat Color</Form.Label>
+              <ColorPicker
+                colors={deskMatColors}
+                value={values.scene.deskMatColor}
+                onChange={(color) => setFieldValue('scene.deskMatColor', color)}
+              />
             </Form.Group>
           </Fragment>
         )}

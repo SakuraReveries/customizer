@@ -128,6 +128,12 @@ export const deskMaterials = [
 export const getMaterialUrl = (id, type, resolution = '1K', format = 'jpg') =>
   `./textures/${id}_${resolution}_${type}.${format}`;
 
+export const deskMatColors = [
+  { id: 'white', name: 'White', color: '#fefefe' },
+  { id: 'black', name: 'Black', color: '#101010' },
+  { id: 'grey', name: 'Grey', color: '#666666' }
+];
+
 export const heatshrinkColors = [
   { id: 'white', name: 'White', color: '#ffffff' },
   { id: 'black', name: 'Black', color: '#000000' },
@@ -669,6 +675,7 @@ export const initialFormValues = {
   scene: {
     deskMaterial: deskMaterials[0].id,
     deskMat: false,
+    deskMatColor: null,
     deskMatTexture: null,
     deskMatWidth: null,
     deskMatHeight: null,
