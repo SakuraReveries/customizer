@@ -1,6 +1,7 @@
 import { Form } from 'react-bootstrap';
 import { SketchPicker } from 'react-color';
 
+import FormField from 'components/FormField';
 import SidebarPane from 'components/SidebarPane';
 import useAdminMode from 'hooks/useAdminMode';
 
@@ -24,8 +25,7 @@ export default function AdminPane() {
   return (
     <SidebarPane title="Debug">
       <Form>
-        <Form.Group className="mb-2">
-          <Form.Label className="text-light">Background Color</Form.Label>
+        <FormField label="Background Color">
           <SketchPicker
             className="ms-3"
             disableAlpha
@@ -33,9 +33,8 @@ export default function AdminPane() {
             color={bgColor}
             onChange={(color) => setBgColor(color.hex)}
           />
-        </Form.Group>
-        <Form.Group className="mb-2">
-          <Form.Label className="text-light">Inner Sleeve Color</Form.Label>
+        </FormField>
+        <FormField label="Inner Sleeve Color">
           <SketchPicker
             className="ms-3"
             disableAlpha
@@ -43,9 +42,8 @@ export default function AdminPane() {
             color={innerSleeveColor}
             onChange={(color) => setInnerSleeveColor(color.hex)}
           />
-        </Form.Group>
-        <Form.Group className="mb-2">
-          <Form.Label className="text-light ">Outer Sleeve Color</Form.Label>
+        </FormField>
+        <FormField label="Outer Sleeve Color">
           <SketchPicker
             className="ms-3"
             disableAlpha
@@ -53,9 +51,8 @@ export default function AdminPane() {
             color={outerSleeveColor}
             onChange={(color) => setOuterSleeveColor(color.hex)}
           />
-        </Form.Group>
-        <Form.Group>
-          <Form.Label className="text-light">Outer Sleeve Opacity</Form.Label>
+        </FormField>
+        <FormField label="Outer Sleeve Opacity">
           <Form.Range
             min={0}
             max={1.0}
@@ -65,7 +62,7 @@ export default function AdminPane() {
               setOuterSleeveOpacity(parseFloat(event.target.value))
             }
           />
-        </Form.Group>
+        </FormField>
       </Form>
     </SidebarPane>
   );
