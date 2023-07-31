@@ -2,8 +2,9 @@ import { useFormikContext } from 'formik';
 import { Form } from 'react-bootstrap';
 
 import ArrayOptions from 'components/ArrayOptions';
-import SidebarPane from 'components/SidebarPane';
 import ColorPicker from 'components/ColorPicker';
+import FormField from 'components/FormField';
+import SidebarPane from 'components/SidebarPane';
 import useMessages from 'hooks/useMessages';
 import {
   connectorFinishes,
@@ -25,8 +26,7 @@ export default function HostConnectorPane() {
       onFocus={() => setFieldValue('scene.focusOn', 'hostConnector')}
     >
       <Form>
-        <Form.Group className="mb-2">
-          <Form.Label className="text-light">Connector Finish</Form.Label>
+        <FormField label="Connector Finish">
           <Form.Select
             onChange={(event) =>
               setFieldValue('hostConnector.connectorFinish', event.target.value)
@@ -35,9 +35,8 @@ export default function HostConnectorPane() {
           >
             <ArrayOptions array={connectorFinishes} />
           </Form.Select>
-        </Form.Group>
-        <Form.Group className="mb-2">
-          <Form.Label className="text-light">Housing Type</Form.Label>
+        </FormField>
+        <FormField label="Housing Type">
           <Form.Switch
             className="text-light ms-3"
             label={
@@ -58,7 +57,7 @@ export default function HostConnectorPane() {
             }
             checked={values.hostConnector.housingType === 'cnc'}
           />
-        </Form.Group>
+        </FormField>
         {values.hostConnector.housingType === 'heatshrink' ? (
           <Form.Group>
             <Form.Label className="text-light">Heatshrink Color</Form.Label>
@@ -96,18 +95,18 @@ export default function HostConnectorPane() {
             </Form.Select>
           </Form.Group>
         )}
-        {values.hostConnector.housingFinish === 'cerakote' && (
-          <Form.Group>
-            <Form.Label className="text-light">Cerakote Color</Form.Label>
-            <ColorPicker
-              colors={cerakoteColors}
-              onChange={(color) =>
-                setFieldValue('hostConnector.cerakoteColor', color)
-              }
-              value={values.hostConnector.cerakoteColor}
-            />
-          </Form.Group>
-        )}
+        <FormField
+          label="Cerakote Color"
+          show={values.hostConnector.housingFinish === 'cerakote'}
+        >
+          <ColorPicker
+            colors={cerakoteColors}
+            onChange={(color) =>
+              setFieldValue('hostConnector.cerakoteColor', color)
+            }
+            value={values.hostConnector.cerakoteColor}
+          />
+        </FormField>
       </Form>
     </SidebarPane>
   );

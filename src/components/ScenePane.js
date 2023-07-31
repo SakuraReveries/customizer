@@ -1,14 +1,14 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
-import { Button, Form, InputGroup } from 'react-bootstrap';
 import { useFormikContext } from 'formik';
-import { Fragment, useCallback, useRef } from 'react';
+import { useCallback, useRef } from 'react';
+import { Button, Form, InputGroup } from 'react-bootstrap';
 
 import ArrayOptions from 'components/ArrayOptions';
-import HelpTooltip from 'components/HelpTooltip';
+import ColorPicker from 'components/ColorPicker';
+import FormField from 'components/FormField';
 import SidebarPane from 'components/SidebarPane';
 import { deskMatColors, deskMaterials, environments } from 'utils';
-import ColorPicker from './ColorPicker';
 
 export default function ScenePane() {
   const canvasRef = useRef();
@@ -44,8 +44,7 @@ export default function ScenePane() {
   return (
     <SidebarPane title="Scene">
       <Form>
-        <Form.Group className="mb-2">
-          <Form.Label className="text-light">Lighting</Form.Label>
+        <FormField label="Lighting">
           <Form.Select
             onChange={(event) =>
               setFieldValue('scene.environment', event.target.value)
@@ -54,9 +53,8 @@ export default function ScenePane() {
           >
             <ArrayOptions array={environments} />
           </Form.Select>
-        </Form.Group>
-        <Form.Group className="mb-2">
-          <Form.Label className="text-light">Desk Material</Form.Label>
+        </FormField>
+        <FormField label="Desk Material">
           <Form.Select
             onChange={(event) =>
               setFieldValue('scene.deskMaterial', event.target.value)
@@ -65,9 +63,8 @@ export default function ScenePane() {
           >
             <ArrayOptions array={deskMaterials} />
           </Form.Select>
-        </Form.Group>
-        <Form.Group className="mb-2">
-          <Form.Label className="text-light">Desk Mat?</Form.Label>
+        </FormField>
+        <FormField label="Desk Mat?">
           <Form.Switch
             className="ms-3"
             onChange={(event) =>
@@ -84,91 +81,81 @@ export default function ScenePane() {
             }
             checked={values.scene.deskMat}
           />
-        </Form.Group>
-        {values.scene.deskMat && (
-          <Fragment>
-            <Form.Group className="mb-2">
-              <Form.Label className="text-light">
-                Desk Mat Size
-                <HelpTooltip text="Measurements are in inches." />
-              </Form.Label>
-              <InputGroup>
-                <InputGroup.Text>Width</InputGroup.Text>
-                <Form.Control
-                  type="number"
-                  min={12}
-                  max={64}
-                  value={values.scene.deskMatWidth}
-                  onChange={(event) =>
-                    setFieldValue(
-                      'scene.deskMatWidth',
-                      parseInt(event.target.value, 10)
-                    )
-                  }
-                  onBlur={(event) => {
-                    const value = parseInt(event.target.value, 10);
+        </FormField>
+        <FormField label="Desk Mat Size" help="Measurements are in inches.">
+          <InputGroup>
+            <InputGroup.Text>Width</InputGroup.Text>
+            <Form.Control
+              type="number"
+              min={12}
+              max={64}
+              value={values.scene.deskMatWidth}
+              onChange={(event) =>
+                setFieldValue(
+                  'scene.deskMatWidth',
+                  parseInt(event.target.value, 10)
+                )
+              }
+              onBlur={(event) => {
+                const value = parseInt(event.target.value, 10);
 
-                    setFieldValue(
-                      'scene.deskMatWidth',
-                      isNaN(value) ? 12 : Math.min(64, Math.max(12, value))
-                    );
-                  }}
-                />
-                <InputGroup.Text>Height</InputGroup.Text>
-                <Form.Control
-                  type="number"
-                  min={12}
-                  max={48}
-                  value={values.scene.deskMatHeight}
-                  onChange={(event) =>
-                    setFieldValue(
-                      'scene.deskMatHeight',
-                      parseInt(event.target.value, 10)
-                    )
-                  }
-                  onBlur={(event) => {
-                    const value = parseInt(event.target.value, 10);
+                setFieldValue(
+                  'scene.deskMatWidth',
+                  isNaN(value) ? 12 : Math.min(64, Math.max(12, value))
+                );
+              }}
+            />
+            <InputGroup.Text>Height</InputGroup.Text>
+            <Form.Control
+              type="number"
+              min={12}
+              max={48}
+              value={values.scene.deskMatHeight}
+              onChange={(event) =>
+                setFieldValue(
+                  'scene.deskMatHeight',
+                  parseInt(event.target.value, 10)
+                )
+              }
+              onBlur={(event) => {
+                const value = parseInt(event.target.value, 10);
 
-                    setFieldValue(
-                      'scene.deskMatHeight',
-                      isNaN(value) ? 12 : Math.min(48, Math.max(12, value))
-                    );
-                  }}
-                />
-              </InputGroup>
-            </Form.Group>
-            <Form.Group className="mb-2">
-              <Form.Label className="text-light">
-                Desk Mat Image{' '}
-                <HelpTooltip text="Your images remain on your device. Crop a high-resolution photo for best results." />
-              </Form.Label>
-              <InputGroup>
-                <Form.Control
-                  ref={inputRef}
-                  type="file"
-                  onChange={handleFileChange}
-                />
-                <Button
-                  variant="danger"
-                  onClick={() => {
-                    inputRef.current.value = '';
-                    setFieldValue('scene.deskMatTexture', null);
-                  }}
-                >
-                  <FontAwesomeIcon icon={faTrash} />
-                </Button>
-              </InputGroup>
-            </Form.Group>
-            <Form.Group className="mb-2">
-              <Form.Label className="text-light">Desk Mat Color</Form.Label>
-              <ColorPicker
-                colors={deskMatColors}
-                value={values.scene.deskMatColor}
-                onChange={(color) => setFieldValue('scene.deskMatColor', color)}
-              />
-            </Form.Group>
-          </Fragment>
-        )}
+                setFieldValue(
+                  'scene.deskMatHeight',
+                  isNaN(value) ? 12 : Math.min(48, Math.max(12, value))
+                );
+              }}
+            />
+          </InputGroup>
+        </FormField>
+        <FormField
+          label="Desk Mat Texture"
+          help="Your images remain on your device. Crop a high-resolution photo for best results."
+        >
+          <InputGroup>
+            <Form.Control
+              ref={inputRef}
+              type="file"
+              onChange={handleFileChange}
+            />
+            <Button
+              variant="danger"
+              onClick={() => {
+                inputRef.current.value = '';
+                setFieldValue('scene.deskMatTexture', null);
+              }}
+            >
+              <FontAwesomeIcon icon={faTrash} />
+            </Button>
+          </InputGroup>
+        </FormField>
+        <FormField label="Desk Mat Color" show={values.scene.deskMat}>
+          <ColorPicker
+            colors={deskMatColors}
+            value={values.scene.deskMatColor}
+            onChange={(color) => setFieldValue('scene.deskMatColor', color)}
+          />
+        </FormField>
         <canvas style={{ display: 'none' }} ref={canvasRef}></canvas>
         <img style={{ display: 'none' }} alt="" ref={imgRef}></img>
       </Form>
