@@ -117,8 +117,8 @@ export default function DeviceConnectorPane() {
             }}
             value={values.deviceConnector.housingFinish}
           >
-            <ObjectOptions
-              object={
+            <ArrayOptions
+              array={
                 values.deviceConnector.subHousingType === 'MonoRing'
                   ? cncHousingFinishes.filter((finish) => finish.id !== 'gold')
                   : cncHousingFinishes
