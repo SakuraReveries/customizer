@@ -82,7 +82,11 @@ export default function ScenePane() {
             checked={values.scene.deskMat}
           />
         </FormField>
-        <FormField label="Desk Mat Size" help="Measurements are in inches.">
+        <FormField
+          label="Desk Mat Size"
+          help="Measurements are in inches."
+          show={values.scene.deskMat}
+        >
           <InputGroup>
             <InputGroup.Text>Width</InputGroup.Text>
             <Form.Control
@@ -131,6 +135,7 @@ export default function ScenePane() {
         <FormField
           label="Desk Mat Texture"
           help="Your images remain on your device. Crop a high-resolution photo for best results."
+          show={values.scene.deskMat}
         >
           <InputGroup>
             <Form.Control
