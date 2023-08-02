@@ -31,5 +31,5 @@ FormField.propTypes = {
   children: PropTypes.node.isRequired,
   label: PropTypes.string,
   help: PropTypes.string,
-  show: PropTypes.boolean
+  show: PropTypes.bool
 };
