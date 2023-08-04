@@ -1,11 +1,11 @@
 import { useFormikContext } from 'formik';
 import { Form } from 'react-bootstrap';
 
-import ArrayOptions from 'components/ArrayOptions';
-import ColorPicker from 'components/ColorPicker';
-import DualColorPicker from 'components/DualColorPicker';
-import FormField from 'components/FormField';
-import SidebarPane from 'components/SidebarPane';
+import ArrayOptions from 'components/forms/ArrayOptions';
+import ColorPicker from 'components/forms/ColorPicker';
+import DualColorPicker from 'components/forms/DualColorPicker';
+import FormField from 'components/forms/FormField';
+import SidebarPane from 'components/panes/SidebarPane';
 import useMessages from 'hooks/useMessages';
 import {
   heatshrinkColors,

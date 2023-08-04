@@ -16,12 +16,10 @@ import {
 // eslint-disable-next-line import/no-unresolved
 import { EffectComposer, N8AO } from '@react-three/postprocessing';
 
-import Desk from 'components/Desk';
-import Cable from 'components/Cable';
-import Messages from 'components/Messages';
-import ResetCamera from 'components/ResetCamera';
-import USBConnector from 'components/USBConnector';
-import CableConnector from 'components/CableConnector';
+import Desk from 'components/objects/Desk';
+import Cable from 'components/objects/Cable';
+import USBConnector from 'components/objects/USBConnector';
+import CableConnector from 'components/objects/CableConnector';
 import CameraController from 'components/CameraController';
 import useAdminMode from 'hooks/useAdminMode';
 import useCameraRefs from 'hooks/useCameraRefs';
@@ -53,62 +51,49 @@ export default function Scene() {
   }, [toggleAdmin, toggleAdminMode]);
 
   return (
-    <Fragment>
-      <ResetCamera />
-      <Messages />
-      <Canvas
-        shadows={!degradedPerformance}
-        gl={{ antialias: false }}
-        style={{ height: '100vh' }}
-        dpr={degradedPerformance ? 0.6 : 1.5}
-      >
-        <color
-          attach="background"
-          args={[adminMode ? bgColor : sceneBackgroundColor]}
-        />
-        <Desk />
-        <Bounds fit clip damping={4} margin={2}>
-          <CameraController refs={refs} focusOn={settings.scene.focusOn} />
-          <Center top>
-            <Cable ref={refs.center} />
-            <group {...attachments?.deviceConnector}>
-              <USBConnector type="device" ref={refs.deviceConnector} />
-            </group>
-            <group {...attachments?.hostConnector}>
-              <USBConnector type="host" ref={refs.hostConnector} />
-            </group>
-            <group {...attachments?.cableConnector}>
-              <CableConnector ref={refs.cableConnector} />
-            </group>
-          </Center>
-        </Bounds>
-        <Environment
-          background={false}
-          files={`./environments/${settings.scene.environment}.hdr`}
-          path="/"
-        />
-        <PerspectiveCamera makeDefault fov={20} position={[-12, 20, 15]} />
-        <OrbitControls
-          makeDefault
-          maxPolarAngle={Math.PI / 2}
-          enablePan={false}
-        />
-        {showStats && <Stats />}
-        {!degradedPerformance && (
+    <Canvas
+      shadows={!degradedPerformance}
+      gl={{ antialias: false }}
+      style={{ height: '100vh' }}
+      dpr={degradedPerformance ? 0.6 : 1.5}
+    >
+      <color
+        attach="background"
+        args={[adminMode ? bgColor : sceneBackgroundColor]}
+      />
+      <Desk />
+      <Bounds fit clip damping={4} margin={2}>
+        <CameraController refs={refs} focusOn={settings.scene.focusOn} />
+        <Center top>
+          <Cable ref={refs.center} />
+          <group {...attachments?.deviceConnector}>
+            <USBConnector type="device" ref={refs.deviceConnector} />
+          </group>
+          <group {...attachments?.hostConnector}>
+            <USBConnector type="host" ref={refs.hostConnector} />
+          </group>
+          <group {...attachments?.cableConnector}>
+            <CableConnector ref={refs.cableConnector} />
+          </group>
+        </Center>
+      </Bounds>
+      <Environment
+        background={false}
+        files={`./environments/${settings.scene.environment}.hdr`}
+        path="/"
+      />
+      <PerspectiveCamera makeDefault fov={20} position={[-12, 20, 15]} />
+      <OrbitControls
+        makeDefault
+        maxPolarAngle={Math.PI / 2}
+        enablePan={false}
+      />
+      {showStats && <Stats />}
+      {!degradedPerformance && (
+        <Fragment>
           <EffectComposer disableNormalPass>
             <N8AO aoRadius={8} intensity={10} distanceFalloff={1} />
           </EffectComposer>
-        )}
-        <PerformanceMonitor
-          iterations={5}
-          threshold={0.6}
-          factor={1}
-          step={-1}
-          bounds={getPerformanceBounds}
-          onIncline={() => setDegradedPerformance(false)}
-          onDecline={() => setDegradedPerformance(true)}
-        />
-        {!degradedPerformance && (
           <group position={[0, -2, 0]}>
             <AccumulativeShadows
               temporal
@@ -128,8 +113,17 @@ export default function Scene() {
               />
             </AccumulativeShadows>
           </group>
-        )}
-      </Canvas>
-    </Fragment>
+        </Fragment>
+      )}
+      <PerformanceMonitor
+        iterations={5}
+        threshold={0.6}
+        factor={1}
+        step={-1}
+        bounds={getPerformanceBounds}
+        onIncline={() => setDegradedPerformance(false)}
+        onDecline={() => setDegradedPerformance(true)}
+      />
+    </Canvas>
   );
 }

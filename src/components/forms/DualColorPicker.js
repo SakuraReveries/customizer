@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import { useState } from 'react';
 import { Container, Row } from 'react-bootstrap';
 
-import ColorSwatch from 'components/ColorSwatch';
+import ColorSwatch from 'components/forms/ColorSwatch';
 
 export default function DualColorPicker({
   colors,

@@ -1,8 +1,16 @@
 import PropTypes from 'prop-types';
-import { useCallback, useState } from 'react';
+import { useCallback, useState, createContext } from 'react';
 
-import { AdminModeContext } from 'hooks/useAdminMode';
 import { sceneBackgroundColor } from 'utils';
+
+export const AdminModeContext = createContext({
+  showStats: false,
+  adminMode: false,
+  innerSleeveColor: null,
+  outerSleeveColor: null,
+  outerSleeveOpacity: null,
+  bgColor: null
+});
 
 export default function AdminModeProvider({ children }) {
   const [showStats, setShowStats] = useState(false);

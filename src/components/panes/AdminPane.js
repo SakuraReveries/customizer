@@ -1,8 +1,8 @@
 import { Form } from 'react-bootstrap';
 import { SketchPicker } from 'react-color';
 
-import FormField from 'components/FormField';
-import SidebarPane from 'components/SidebarPane';
+import FormField from 'components/forms/FormField';
+import SidebarPane from 'components/panes/SidebarPane';
 import useAdminMode from 'hooks/useAdminMode';
 
 export default function AdminPane() {

@@ -1,6 +1,6 @@
 import { forwardRef, useMemo } from 'react';
 
-import Material from 'components/Material';
+import Material from 'components/objects/Material';
 import useModel from 'hooks/useModel';
 import {
   mdpcxColors,

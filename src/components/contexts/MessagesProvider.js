@@ -1,9 +1,15 @@
 import PropTypes from 'prop-types';
-import { useState, useCallback } from 'react';
+import { useState, useCallback, createContext } from 'react';
 
-import { MessageContext } from 'hooks/useMessages';
+export const MessagesContext = createContext({
+  messages: {
+    alignmentDotColor: false,
+    cerakoteColor: false,
+    glowCnc: false
+  }
+});
 
-export default function MessageProvider({ children }) {
+export default function MessagesProvider({ children }) {
   const [messages, setMessages] = useState({
     alignmentDotColor: false,
     cerakoteColor: false,
@@ -28,14 +34,14 @@ export default function MessageProvider({ children }) {
   );
 
   return (
-    <MessageContext.Provider
+    <MessagesContext.Provider
       value={{ messages, enableMessage, disableMessage }}
     >
       {children}
-    </MessageContext.Provider>
+    </MessagesContext.Provider>
   );
 }
 
-MessageProvider.propTypes = {
+MessagesProvider.propTypes = {
   children: PropTypes.node.isRequired
 };

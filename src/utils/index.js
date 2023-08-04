@@ -729,3 +729,8 @@ export const initialFormValues = {
     ledColor: null
   }
 };
+
+export const controlMap = [
+  { name: 'toggleStats', keys: ['F4'] },
+  { name: 'toggleAdmin', keys: ['F8'] }
+];

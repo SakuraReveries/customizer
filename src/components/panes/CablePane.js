@@ -2,10 +2,10 @@ import { useMemo } from 'react';
 import { useFormikContext } from 'formik';
 import { Form } from 'react-bootstrap';
 
-import FormField from 'components/FormField';
-import SidebarPane from 'components/SidebarPane';
-import ObjectOptions from 'components/ObjectOptions';
-import ColorPicker from 'components/ColorPicker';
+import ColorPicker from 'components/forms/ColorPicker';
+import FormField from 'components/forms/FormField';
+import ObjectOptions from 'components/forms/ObjectOptions';
+import SidebarPane from 'components/panes/SidebarPane';
 import {
   cableTypes,
   mdpcxColors,

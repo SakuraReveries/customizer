@@ -1,13 +1,13 @@
 import { Accordion, Col, Container, Row } from 'react-bootstrap';
 
 import logo from 'images/logo.png';
-import AdminPane from 'components/AdminPane';
-import CablePane from 'components/CablePane';
-import ScenePane from 'components/ScenePane';
-import SummaryPane from 'components/SummaryPane';
-import HostConnectorPane from 'components/HostConnectorPane';
-import CableDetachablePane from 'components/CableDetachablePane';
-import DeviceConnectorPane from 'components/DeviceConnectorPane';
+import AdminPane from 'components/panes/AdminPane';
+import CablePane from 'components/panes/CablePane';
+import ScenePane from 'components/panes/ScenePane';
+import SummaryPane from 'components/panes/SummaryPane';
+import HostConnectorPane from 'components/panes/HostConnectorPane';
+import CableDetachablePane from 'components/panes/CableDetachablePane';
+import DeviceConnectorPane from 'components/panes/DeviceConnectorPane';
 
 export default function Sidebar() {
   return (

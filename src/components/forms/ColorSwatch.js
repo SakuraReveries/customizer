@@ -47,7 +47,7 @@ export default function ColorSwatch({
       <OverlayTrigger placement="bottom" overlay={<Tooltip>{name}</Tooltip>}>
         <button
           type="button"
-          className="btn btn-sm sr-color-picker-swatch p-0"
+          className="btn btn-sm sr-color-swatch p-0"
           style={style}
           onClick={() => onChange(id)}
         >

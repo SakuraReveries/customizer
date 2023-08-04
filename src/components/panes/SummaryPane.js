@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 import { useFormikContext } from 'formik';
 import { Alert, Container, Row, Col } from 'react-bootstrap';
 
-import SidebarPane from 'components/SidebarPane';
+import SidebarPane from 'components/panes/SidebarPane';
 import {
   cableTypes,
   sleeveTypes,

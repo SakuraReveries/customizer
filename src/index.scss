@@ -13,9 +13,9 @@ $tooltip-bg: #713146;
 
 // Component styles
 @import "components/App";
-@import "components/ColorPicker";
 @import "components/Loader";
 @import "components/Sidebar";
+@import "components/forms/ColorSwatch";
 
 html,
 body {

@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import { Form } from 'react-bootstrap';
 
-import HelpTooltip from 'components/HelpTooltip';
+import HelpTooltip from 'components/forms/HelpTooltip';
 
 export default function FormField({
   children,

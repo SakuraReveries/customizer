@@ -1,7 +1,7 @@
 import { forwardRef } from 'react';
 import { useFormikContext } from 'formik';
 
-import Material from 'components/Material';
+import Material from 'components/objects/Material';
 import {
   cerakoteColors,
   cncHousingFinishes,

@@ -1,13 +1,6 @@
-import { createContext, useContext } from 'react';
+import { useContext } from 'react';
 
-export const AdminModeContext = createContext({
-  showStats: false,
-  adminMode: false,
-  innerSleeveColor: null,
-  outerSleeveColor: null,
-  outerSleeveOpacity: null,
-  bgColor: null
-});
+import { AdminModeContext } from 'components/contexts/AdminModeProvider';
 
 export default function useAdminMode() {
   return useContext(AdminModeContext);

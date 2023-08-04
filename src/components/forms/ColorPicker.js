@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import { Container, Row } from 'react-bootstrap';
 
-import ColorSwatch from './ColorSwatch';
+import ColorSwatch from 'components/forms/ColorSwatch';
 
 export default function ColorPicker({ colors, onChange, value }) {
   return (

@@ -4,10 +4,10 @@ import { useFormikContext } from 'formik';
 import { useCallback, useRef } from 'react';
 import { Button, Form, InputGroup } from 'react-bootstrap';
 
-import ArrayOptions from 'components/ArrayOptions';
-import ColorPicker from 'components/ColorPicker';
-import FormField from 'components/FormField';
-import SidebarPane from 'components/SidebarPane';
+import ArrayOptions from 'components/forms/ArrayOptions';
+import ColorPicker from 'components/forms/ColorPicker';
+import FormField from 'components/forms/FormField';
+import SidebarPane from 'components/panes/SidebarPane';
 import { deskMatColors, deskMaterials, environments } from 'utils';
 
 export default function ScenePane() {

@@ -6,7 +6,7 @@ import { useFrame } from '@react-three/fiber';
 import { Color } from 'three';
 import { useFormikContext } from 'formik';
 
-import Material from 'components/Material';
+import Material from 'components/objects/Material';
 import useModel from 'hooks/useModel';
 import {
   connectorOffsets,

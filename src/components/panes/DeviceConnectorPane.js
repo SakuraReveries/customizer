@@ -1,11 +1,11 @@
 import { useFormikContext } from 'formik';
 import { Form } from 'react-bootstrap';
 
-import ArrayOptions from 'components/ArrayOptions';
-import ColorPicker from 'components/ColorPicker';
-import FormField from 'components/FormField';
-import SidebarPane from 'components/SidebarPane';
-import ObjectOptions from 'components/ObjectOptions';
+import ArrayOptions from 'components/forms/ArrayOptions';
+import ColorPicker from 'components/forms/ColorPicker';
+import FormField from 'components/forms/FormField';
+import ObjectOptions from 'components/forms/ObjectOptions';
+import SidebarPane from 'components/panes/SidebarPane';
 import useMessages from 'hooks/useMessages';
 import {
   cerakoteColors,
