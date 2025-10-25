@@ -67,12 +67,15 @@ export default function Scene() {
         <Center top>
           <Cable ref={refs.center} />
           <group {...attachments?.deviceConnector}>
+            {/* eslint-disable-next-line react-hooks/refs */}
             <USBConnector type="device" ref={refs.deviceConnector} />
           </group>
           <group {...attachments?.hostConnector}>
+            {/* eslint-disable-next-line react-hooks/refs */}
             <USBConnector type="host" ref={refs.hostConnector} />
           </group>
           <group {...attachments?.cableConnector}>
+            {/* eslint-disable-next-line react-hooks/refs */}
             <CableConnector ref={refs.cableConnector} />
           </group>
         </Center>
