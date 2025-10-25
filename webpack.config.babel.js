@@ -41,7 +41,7 @@ if (dev) {
 
 export default {
   mode: dev ? 'development' : 'production',
-  devtool: dev ? 'eval-cheap-module-source-map' : 'cheap-module-source-map',
+  devtool: dev ? 'eval-cheap-module-source-map' : false,
   entry: './src/index.js',
   devServer: {
     compress: dev,
@@ -133,5 +133,6 @@ export default {
         }
       }
     }
-  }
+  },
+  ignoreWarnings: [/@import/]
 };
